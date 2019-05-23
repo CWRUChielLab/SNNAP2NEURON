@@ -1,0 +1,24 @@
+//create plots
+objref plots
+plots = new Graph(0)
+addplot(plots, 0)
+
+// view: xmin, ymin, xrange, yrange, winleft, wintop, winwidth, winheight
+plots.view(0, -110, tstop, 210, 0, 290, 640, 320)
+
+plots.addvar("HH Vm", "HH.v(0.5)", 2, 1)
+
+
+// New vector for recording Vsoma
+objref vvec, tvec
+tvec = new Vector()
+tvec.record(&t) // record time
+vvec = new Vector()
+HH vvec.record(&v(0.5)) // record v at HH
+
+// to record state variables of a point process defined
+// by NMODL
+//objref mvec
+//mvec = new Vector()
+//HH mvec.record(&HH_K.m) // record state variable m of HH_K
+

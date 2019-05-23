@@ -1,0 +1,11 @@
+//create plots
+objref plots
+plots = new Graph(0)
+addplot(plots, 0)
+
+// view: xmin, ymin, xrange, yrange, winleft, wintop, winwidth, winheight
+plots.view(0, -110, tstop, 210, 0, 290, 640, 320)
+
+plots.addvar("HH Vm", "HH.v(0.5)", 2, 1)
+
+

@@ -1,0 +1,15 @@
+// New file for recording vector
+
+objref f1
+f1 = new File()
+f1.wopen("HHdata.txt")
+//tvec.printf(f1)
+
+//print "writing HH.v(0.5)"
+f1.printf("# t\tHH.v(0.5)\n")
+for i=0, tvec.size()-1 {
+    f1.printf("%g\t%g\n", tvec.x[i], vvec.x[i])
+}
+
+//vvec.printf(f1)
+f1.close()
