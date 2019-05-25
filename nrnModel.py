@@ -402,7 +402,7 @@ class NRNModel():
                         if ivdType == '5':
                             nf.write("// passive current\n")
                         
-                            vdgObjName = nName+"_"+vdgName
+                            vdgObjName = nName+"_pas"
                             nf.write("objref "+vdgObjName+ "\n")
                             nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_pas_ivd5(0.5)\n")
                         
@@ -417,7 +417,7 @@ class NRNModel():
 
                     if ivdType == '1' or ivdType == '3':
                         nf.write("//_A"+aType+"_B"+bType+"\n")
-                        nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_tc_ivd"+ivdType+"_A"+aType+"(0.5)\n")
+                        nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_tc_ivd"+ivdType+"(0.5)\n")
                         
                         nf.write(util.formatedObjectVar(vdgObjName, "e")+ "= "+(vdgs[vdgName].E).ljust(lj) + "// (mV)\n")
                         nf.write(util.formatedObjectVar(vdgObjName, "gmax") + "= " + str(g).ljust(lj) + "// (uS)\n")
@@ -544,21 +544,19 @@ class NRNModel():
             tA_tx = float(ivd.tA_tx) * 1000.0
             file.write(util.formatedObjectVar(vdgObj, "tA_tx") + "= "+ str(tA_tx).ljust(lj)+ "// (ms)\n")
             
-            if tAType in ['2', '3', '6']:
+            if tAType in ['2', '3']:
+                # convert seconds to ms
+                tA_tn = float(ivd.tA_tn) * 1000.0
+                file.write(util.formatedObjectVar(vdgObj, "tA_tn") + "= "+ str(tA_tn).ljust(lj)+ "// (ms)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tA_h1") + "= "+ (ivd.tA_h1).ljust(lj)+ "// (mV)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tA_s1") + "= "+ (ivd.tA_s1).ljust(lj)+ "// (mV)\n")
-                if tAType != '6':
-                    # convert seconds to ms
-                    tA_tn = float(ivd.tA_tn) * 1000.0
-                    file.write(util.formatedObjectVar(vdgObj, "tA_tn") + "= "+ str(tA_tn).ljust(lj)+ "// (ms)\n")
-                    file.write(util.formatedObjectVar(vdgObj, "tA_p1") + "= "+ (ivd.tA_p1).ljust(lj)+ "\n\n")
-                if tAType in ['3', '6']:
+                file.write(util.formatedObjectVar(vdgObj, "tA_p1") + "= "+ (ivd.tA_p1).ljust(lj)+ "\n\n")
+                if tAType in ['3']:
                     file.write(util.formatedObjectVar(vdgObj, "tA_h2") + "= "+ (ivd.tA_h2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tA_s2") + "= "+ (ivd.tA_s2).ljust(lj)+ "// (mV)\n")
-                    if tAType != '6':
-                        file.write(util.formatedObjectVar(vdgObj, "tA_p2") + "= "+ (ivd.tA_p2).ljust(lj)+ "\n\n")
+                    file.write(util.formatedObjectVar(vdgObj, "tA_p2") + "= "+ (ivd.tA_p2).ljust(lj)+ "\n\n")
             elif tAType != '1':
-                print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
+                print "WARNING: Time constant forms other than 1, 2, or 3 are not supported yet!!!"
 
         # write steady state
         ssAType = ivd.ssAType
@@ -587,21 +585,21 @@ class NRNModel():
             tB_tx = float(ivd.tB_tx) * 1000.0
             file.write(util.formatedObjectVar(vdgObj, "tB_tx")+ "= "+ str(tB_tx).ljust(lj)+ "// (ms)\n")
 
-            if tBType in ['2', '3', '6']:
+            if tBType in ['2', '3']:
+                # convert seconds to ms
+                tB_tn = float(ivd.tB_tn) * 1000.0
+                
+                file.write(util.formatedObjectVar(vdgObj, "tB_tn")+ "= "+ str(tB_tn).ljust(lj)+ "// (ms)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tB_h1")+ "= "+ (ivd.tB_h1).ljust(lj)+ "// (mV)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tB_s1")+ "= "+ (ivd.tB_s1).ljust(lj)+ "// (mV)\n")
-                if tBType != '6':
-                    # convert seconds to ms
-                    tB_tn = float(ivd.tB_tn) * 1000.0
-                    file.write(util.formatedObjectVar(vdgObj, "tB_tn")+ "= "+ str(tB_tn).ljust(lj)+ "// (ms)\n")
-                    file.write(util.formatedObjectVar(vdgObj, "tB_p1")+ "= "+ ivd.tB_p1+ "\n\n")
-                if tBType in ['3', '6']:
+                file.write(util.formatedObjectVar(vdgObj, "tB_p1")+ "= "+ ivd.tB_p1+ "\n\n")
+
+                if tBType in ['3']:
                     file.write(util.formatedObjectVar(vdgObj, "tB_h2")+ "= "+ (ivd.tB_h2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tB_s2")+ "= "+ (ivd.tB_s2).ljust(lj)+ "// (mV)\n")
-                    if tBType != '6':
-                        file.write(util.formatedObjectVar(vdgObj, "tB_p2")+ "= "+ ivd.tB_p2+ "\n\n")
+                    file.write(util.formatedObjectVar(vdgObj, "tB_p2")+ "= "+ ivd.tB_p2+ "\n\n")
             elif tBType != '1':
-                print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
+                print "WARNING: Time constant forms other than 1, 2, or 3 are not supported yet!!!"
 
         # write steady state
         ssBType = ivd.ssBType
