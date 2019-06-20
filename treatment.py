@@ -46,7 +46,7 @@ class Treatment():
         self.readTrtFile()
 
     def readTrtFile(self):
-        filename = self.filePath + "/" +  self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
 

@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+import sys
+import os
 
 class AssignedBlock():
 
@@ -122,7 +124,7 @@ class NRNModFile():
                 try:
                     g = float(vdgs[vdgName].g) * 1.0e-6
                 except:
-                    print "WARNING!: could not convert "+vdgName+ " conductance of neuron " + nName
+                    print "WARNING!: could not convert "+vdgName+ " conductance of neuron " + self.nrnName
                     print "Exited unexpectedly!"
                     sys.exit(-1)
                     
@@ -427,7 +429,7 @@ class NRNModFile():
 
     def writeModFile(self):
 
-        modFile = self.modFilePath + "/" + self.neuronBlock.mechName + ".mod"
+        modFile = os.path.join(self.modFilePath,self.neuronBlock.mechName+".mod")
         with open(modFile, "w") as mf:
 
             # write UNITS Block

@@ -42,9 +42,9 @@ if __name__ == "__main__":
         filePath = sys.argv[1]
     else:
         print("usage: parseSNNAP <simulationFile>")
-        filePath = "model/hhNetwork.smu"
+        filePath = "model/hhNetwork.smu" # imclude this example when distributing?
 
-    splitedFilePath = filePath.split('/')
+    splitedFilePath = filePath.split(os.sep)
 
     simFilePath = splitedFilePath[:-1]
     simFileName = splitedFilePath[len(splitedFilePath)-1]

@@ -1,0 +1,26 @@
+// presyn: b postSyn: a
+//cs_ fATType:5 ATType:3 XtType:1
+
+threshold       = 0.0             // (mV)
+delay           = 0.0             // (ms)
+weight          = 1               
+
+objref cs_2
+a cs_2 = new snnap_cs2_At34_Xt1(0.5)
+
+cs_2.e              = -42.0           // (mV)
+cs_2.g              = 0.08            // (uS)
+cs_2.dur            = 0.0             // (ms)
+
+cs_2.fAt_a          = 0.00
+cs_2.fAt_b          = 914.72
+cs_2.Ics_type       = 1
+cs_2.fAt_type       = 5
+cs_2.At_type        = 3
+cs_2.Xt_type        = 1
+
+cs_2.taucs1         = 40.0            // (ms)
+
+objref cs_nc2
+b cs_nc2 = new NetCon(&v(0.5), cs_2, threshold, delay, weight)
+

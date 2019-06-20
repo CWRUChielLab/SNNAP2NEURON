@@ -15,6 +15,7 @@
 
 
 import re
+import os
 
 import util
 from network import Network as ntw
@@ -48,9 +49,9 @@ class Simulation ():
 
 
         
-        splitedFilePath = filePath.split('/')
+        splitedFilePath = filePath.split(os.sep)
 
-        self.simFilePath = "/".join(splitedFilePath[:-1])
+        self.simFilePath = os.sep.join(splitedFilePath[:-1])
         self.simFileName = splitedFilePath[len(splitedFilePath)-1]
     
         # read simulation(.smu) file
@@ -72,7 +73,7 @@ class Simulation ():
         """
         read simulation file
         """
-        fileName = filePath + "/" +fileName
+        fileName = os.path.join(filePath,fileName)
         with open(fileName) as f:
             self.text = f.read()
 

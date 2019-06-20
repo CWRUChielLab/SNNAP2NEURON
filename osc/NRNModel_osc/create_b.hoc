@@ -1,0 +1,86 @@
+create b
+b {
+	nseg = 1		// single compartment
+	diam = 1		// (um)
+	L = 3.1831e7		// (um)
+	// total area = pi*diam*L = 1e8 um2 = 1 cm2
+
+	cm = 0.0013          // (uF/cm2)
+}
+
+b.v(0.5) = -39.82           // (mV)
+
+// passive current
+objref b_pas
+b b_pas = new snnap_ionic_pas_ivd5(0.5)
+b_pas.e             = -39.8           // (mV)
+b_pas.gmax          = 0.25            // (uS)
+
+
+objref b_K
+//_A2_B2
+b b_K = new snnap_ionic_tc_ivd1(0.5)
+b_K.e               = -75.0           // (mV)
+b_K.gmax            = 12.0            // (uS)
+b_K.p               = 4
+
+b_K.tA_type         = 3
+b_K.tA_tx           = 27.0            // (ms)
+b_K.tA_tn           = 2.16            // (ms)
+b_K.tA_h1           = -0.0004         // (mV)
+b_K.tA_s1           = 11.7            // (mV)
+b_K.tA_p1           = 1               
+
+b_K.tA_h2           = -27.0           // (mV)
+b_K.tA_s2           = -11.2           // (mV)
+b_K.tA_p2           = 1               
+
+b_K.ssA_type        = 1
+b_K.ssA_h           = -2.4            // (mV)
+b_K.ssA_s           = 8.8             // (mV)
+b_K.ssA_p           = 1
+
+b_K.tB_type         = 2
+b_K.tB_tx           = 200.0           // (ms)
+b_K.tB_tn           = 20.0            // (ms)
+b_K.tB_h1           = -0.0014         // (mV)
+b_K.tB_s1           = 8.3             // (mV)
+b_K.tB_p1           = 1
+
+b_K.ssB_type        = 2
+b_K.ssB_h           = 8.4             // (mV)
+b_K.ssB_s           = 1.5             // (mV)
+b_K.ssB_p           = 2
+b_K.ssB_Bn          = 0.15
+
+objref b_Na
+//_A2_B2
+b b_Na = new snnap_ionic_tc_ivd1(0.5)
+b_Na.e              = 76.6            // (mV)
+b_Na.gmax           = 7.5             // (uS)
+b_Na.p              = 3
+
+b_Na.tA_type        = 2
+b_Na.tA_tx          = 1.5             // (ms)
+b_Na.tA_tn          = 0.45            // (ms)
+b_Na.tA_h1          = -8.7            // (mV)
+b_Na.tA_s1          = 1.85            // (mV)
+b_Na.tA_p1          = 1               
+
+b_Na.ssA_type       = 1
+b_Na.ssA_h          = -18.1           // (mV)
+b_Na.ssA_s          = 4.8             // (mV)
+b_Na.ssA_p          = 1
+
+b_Na.tB_type        = 2
+b_Na.tB_tx          = 10.0            // (ms)
+b_Na.tB_tn          = 2.4             // (ms)
+b_Na.tB_h1          = -15.2           // (mV)
+b_Na.tB_s1          = 3.5             // (mV)
+b_Na.tB_p1          = 1
+
+b_Na.ssB_type       = 1
+b_Na.ssB_h          = -27.5           // (mV)
+b_Na.ssB_s          = 9.2             // (mV)
+b_Na.ssB_p          = 1
+

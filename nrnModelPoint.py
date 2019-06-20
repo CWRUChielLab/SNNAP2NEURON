@@ -73,7 +73,8 @@ class NRNModelPoint():
         neurons = sSim.network.neurons
         coupledNeurons = []
         esf_local = "create_es.hoc"
-        esFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + esf_local
+        esFileName = os.path.join(self.nrnDirPath,self.nrnDirName,esf_local)
+
         self.ElecCouplingFile = esf_local
 
         for es in esList:
@@ -135,7 +136,7 @@ class NRNModelPoint():
         trtList = sSim.network.chemSyns
 
         self.treatmentFile = "treatments.hoc"
-        trtFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + self.treatmentFile
+        trtFileName = os.path.join(self.nrnDirPath,self.nrnDirName,self.treatmentFile)
 
         print "TRTFilename: ", trtFileName
         with open(trtFileName, "w") as tf:
@@ -178,7 +179,7 @@ class NRNModelPoint():
         i = 0
         for cs in csList:
             csf_local = "cs_"+cs.preSyn+"_to_" + cs.postSyn + "_" + cs.synType +".hoc"
-            csFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + csf_local
+            csFileName = os.path.join(self.nrnDirPath,self.nrnDirName,csf_local)
 
             with open(csFileName, "w") as csf:
 
@@ -268,7 +269,7 @@ class NRNModelPoint():
 
         lj = self.lJust1
         
-        mainFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" +"sim_"+self.simName+".hoc"
+        mainFileName = os.path.join(self.nrnDirPath,self.nrnDirName,"sim_"+self.simName+".hoc")
         print "Main fileName: ", mainFileName
         
         with open(mainFileName, "w") as mf:
@@ -340,9 +341,9 @@ class NRNModelPoint():
         self.nrnDirPath = sSim.simFilePath
         self.nrnDirName = "NRNModel_" + self.simName
 
-        if not os.path.isdir(self.nrnDirPath + "/"+ self.nrnDirName):
-            os.mkdir(self.nrnDirPath + "/"+ self.nrnDirName)
-            print "Neuron model is located in ", self.nrnDirPath+ "/"+ self.nrnDirName
+        if not os.path.isdir(self.nrnDirPath + os.sep + self.nrnDirName):
+            os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
+            print "Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName
 
 
 
@@ -357,7 +358,7 @@ class NRNModelPoint():
 
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
-            nFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + nf_local
+            nFileName = os.path.join(self.nrnDirPath,self.nrnDirName,nf_local)
             nrn = sSim.network.neurons[nName]
 
             with open(nFileName, "w") as nf:

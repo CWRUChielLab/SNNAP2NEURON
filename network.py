@@ -18,6 +18,7 @@
 
 
 import re
+import os
 
 import util
 from neuron import Neuron
@@ -45,7 +46,7 @@ class ElecSynapse():
         """
         read electrical coupling file
         """
-        filename = self.filePath + "/" +  self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
             print "Reading electrical coupling file : ", filename
@@ -84,7 +85,7 @@ class Network():
         """
         read network file
         """
-        filename = self.filePath + "/" +  self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
 

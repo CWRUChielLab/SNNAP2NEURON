@@ -18,6 +18,7 @@
 
 
 import re
+import os
 
 import util
 
@@ -131,7 +132,7 @@ class VDConductance():
     
 
     def read_AFile(self):
-        filename = self.filePath + "/" + self.A
+        filename = os.path.join(self.filePath,self.A)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -152,7 +153,7 @@ class VDConductance():
         return
 
     def read_BFile(self):
-        filename = self.filePath + "/" + self.B
+        filename = os.path.join(self.filePath,self.B)
         with open(filename) as f:
             self.text = f.read()
 
@@ -241,7 +242,7 @@ class VDConductance():
 
 
     def read_mFile(self):
-        filename = self.filePath + "/" + self.m
+        filename = os.path.join(self.filePath,self.m)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -263,7 +264,7 @@ class VDConductance():
     
             
     def read_hFile(self):
-        filename = self.filePath + "/" + self.h
+        filename = os.path.join(self.filePath,self.h)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -320,7 +321,7 @@ class VDConductance():
 
     
     def readVDGFile(self):
-        filename = self.filePath + "/" + self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
 

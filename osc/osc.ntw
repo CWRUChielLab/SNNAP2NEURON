@@ -1,0 +1,49 @@
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>    MODULES NAME: ntw		>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+>----------------------->------------------------------->
+  LIST_NEURONS:		> 	List of Neurons		>
+>.......................>...............................>
+	a		>	Neuron's name		>
+	neur1.neu 	>	File Name		>
+	yellow	 	>	Color Name		>
+>.......................>...............................>
+	b		>	Neuron's name		>
+	neur1.neu 	>	File Name		>
+	white	 	>	Color Name		>
+>.......................>...............................>
+	c		>	Neuron's name		>
+	neur2.neu  	>	File Name		>
+	green	 	>	Color Name		>
+>.......................>...............................>
+	END		>				>
+>----------------------->------------------------------->
+
+>----------------------->------------------------------->
+  CHEMSYN:		> 	Chemical synapse	>
+>.......................>...............................>
+	b		> Name of postsynaptic neuron	>
+	a		> Name of presynaptic neuron	>
+	Exci		> type of synapse		>
+	syn1.cs		> File Name			>
+	yellow	 	> Color Name			>
+>.......................>...............................>
+	c		> Name of postsynaptic neuron	>
+	a		> Name of presynaptic neuron	>
+	Inhib		> type of synapse		>
+	syn2.cs		> File Name			>
+	yellow	 	> Color Name			>
+>.......................>...............................>
+	a		> Name of postsynaptic neuron	>
+	b		> Name of presynaptic neuron	>
+	Inhib		> type of synapse		>
+	syn2.cs		> File Name			>
+	white	 	> Color Name			>
+>.......................>...............................>
+	END		>				>
+>----------------------->------------------------------->
+END

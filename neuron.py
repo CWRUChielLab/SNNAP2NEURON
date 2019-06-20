@@ -18,6 +18,7 @@
 
 
 import re
+import os
 
 import util
 from  vdgConductance import VDConductance
@@ -49,7 +50,7 @@ class Neuron():
         """
         read .neu file
         """
-        filename = self.filePath + "/" +  self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
 

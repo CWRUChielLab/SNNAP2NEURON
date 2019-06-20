@@ -18,6 +18,7 @@
 
 
 import re
+import os
 
 import util
 
@@ -69,7 +70,7 @@ class ChemSynapse():
         """
         read .Xt file
         """
-        fileName = self.filePath + "/" + self.XtFileName
+        fileName = os.path.join(self.filePath,self.XtFileName)
         with open(fileName) as f:
             self.text = f.read()
 
@@ -98,7 +99,7 @@ class ChemSynapse():
         """
         read SNNAP time dependent activation function of chemical synapse
         """
-        fileName = self.filePath + "/" + self.fAtFileName
+        fileName = os.path.join(self.filePath,self.fAtFileName)
         with open(fileName) as f:
             self.text = f.read()
 
@@ -136,7 +137,7 @@ class ChemSynapse():
         """
         read SNNAP chemical synapse (.cs) file
         """
-        fileName = self.filePath + "/" + self.fileName
+        fileName = os.path.join(self.filePath,self.fileName)
         with open(fileName) as f:
             self.text = f.read()
             print "Reading chemical synapse file : ", fileName
