@@ -16,16 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import sys
 import re
 import os
-
 from simulation import Simulation as sim
 from nrnModel import NRNModel
         
 def parse2Hoc(filename):
-
     # create simulation object. 
     snnapSim = sim(filename)
 
@@ -35,14 +32,13 @@ def parse2Hoc(filename):
 def printSim(sim):
     pass
 
-    
 if __name__ == "__main__":
     print "main"
     if len(sys.argv) > 1:
         filePath = sys.argv[1]
     else:
         print("usage: parseSNNAP <simulationFile>")
-        filePath = "model/hhNetwork.smu" # imclude this example when distributing?
+        #filePath = "model/hhNetwork.smu" # imclude this example when distributing?
 
     splitedFilePath = filePath.split(os.sep)
 
@@ -50,4 +46,3 @@ if __name__ == "__main__":
     simFileName = splitedFilePath[len(splitedFilePath)-1]
     
     currSim = parse2Hoc(filePath)
-
