@@ -20,13 +20,16 @@ import sys
 import re
 import os
 from simulation import Simulation as sim
-from nrnModel import NRNModel
-        
+from nrnModelPoint import NRNModelPoint
+from nrnModelDist import NRNModelDist
+
 def parse2Hoc(filename):
     # create simulation object. 
     snnapSim = sim(filename)
 
-    nrnModel = NRNModel(snnapSim)
+    # write model in NEURON
+    #nrnModel = NRNModelPoint(snnapSim)
+    nrnModel = NRNModelDist(snnapSim)
     return snnapSim
 
 def printSim(sim):
