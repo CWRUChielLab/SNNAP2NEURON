@@ -813,9 +813,6 @@ class NRNModFile():
                 print "WARNING: only time constant types 1, 2 and 3 are suppoeterd yet!!"
                 print "Exiting..."
                 sys.exit()
-                
-
-        pass
 
     def fill_ivd_B(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
