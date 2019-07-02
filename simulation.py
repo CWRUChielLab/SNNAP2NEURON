@@ -13,18 +13,14 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-
 import re
 import os
-
 import util
 from network import Network as ntw
 from treatment import Treatment as trt
 
 class Simulation ():
-
     def __init__(self, filePath):
-        
         """
         self.LOGICAL_NAME
         self.TIMING
@@ -34,9 +30,7 @@ class Simulation ():
         self.NETWORK
         self.OUTPUT_SETUP
         self.TREATMENTS
-
         """
-
         self.parameters = {"LOGICAL_NAME": "",
                 "TIMING": {"t0": 0.0, "tStop": 1.0, "h":0.00004},
                 "ON_LINE_GRAPH": 1,
@@ -47,8 +41,6 @@ class Simulation ():
                 "TREATMENTS": "",
                 "INT_&_FIRE": 0.0}
 
-
-        
         splitedFilePath = filePath.split(os.sep)
 
         self.simFilePath = os.sep.join(splitedFilePath[:-1])
@@ -64,11 +56,7 @@ class Simulation ():
 
         if self.parameters['TREATMENTS'] != "":
             self.treatemts = trt(self.simFilePath, self.parameters['TREATMENTS'])
-        
-
-
-
-    
+            
     def readSimFile(self, filePath, fileName):
         """
         read simulation file
@@ -98,7 +86,6 @@ class Simulation ():
         and return line number of the next parameter
         SNNAP states time in seconds in .smu file
         """
-        
         if word1 == "TIMING":
             self.parameters['TIMING']['t0']    = lineArr[i+1][0]
             self.parameters['TIMING']['tStop'] = lineArr[i+2][0]
@@ -107,6 +94,3 @@ class Simulation ():
         else:
             self.parameters[word1] = lineArr[i+1][0]
             return i+1
-
-
-

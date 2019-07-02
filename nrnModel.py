@@ -16,17 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import sys
 import re
 import os
-
 import util
 
 class NRNModel():
-
     def __init__(self, sSim):
-
         self.simName = sSim.simFileName.split('.')[0]
         self.lJust1 = 16
 
@@ -60,15 +56,12 @@ class NRNModel():
         # write main file for simulation 
         self.writeMainSimFile(sSim)
 
-
     def writeElecCoupling(self, sSim):
-
         esList = sSim.network.elecSyns
         if len(esList) == 0:
             return
         
         lj = self.lJust1
-
         neurons = sSim.network.neurons
         coupledNeurons = []
         esf_local = "create_es.hoc"
@@ -102,7 +95,6 @@ class NRNModel():
                 i = i+1
 
             for es in esList:
-
                 # convert uS to S
                 g1 = float(es.g1) * 1.0e-6
                 g2 = float(es.g2) * 1.0e-6
@@ -126,9 +118,6 @@ class NRNModel():
             esf.write("es = new LinearMechanism(c, g, y, b, sl, xvec)\n")
         return
 
-
-
-    
     def writeTreatments(self, sSim):
         lj = self.lJust1
         trtList = sSim.network.chemSyns
@@ -138,7 +127,6 @@ class NRNModel():
 
         print "TRTFilename: ", trtFileName
         with open(trtFileName, "w") as tf:
-
             tf.write("// create stim objects\n")
             
             iClamps = sSim.treatemts.currentInjList
@@ -168,7 +156,6 @@ class NRNModel():
 
         return
 
-        
     def writeChemSyns(self, sSim):
 
         lj = self.lJust1
@@ -259,11 +246,8 @@ class NRNModel():
                 csf.write(cs.preSyn+" "+ csncObjName +" = new NetCon(&v(0.5), "+ csObjName+ ", threshold, delay, weight)\n\n")
             i = i+1
         return
-    
-
 
     def writeMainSimFile(self, sSim):
-
         lj = self.lJust1
         
         mainFileName = os.path.join(self.nrnDirPath,self.nrnDirName,"sim_"+self.simName+".hoc")
@@ -329,12 +313,10 @@ class NRNModel():
             
         return
 
-
     def createModelDir(self, sSim):
         """
         create a directrory called NRNModel_<SNNAP-simulation-name>
         """
-        
         self.nrnDirPath = sSim.simFilePath
         self.nrnDirName = "NRNModel_" + self.simName
 
@@ -342,15 +324,11 @@ class NRNModel():
             os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
             print "Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName
 
-
-    
     def writeNeurons(self, sSim):
         """
         write neuron data into files
         """
-        
         lj = self.lJust1
-        
 
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
@@ -358,7 +336,6 @@ class NRNModel():
             nrn = sSim.network.neurons[nName]
 
             with open(nFileName, "w") as nf:
-
                 # append file name to the neuron filelist
                 self.neutonFiles.append(nf_local)
                 
@@ -426,7 +403,6 @@ class NRNModel():
                             nf.write(util.formatedObjectVar(vdgObjName, "e")+ "= "+(vdgs[vdgName].E).ljust(lj) + "// (mV)\n")
                             nf.write(util.formatedObjectVar(vdgObjName, "gmax") + "= " + str(g).ljust(lj) + "// (uS)\n\n\n")
                             continue
-
                         
                     # create object reference for this vdg
                     vdgObjName = nName+"_"+vdgName
@@ -458,12 +434,10 @@ class NRNModel():
 
                         if ivdType == '2':
                             self.write_InActF_rateConstant(nf,  vdgObjName, vdgs[vdgName])
+
                     nf.write("\n")
 
-
-
     def write_ActF_rateConstant(self, file, vdgObj, ivd):
-
         # in SNNAP time derivatives are also in seconds. to convert them to Neuron time derivatives
         # must be divided by 1000.0
         lj = self.lJust1
@@ -486,7 +460,6 @@ class NRNModel():
                 file.write(util.formatedObjectVar(vdgObj, "am_C")+ "= "+ (ivd.am_C).ljust(lj)+ "// (mV)\n")
 
                 if amType != '5' and amType != '6' and amType != '7':
-
                     file.write(util.formatedObjectVar(vdgObj, "am_D")+ "= "+ (ivd.am_D).ljust(lj)+ "// (mV)\n")
             
         bmType = ivd.bmType
@@ -505,9 +478,7 @@ class NRNModel():
                     
         file.write("\n")
 
-
     def write_InActF_rateConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         inactfType = ivd.hType
         if inactfType == "2":
@@ -546,9 +517,7 @@ class NRNModel():
 
         file.write("\n")
 
-
     def write_ActF_timeConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         afType = ivd.AType
         if afType == "2":
@@ -589,7 +558,6 @@ class NRNModel():
         #file.write('%-40s %6s %10s %2s\n' % (filename, type, size, modified))
 
     def write_InActF_timeConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         inactfType = ivd.BType
         if inactfType == "2":
@@ -615,6 +583,7 @@ class NRNModel():
                     file.write(util.formatedObjectVar(vdgObj, "tB_h2")+ "= "+ (ivd.tB_h2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tB_s2")+ "= "+ (ivd.tB_s2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tB_p2")+ "= "+ ivd.tB_p2+ "\n\n")
+
             elif tBType != '1':
                 print "WARNING: Time constant forms other than 1, 2, or 3 are not supported yet!!!"
 
@@ -628,7 +597,6 @@ class NRNModel():
 
         if ssBType == '2':
             file.write(util.formatedObjectVar(vdgObj, "ssB_Bn")+ "= "+ ivd.ssB_Bn+ "\n")
-
 
     def printNeurons(self, sSim):
         """
@@ -731,7 +699,6 @@ class NRNModel():
         if ssAType == 2:
             print "ssA_IV: ", ivd.ssA_An
 
-
     def print_InActF_timeConstant(self, ivd):
         inactfType = ivd.BType
         if inactfType == "2":
@@ -757,8 +724,7 @@ class NRNModel():
         print "ssB_p: ", ivd.ssB_p            
         if ssBType == 2:
             print "ssB_IV: ", ivd.ssB_Bn
-            
-            
+
     def printIvd(self, ivd):
         """
         """
@@ -785,5 +751,3 @@ class NRNModel():
 
         print "E: ", ivd.E
         print "g: ", ivd.g
-
-

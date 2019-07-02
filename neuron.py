@@ -16,18 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import re
 import os
-
 import util
 from  vdgConductance import VDConductance
 
-
 class Neuron():
-
     def __init__(self, name, fileName, color, filePath):
-
         self.name = name
         self.filePath = filePath
         self.fileName = fileName
@@ -42,9 +37,7 @@ class Neuron():
         # voltage gated conductances
         self.vdgs = {}
 
-
         self.readNeuronFile()
-        
         
     def readNeuronFile(self):
         """
@@ -83,7 +76,6 @@ class Neuron():
 
                 i = i+1
 
-
     def extractConductance(self, i, lineArr):
         """
         read and store leak, Na, K, conductance filenames(*.vdg) and color from
@@ -93,7 +85,6 @@ class Neuron():
         vdgFileName = self.findNextFeature(i, lineArr, feature="File Name")
         vdgColor = self.findNextFeature(i, lineArr, feature="Color")
         self.vdgs[vdgName] = VDConductance(self.filePath, vdgFileName, vdgColor)
-
 
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
@@ -105,7 +96,5 @@ class Neuron():
             j = j+1
         return lineArr[j][0]
 
-
     def extractNeuronsFeature(self, i, str):
         return str.split(':')[1].strip()
-
