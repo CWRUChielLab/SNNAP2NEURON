@@ -355,7 +355,7 @@ class NRNModelDist():
         
         lj = self.lJust1
         
-
+        # go through neurons in the model
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
             nFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + nf_local
