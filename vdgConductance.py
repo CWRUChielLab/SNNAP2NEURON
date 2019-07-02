@@ -16,19 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import re
-
+import os
 import util
-
 
 class VDConductance():
     def __init__(self, filePath, fileName, color):
-
         self.filePath = filePath
         self.fileName = fileName
         self.color = color
-
 
         # will be filled from vdg file
         self.ivdType = ""
@@ -40,7 +36,6 @@ class VDConductance():
         self.B = ""
         self.m = ""
         self.h = ""
-
 
         # will be filled from .A file (if ivdType equal to 1 or 3)
         self.AType = ""
@@ -115,9 +110,7 @@ class VDConductance():
         self.bh_B = ""
         self.bh_C = ""
         self.bh_D = ""
-        
-        
-        
+                
         self.readVDGFile()
         if self.ivdType == "2" or self.ivdType == "4":
             self.read_mFile()
@@ -129,9 +122,8 @@ class VDConductance():
                 self.read_BFile()
             pass
     
-
     def read_AFile(self):
-        filename = self.filePath + "/" + self.A
+        filename = os.path.join(self.filePath,self.A)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -152,7 +144,7 @@ class VDConductance():
         return
 
     def read_BFile(self):
-        filename = self.filePath + "/" + self.B
+        filename = os.path.join(self.filePath,self.B)
         with open(filename) as f:
             self.text = f.read()
 
@@ -171,7 +163,6 @@ class VDConductance():
                 i = i+1
         return
 
-    
     def extractTimeConstant(self, i, lineArr):
         """
         read and return parameters related to time constant for activation (tA from .A files)
@@ -202,7 +193,6 @@ class VDConductance():
         elif tConstType != '1':
             print "WARNING: Time constant forms other than 1, 2 or 3 are not supported yet!!!"
         return tConstType, tx, tn, h1, h2, s1, s2, p1, p2
-
     
     def extractSteadyState(self, i, lineArr, isActivation):
         """
@@ -239,9 +229,8 @@ class VDConductance():
             
         return funcType, iv
 
-
     def read_mFile(self):
-        filename = self.filePath + "/" + self.m
+        filename = os.path.join(self.filePath,self.m)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -260,10 +249,9 @@ class VDConductance():
 
                 i = i+1
         return
-    
-            
+        
     def read_hFile(self):
-        filename = self.filePath + "/" + self.h
+        filename = os.path.join(self.filePath,self.h)     
         with open(filename) as f:
             self.text = f.read()
 
@@ -283,7 +271,6 @@ class VDConductance():
                 i = i+1
         return
 
-    
     def extractActivation_rateConst(self, i, lineArr):
         """
         extract rate constant activation (m) or inactivation (h) parameters
@@ -298,7 +285,6 @@ class VDConductance():
             l = self.findNextFeature(i, lineArr, "L")
             
         return funcType, iv, l
-
 
     def extractRateParameter(self, i, lineArr):
         """
@@ -317,10 +303,9 @@ class VDConductance():
                 if parmType != '5' and parmType != '6' and parmType != '7':
                     rp_D = self.findNextFeature(i, lineArr, "D")
         return (parmType, rp_A, rp_B, rp_C,rp_D)
-
     
     def readVDGFile(self):
-        filename = self.filePath + "/" + self.fileName
+        filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
 
@@ -336,8 +321,6 @@ class VDConductance():
         return
 
     def extractIvd(self, i, lineArr):
-        """
-        """
         self.ivdType = lineArr[i][0]
         if self.ivdType == "1" or self.ivdType == "3":
             self.A = self.findNextFeature(i, lineArr, "A")
@@ -355,16 +338,12 @@ class VDConductance():
         self.g = self.findNextFeature(i, lineArr, "g")
         self.E = self.findNextFeature(i, lineArr, "E")
 
-
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
-            return None
-        
+            return None        
         j = i+1
         if j >= len(lineArr):
             return None
         while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
-
-        

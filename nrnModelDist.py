@@ -16,19 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import sys
 import re
 import os
-
 import util
 from nrnModFile import NRNModFile
 
 #class NRNModel():
 class NRNModelDist():
-
     def __init__(self, sSim):
-
         self.simName = sSim.simFileName.split('.')[0]
         self.lJust1 = 16
 
@@ -63,9 +59,7 @@ class NRNModelDist():
         # write main file for simulation 
         self.writeMainSimFile(sSim)
 
-
     def writeElecCoupling(self, sSim):
-
         esList = sSim.network.elecSyns
         if len(esList) == 0:
             return
@@ -75,7 +69,7 @@ class NRNModelDist():
         neurons = sSim.network.neurons
         coupledNeurons = []
         esf_local = "create_es.hoc"
-        esFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + esf_local
+        esFileName = os.path.join(self.nrnDirPath,self.nrnDirName,esf_local)
         self.ElecCouplingFile = esf_local
 
         for es in esList:
@@ -105,7 +99,6 @@ class NRNModelDist():
                 i = i+1
 
             for es in esList:
-
                 # convert uS to S
                 g1 = float(es.g1) * 1.0e-6
                 g2 = float(es.g2) * 1.0e-6
@@ -129,19 +122,15 @@ class NRNModelDist():
             esf.write("es = new LinearMechanism(c, g, y, b, sl, xvec)\n")
         return
 
-
-
-    
     def writeTreatments(self, sSim):
         lj = self.lJust1
         trtList = sSim.network.chemSyns
 
         self.treatmentFile = "treatments.hoc"
-        trtFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + self.treatmentFile
+        trtFileName = os.path.join(self.nrnDirPath,self.nrnDirName,self.treatmentFile)
 
         print "TRTFilename: ", trtFileName
         with open(trtFileName, "w") as tf:
-
             tf.write("// create stim objects\n")
             
             iClamps = sSim.treatemts.currentInjList
@@ -168,19 +157,16 @@ class NRNModelDist():
                 # in SNNAP magnitude of current inject is in nA 
                 mag = float(ic.magnitude)
                 tf.write(util.formatedObjectVar(stimID, "amp") + "= "+ str(mag).ljust(lj) + "// (nA)\n\n")
-
         return
 
-        
     def writeChemSyns(self, sSim):
-
         lj = self.lJust1
         csList = sSim.network.chemSyns
         neurons = sSim.network.neurons
         i = 0
         for cs in csList:
             csf_local = "cs_"+cs.preSyn+"_to_" + cs.postSyn + "_" + cs.synType +".hoc"
-            csFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + csf_local
+            csFileName = os.path.join(self.nrnDirPath,self.nrnDirName,csf_local)
 
             with open(csFileName, "w") as csf:
 
@@ -228,7 +214,6 @@ class NRNModelDist():
                 spDur = float(neurons[cs.preSyn].spikeDur) *1000
                 csf.write(util.formatedObjectVar(csObjName, "dur")+"= "+ str(spDur).ljust(lj) + "// (ms)\n\n")
 
-
                 if cs.fATType in ['3', '5', '6']:
                     csf.write(util.formatedObjectVar(csObjName, "fAt_a")+"= "+ cs.fAT_a + "\n")
                 if cs.fATType in ['3', '4', '5']:
@@ -263,18 +248,14 @@ class NRNModelDist():
                 csf.write(cs.preSyn+" "+ csncObjName +" = new NetCon(&v(0.5), "+ csObjName+ ", threshold, delay, weight)\n\n")
             i = i+1
         return
-    
-
 
     def writeMainSimFile(self, sSim):
-
         lj = self.lJust1
         
-        mainFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" +"sim_"+self.simName+".hoc"
+        mainFileName = os.path.join(self.nrnDirPath,self.nrnDirName,"sim_"+self.simName+".hoc")
         print "Main fileName: ", mainFileName
         
         with open(mainFileName, "w") as mf:
-
             mf.write("// load gui and standard run library\n")
             mf.write("load_file(\"nrngui.hoc\")\n\n")
 
@@ -291,7 +272,6 @@ class NRNModelDist():
                 mf.write("load_file(\"" + self.ElecCouplingFile + "\")\n")
             mf.write("\n")
             
-
             mf.write("// create stim objects\n")
             mf.write("load_file(\"" + self.treatmentFile + "\")\n\n")
 
@@ -307,7 +287,6 @@ class NRNModelDist():
             mf.write("//cvode.active(1)      // enable variable time steps\n")
             mf.write("finitialize()        // initialize state variables (INITIAL blocks)\n")
             mf.write("fcurrent()           // initialize all currents    (BREAKPOINT blocks)\n\n")
-
 
             mf.write("load_file(\"create_plot.hoc\")\n\n")
             # mf.write("// run()\n\n")
@@ -329,43 +308,37 @@ class NRNModelDist():
             mf.write("alt_run()\n\n")
 
             mf.write("//load_file(\"fwrite.hoc\")\n\n")
-            print "\nSNNAP model was sucessfully converted to NEURON!"
-            
+            print "\nSNNAP model was sucessfully converted to NEURON!"            
         return
-
 
     def createModelDir(self, sSim):
         """
         create a directrory called NRNModel_<SNNAP-simulation-name>
-        """
-        
+        """        
         self.nrnDirPath = sSim.simFilePath
         self.nrnDirName = "NRNModel_" + self.simName
 
-        if not os.path.isdir(self.nrnDirPath + "/"+ self.nrnDirName):
-            os.mkdir(self.nrnDirPath + "/"+ self.nrnDirName)
-            print "Neuron model is located in ", self.nrnDirPath+ "/"+ self.nrnDirName
+        if not os.path.isdir(self.nrnDirPath + os.sep + self.nrnDirName):
+            os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
+            print "Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName
 
-
-    
     def writeNeuronsDist(self, sSim):
         """
         write neuron data into files
-        """
-        
+        """        
         lj = self.lJust1
         
+
         # go through neurons in the model
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
-            nFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + nf_local
+            nFileName = os.path.join(self.nrnDirPath,self.nrnDirName,nf_local)
             nrn = sSim.network.neurons[nName]
 
             # name given to distributed mechanics of this neuron 
             nrnModName = nName+"_mechs"
 
             with open(nFileName, "w") as nf:
-
                 # append file name to the neuron filelist
                 self.neutonFiles.append(nf_local)
                 
@@ -386,7 +359,6 @@ class NRNModelDist():
 
                 # insert leak current
                 vdgs = nrn.vdgs
-
                 
                 nf.write("\tinsert "+ nrnModName +"\n")
 
@@ -409,32 +381,26 @@ class NRNModelDist():
                 # write inital Vm
                 nf.write(nName+".v(0.5) = " + str(nrn.vmInit).ljust(lj) +" // (mV)\n\n")
                 
-
             #write modFile with distributed mechanics
             # mod file name
             localModFile = nrnModName+".mod"
-            modFilePath = self.nrnDirPath +"/"+ self.nrnDirName
+            modFilePath = os.path.join(self.nrnDirPath,self.nrnDirName)
 
             # create modfile object
             NRNModFile(nName, modFilePath, nrn)
 
-
-    
     def writeNeurons(self, sSim):
         """
         write neuron data into files
         """
-        
         lj = self.lJust1
         
-
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
-            nFileName = self.nrnDirPath +"/"+ self.nrnDirName + "/" + nf_local
+            nFileName = os.path.join(self.nrnDirPath,self.nrnDirName,nf_local)
             nrn = sSim.network.neurons[nName]
 
             with open(nFileName, "w") as nf:
-
                 # append file name to the neuron filelist
                 self.neutonFiles.append(nf_local)
                 
@@ -502,8 +468,7 @@ class NRNModelDist():
                             nf.write(util.formatedObjectVar(vdgObjName, "e")+ "= "+(vdgs[vdgName].E).ljust(lj) + "// (mV)\n")
                             nf.write(util.formatedObjectVar(vdgObjName, "gmax") + "= " + str(g).ljust(lj) + "// (uS)\n\n\n")
                             continue
-
-                        
+  
                     # create object reference for this vdg
                     vdgObjName = nName+"_"+vdgName
                     nf.write("objref "+vdgObjName+ "\n")
@@ -536,10 +501,7 @@ class NRNModelDist():
                             self.write_InActF_rateConstant(nf,  vdgObjName, vdgs[vdgName])
                     nf.write("\n")
 
-
-
     def write_ActF_rateConstant(self, file, vdgObj, ivd):
-
         # in SNNAP time derivatives are also in seconds. to convert them to Neuron time derivatives
         # must be divided by 1000.0
         lj = self.lJust1
@@ -562,7 +524,6 @@ class NRNModelDist():
                 file.write(util.formatedObjectVar(vdgObj, "am_C")+ "= "+ (ivd.am_C).ljust(lj)+ "// (mV)\n")
 
                 if amType != '5' and amType != '6' and amType != '7':
-
                     file.write(util.formatedObjectVar(vdgObj, "am_D")+ "= "+ (ivd.am_D).ljust(lj)+ "// (mV)\n")
             
         bmType = ivd.bmType
@@ -581,9 +542,7 @@ class NRNModelDist():
                     
         file.write("\n")
 
-
     def write_InActF_rateConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         inactfType = ivd.hType
         if inactfType == "2":
@@ -622,9 +581,7 @@ class NRNModelDist():
 
         file.write("\n")
 
-
     def write_ActF_timeConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         afType = ivd.AType
         if afType == "2":
@@ -667,7 +624,6 @@ class NRNModelDist():
         #file.write('%-40s %6s %10s %2s\n' % (filename, type, size, modified))
 
     def write_InActF_timeConstant(self, file, vdgObj, ivd):
-
         lj = self.lJust1
         inactfType = ivd.BType
         if inactfType == "2":
@@ -706,7 +662,6 @@ class NRNModelDist():
 
         if ssBType == '2':
             file.write(util.formatedObjectVar(vdgObj, "ssB_Bn")+ "= "+ ivd.ssB_Bn+ "\n")
-
 
     def printNeurons(self, sSim):
         """
@@ -755,7 +710,6 @@ class NRNModelDist():
                 print "bm_C: ", ivd.bm_C
                 if bmType != '5' and bmType != '6' and bmType != '7':
                     print "bm_D: ", ivd.bm_D
-
 
     def print_InActF_rateConstant(self, ivd):
         inactfType = ivd.hType
@@ -809,7 +763,6 @@ class NRNModelDist():
         if ssAType == 2:
             print "ssA_IV: ", ivd.ssA_An
 
-
     def print_InActF_timeConstant(self, ivd):
         inactfType = ivd.BType
         if inactfType == "2":
@@ -835,11 +788,8 @@ class NRNModelDist():
         print "ssB_p: ", ivd.ssB_p            
         if ssBType == 2:
             print "ssB_IV: ", ivd.ssB_Bn
-            
-            
+               
     def printIvd(self, ivd):
-        """
-        """
         ivdType = ivd.ivdType
         print "ivd type: ", ivdType
         if ivdType == "1" or ivdType == "3":
@@ -859,9 +809,5 @@ class NRNModelDist():
         if ivdType == "2":
             print "hType: ", ivd.hType
             self.print_InActF_rateConstant(ivd)
-
-
         print "E: ", ivd.E
         print "g: ", ivd.g
-
-

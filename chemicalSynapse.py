@@ -16,18 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import re
-
+import os
 import util
 
 class ChemSynapse():
-
-
     def __init__(self, postSyn, preSyn, synType, fileName, color, filePath):
-        """
-        """
-
         self.filePath = filePath
         self.fileName = fileName
 
@@ -64,12 +58,11 @@ class ChemSynapse():
                 self.readXtFile()
                 pass
                 
-
     def readXtFile(self):
         """
         read .Xt file
         """
-        fileName = self.filePath + "/" + self.XtFileName
+        fileName = os.path.join(self.filePath,self.XtFileName)
         with open(fileName) as f:
             self.text = f.read()
 
@@ -84,8 +77,7 @@ class ChemSynapse():
                     if self.XtType == "3":
                         self.extractPSM(i+1, lineArr)
                 i = i+1
-
-                
+               
     def extractPSM(self, i, lineArr):
         """
         since PSM has only one option
@@ -93,12 +85,11 @@ class ChemSynapse():
         self.PSM_ud = self.findNextFeature(i+1, lineArr, feature="ud")
         self.PSM_ur = self.findNextFeature(i+1, lineArr, feature="ur")
     
-
     def readfATFile(self):
         """
         read SNNAP time dependent activation function of chemical synapse
         """
-        fileName = self.filePath + "/" + self.fAtFileName
+        fileName = os.path.join(self.filePath,self.fAtFileName)
         with open(fileName) as f:
             self.text = f.read()
 
@@ -120,8 +111,7 @@ class ChemSynapse():
                     self.extractAt(i, lineArr)
                     
                 i = i+1
-
-                
+         
     def extractAt(self, i, lineArr):
         self.ATType = lineArr[i+1][0]
         if self.ATType == '1':
@@ -130,13 +120,12 @@ class ChemSynapse():
         if self.ATType == '3':
             self.XtFileName = lineArr[i+2][0]
             self.At_u1 = lineArr[i+3][0]
-
-            
+       
     def readCSFile(self):
         """
         read SNNAP chemical synapse (.cs) file
         """
-        fileName = self.filePath + "/" + self.fileName
+        fileName = os.path.join(self.filePath,self.fileName)
         with open(fileName) as f:
             self.text = f.read()
             print "Reading chemical synapse file : ", fileName
@@ -152,7 +141,6 @@ class ChemSynapse():
                     continue
                 if re.search("Ics", line[0]) is not None:
                     self.extractCS(i+1, lineArr)
-
                 i = i+1
 
     def extractCS(self, i, lineArr):
@@ -164,16 +152,13 @@ class ChemSynapse():
             self.R = self.findNextFeature(i, lineArr, feature="R")
             self.g = self.findNextFeature(i, lineArr, feature="g")
             self.E = self.findNextFeature(i, lineArr, feature="E")
-            
 
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
             return None
-        
         j = i+1
         if j >= len(lineArr):
             return None
         while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
-

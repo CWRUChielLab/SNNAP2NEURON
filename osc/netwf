@@ -1,0 +1,8 @@
+NEURONS
+a neur1.neu yellow
+b neur1.neu white
+c neur2.neu green
+CONNECTIONS
+a b c1 Exci 0 syn1.cs N yellow
+a c c1 Inhib 0 syn2.cs N yellow
+b a c1 Inhib -1 syn2.cs N white

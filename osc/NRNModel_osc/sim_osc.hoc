@@ -1,0 +1,44 @@
+// load gui and standard run library
+load_file("nrngui.hoc")
+
+// create neurons
+load_file("create_a.hoc")
+load_file("create_c.hoc")
+load_file("create_b.hoc")
+
+// create electrical and chemical synapses
+load_file("cs_a_to_b_Exci.hoc")
+load_file("cs_a_to_c_Inhib.hoc")
+load_file("cs_b_to_a_Inhib.hoc")
+
+// create stim objects
+load_file("treatments.hoc")
+
+// initialize simulation
+v_init = -60.0           // (mV)
+dt = 0.05            // (ms)
+tstop = 8000.0          // (ms)
+
+//cvode.active(1)      // enable variable time steps
+finitialize()        // initialize state variables (INITIAL blocks)
+fcurrent()           // initialize all currents    (BREAKPOINT blocks)
+
+load_file("create_plot.hoc")
+
+// alternative run() function which allow cells to be initialize to distict inital Vm.
+proc alt_run() {
+	running_ = 1
+	// initialization
+	cvode_simgraph()
+	realtime = 0
+	setdt()
+	finitialize()
+	initPlot()
+	// advance
+	continuerun(tstop)
+}
+
+alt_run()
+
+//load_file("fwrite.hoc")
+

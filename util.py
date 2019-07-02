@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
-
 def formatedObjectVar(obj, var):
     """
     returns a left justified sting (obj.var) with a length of 20 characters
@@ -28,8 +27,6 @@ def formatedObjectVar(obj, var):
     a left justified sting with a length of 20 characters
     """
     return (obj+"."+var).ljust(20)
-
-
 
 def cleanupFileText(text):
     """
