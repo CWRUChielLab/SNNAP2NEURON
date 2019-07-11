@@ -6,81 +6,8 @@ c {
 	// total area = pi*diam*L = 1e8 um2 = 1 cm2
 
 	cm = 0.0013          // (uF/cm2)
+	insert c_mechs
 }
 
 c.v(0.5) = -39.82           // (mV)
-
-objref c_Na
-//_A2_B2
-c c_Na = new snnap_ionic_tc_ivd1(0.5)
-c_Na.e              = 76.6            // (mV)
-c_Na.gmax           = 7.5             // (uS)
-c_Na.p              = 3
-
-c_Na.tA_type        = 2
-c_Na.tA_tx          = 1.5             // (ms)
-c_Na.tA_tn          = 0.45            // (ms)
-c_Na.tA_h1          = -8.7            // (mV)
-c_Na.tA_s1          = 1.85            // (mV)
-c_Na.tA_p1          = 1               
-
-c_Na.ssA_type       = 1
-c_Na.ssA_h          = -18.1           // (mV)
-c_Na.ssA_s          = 4.8             // (mV)
-c_Na.ssA_p          = 1
-
-c_Na.tB_type        = 2
-c_Na.tB_tx          = 10.0            // (ms)
-c_Na.tB_tn          = 2.4             // (ms)
-c_Na.tB_h1          = -15.2           // (mV)
-c_Na.tB_s1          = 3.5             // (mV)
-c_Na.tB_p1          = 1
-
-c_Na.ssB_type       = 1
-c_Na.ssB_h          = -27.5           // (mV)
-c_Na.ssB_s          = 9.2             // (mV)
-c_Na.ssB_p          = 1
-
-objref c_K
-//_A2_B2
-c c_K = new snnap_ionic_tc_ivd1(0.5)
-c_K.e               = -75.0           // (mV)
-c_K.gmax            = 12.0            // (uS)
-c_K.p               = 4
-
-c_K.tA_type         = 3
-c_K.tA_tx           = 27.0            // (ms)
-c_K.tA_tn           = 2.16            // (ms)
-c_K.tA_h1           = -0.0004         // (mV)
-c_K.tA_s1           = 11.7            // (mV)
-c_K.tA_p1           = 1               
-
-c_K.tA_h2           = -27.0           // (mV)
-c_K.tA_s2           = -11.2           // (mV)
-c_K.tA_p2           = 1               
-
-c_K.ssA_type        = 1
-c_K.ssA_h           = -2.4            // (mV)
-c_K.ssA_s           = 8.8             // (mV)
-c_K.ssA_p           = 1
-
-c_K.tB_type         = 2
-c_K.tB_tx           = 200.0           // (ms)
-c_K.tB_tn           = 20.0            // (ms)
-c_K.tB_h1           = -0.0014         // (mV)
-c_K.tB_s1           = 8.3             // (mV)
-c_K.tB_p1           = 1
-
-c_K.ssB_type        = 2
-c_K.ssB_h           = 8.4             // (mV)
-c_K.ssB_s           = 1.5             // (mV)
-c_K.ssB_p           = 2
-c_K.ssB_Bn          = 0.15
-
-// passive current
-objref c_pas
-c c_pas = new snnap_ionic_pas_ivd5(0.5)
-c_pas.e             = -26.8           // (mV)
-c_pas.gmax          = 0.25            // (uS)
-
 

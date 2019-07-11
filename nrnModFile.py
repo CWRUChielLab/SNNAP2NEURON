@@ -1,3 +1,20 @@
+# This file is part of SNNAP2NEURON.
+#
+# Copyright (C) 2019 Jayalath A M M Abeywardhana, Jeffrey Gill, Reid Bolding,
+# Peter Thomas
+#
+# SNNAP2NEURON is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# SNNAP2NEURON is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
 import os
@@ -674,7 +691,6 @@ class NRNModFile():
         af_tau_prefix = af_tau +'_'
         ##########################################
 
-
         # write steady state
         ssA_Type = ivd.ssAType
         af_SSA_h = af_SSA_prefix+ 'h'
@@ -698,7 +714,7 @@ class NRNModFile():
             self.procRates[prName] = [af_SSA+ ' = (1 - '+af_SSA_An+')/(1 + exp(('+af_SSA_h+'-v)/'+af_SSA_s+'))^'+af_SSA_p+' + '+ af_SSA_An]
             prmblck[vdgName].append(af_SSA_An+ " = "+ivd.ssA_An)
             nblck.rangeVariables.append(af_SSA_An)
-        
+
         # add rate paramters to GLOBAL variable list
         nblck.globalVariables.append(af_SSA)
 
@@ -719,31 +735,8 @@ class NRNModFile():
             # add activation fucntion to derivative block
             dvblck.append(af+"\' = ("+af_SSA+ " - " +af+") / " +af_tau)
 
+            #########################################
             
-    def fill_ivd_A(self, vdgName, vgdPrefix, ivd):
-            # write steady state
-            ssA_Type = ivd.ssAType
-            af_SSA_h = af_SSA_prefix+ 'h'
-            af_SSA_s = af_SSA_prefix+ 's'
-            af_SSA_p = af_SSA_prefix+ 'p'
-            
-            # add to parameter block
-            prmblck[vdgName].append(af_SSA_h+ " = "+ivd.ssA_h.ljust(lj) + "(mV)")
-            prmblck[vdgName].append(af_SSA_s+ " = "+ivd.ssA_s.ljust(lj) + "(mV)")
-            prmblck[vdgName].append(af_SSA_p+ " = "+ivd.ssA_p)
-            # add parameters to RANGE varible list
-            nblck.rangeVariables.append(af_SSA_h)
-            nblck.rangeVariables.append(af_SSA_s)
-            nblck.rangeVariables.append(af_SSA_p)
-
-            if ssA_Type == '1':
-                self.procRates[vdgName] = [af_SSA+ ' = 1/(1 + exp(('+af_SSA_h+'-v)/'+af_SSA_s+'))^'+af_SSA_p]
-            if ssA_Type == '2':
-                af_SSA_An = af_SSA_prefix+ 'An'
-                self.procRates[vdgName] = [af_SSA+ ' = (1 - '+af_SSA_An+')/(1 + exp(('+af_SSA_h+'-v)/'+af_SSA_s+'))^'+af_SSA_p+' + '+ af_SSA_An]
-                prmblck[vdgName].append(af_SSA_An+ " = "+ivd.ssA_An)
-                nblck.rangeVariables.append(af_SSA_An)
-
             tauType = ivd.tAType
             af_tau_tx = af_tau_prefix +'tx'
             
@@ -781,10 +774,10 @@ class NRNModFile():
                     prmblck[vdgName].append(af_tau_p1+ " = "+ivd.tA_p1)
                     nblck.rangeVariables.append(af_tau_p1)
                     
-                    tau_tn = float(ivd.tA_tn) * 1000.0
-                    af_tau_tn = af_tau_prefix +'tn'
-                    prmblck[vdgName].append(af_tau_tn+ " = "+str(tau_tn).ljust(lj) + "(ms)")
-                    nblck.rangeVariables.append(af_tau_tn)
+                    # tau_tn = float(ivd.tA_tn) * 1000.0
+                    # af_tau_tn = af_tau_prefix +'tn'
+                    # prmblck[vdgName].append(af_tau_tn+ " = "+str(tau_tn).ljust(lj) + "(ms)")
+                    # nblck.rangeVariables.append(af_tau_tn)
 
                     if tauType == '2':
                         self.procRates[prName].append(af_tau+ ' = (' +af_tau_tx+ ' - '+af_tau_tn+')/ (1 + exp((v-'+af_tau_h1+')/'+af_tau_s1+'))^'+af_tau_p1 + ' + ' + af_tau_tn)
