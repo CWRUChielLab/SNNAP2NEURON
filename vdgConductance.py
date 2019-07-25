@@ -137,7 +137,7 @@ class VDConductance():
                     self.AType, self.A_IV = self.extractActivation_timeConst(i+1, lineArr)
                 if re.search("^ssA", line[0]) is not None:
                     self.ssAType, self.ssA_h, self.ssA_s, self.ssA_p, self.ssA_An = self.extractSteadyState(i+1, lineArr, 1)
-                if re.search("^tA", line[0]) is not None:
+                if self.AType == "2" and re.search("^tA", line[0]) is not None:
                     self.tAType, self.tA_tx, self.tA_tn, self.tA_h1, self.tA_h2, self.tA_s1, self.tA_s2, self.tA_p1, self.tA_p2  = self.extractTimeConstant(i+1, lineArr)
 
                 i = i+1
@@ -158,7 +158,7 @@ class VDConductance():
                     self.BType, self.B_IV = self.extractActivation_timeConst(i+1, lineArr)
                 if re.search("^ssB", line[0]) is not None:
                     self.ssBType, self.ssB_h, self.ssB_s, self.ssB_p, self.ssB_Bn = self.extractSteadyState(i+1, lineArr, 0)
-                if re.search("^tB", line[0]) is not None:
+                if self.BType == "2" and re.search("^tB", line[0]) is not None:
                     self.tBType, self.tB_tx, self.tB_tn, self.tB_h1, self.tB_h2, self.tB_s1, self.tB_s2, self.tB_p1, self.tB_p2  = self.extractTimeConstant(i+1, lineArr)
                 i = i+1
         return
@@ -182,14 +182,18 @@ class VDConductance():
             h1 = self.findNextFeature(i, lineArr, "h")
             s1 = self.findNextFeature(i, lineArr, "s")
             p1 = self.findNextFeature(i, lineArr, "p")
-        elif tConstType == '3':
-            tn = self.findNextFeature(i, lineArr, "tn")
+        elif tConstType in ['3', '6']:
+            
             h1 = self.findNextFeature(i, lineArr, "h1")
             s1 = self.findNextFeature(i, lineArr, "s1")
-            p1 = self.findNextFeature(i, lineArr, "p1")
+            
             h2 = self.findNextFeature(i, lineArr, "h2")
             s2 = self.findNextFeature(i, lineArr, "s2")
-            p2 = self.findNextFeature(i, lineArr, "p2")
+            if tConstType in ['3']:
+                tn = self.findNextFeature(i, lineArr, "tn")
+                p1 = self.findNextFeature(i, lineArr, "p1")
+                p2 = self.findNextFeature(i, lineArr, "p2")
+
         elif tConstType != '1':
             print "WARNING: Time constant forms other than 1, 2 or 3 are not supported yet!!!"
         return tConstType, tx, tn, h1, h2, s1, s2, p1, p2
@@ -321,6 +325,9 @@ class VDConductance():
         return
 
     def extractIvd(self, i, lineArr):
+        """
+        read and store rate parameters from .vdg files        
+        """
         self.ivdType = lineArr[i][0]
         if self.ivdType == "1" or self.ivdType == "3":
             self.A = self.findNextFeature(i, lineArr, "A")
