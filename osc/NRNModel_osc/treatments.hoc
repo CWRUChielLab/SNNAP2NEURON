@@ -1,8 +1,0 @@
-// create stim objects
-objref stim[1]
-
-a stim[0]       = new IClamp(0.5)
-stim[0].del         = 500.0           // (ms)
-stim[0].dur         = 3000.0          // (ms)
-stim[0].amp         = 2.5             // (nA)
-
