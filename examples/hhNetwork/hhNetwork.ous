@@ -1,0 +1,47 @@
+
+>------------------------------->--------------------------------------->
+  VAR_TO_GRAPH: 		>	List of current contributing	>
+				>		to ion pools		>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		5           	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		0.10        	>	Max Value of X			>
+		blue         	>	Color of Range			>
+	V[Neuron_1....]<{svr} 	>	Var Name for Y-axis		>
+		7           	>	Number of Tic Marks		>
+		-80.00      	>	Min Value of Y			>
+		60.00       	>	Max Value of Y			>
+		blue          	>	Color of RAnge			>
+	V[Neuron_3....]<{ivr} 	>	Var Name for Y-axis		>
+		7           	>	Number of Tic Marks		>
+		-80.00      	>	Min Value of Y			>
+		60.00       	>	Max Value of Y			>
+		green         	>	Color of RAnge			>
+	V[Neuron_2....]<{ivr} 	>	Var Name for Y-axis		>
+		7           	>	Number of Tic Marks		>
+		-80.00      	>	Min Value of Y			>
+		60.00       	>	Max Value of Y			>
+		red           	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	END:			>					>
+>------------------------------->--------------------------------------->
+
+>------------------------------->--------------------------------------->
+   VAR_TO_FILE: 		>	List of current contributing	>
+>				>		to ion pools		>
+>------------------------------->--------------------------------------->
+	time<{ivr}             	>	VAR name			>
+	V[Neuron_1....]<{ivr}  	>	VAR name			>
+	V[Neuron_2....]<{ivr}  	>	VAR name			>
+	V[Neuron_3....]<{ivr}  	>	VAR name			>
+	fAt[Neuron_2.>----.Neuron_1.exc.]<{ivr}	>	VAR name			>
+	At[Neuron_2.>----.Neuron_1.exc.]<{ivr}	>	VAR name			>
+>------------------------------->--------------------------------------->
+	END:			>					>
+>------------------------------->--------------------------------------->
+
+END:

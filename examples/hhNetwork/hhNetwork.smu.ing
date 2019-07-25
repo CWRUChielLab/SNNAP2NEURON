@@ -1,0 +1,359 @@
+LOGICAL_NAME	hhNetwork
+TIMING: 0.0 0.1 1.0E-6
+ON_LINE_GRAPH: 1
+STORE_RESULTS: 1
+INT_METHOD: 1
+INT_&_FIRE: 0.002
+#NEUR	3
+neur#=0	Neuron_1
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	0.001
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.3	-49.4	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	2
+#prm	3
+120.0	3.0	55.0	
+A	0
+B	0
+m	1
+h	1
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.1	35.0	-35.0	10.0	
+bm	5
+#prm	3
+4.0	-60.0	18.0	
+INACTIVATION=h	
+h	3
+#prm	2
+-1.0	3000.0	
+ah	5
+#prm	3
+0.07	-60.0	20.0	
+bh	8
+#prm	2
+-30.0	10.0	
+vdg#=2	K
+Ivd	4
+#prm	3
+36.0	4.0	-72.0	
+A	0
+B	0
+m	1
+h	0
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.01	50.0	-50.0	10.0	
+bm	5
+#prm	3
+0.125	-60.0	80.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=1	Neuron_2
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	0.001
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.3	-49.4	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	2
+#prm	3
+120.0	3.0	55.0	
+A	0
+B	0
+m	1
+h	1
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.1	35.0	-35.0	10.0	
+bm	5
+#prm	3
+4.0	-60.0	18.0	
+INACTIVATION=h	
+h	3
+#prm	2
+-1.0	3000.0	
+ah	5
+#prm	3
+0.07	-60.0	20.0	
+bh	8
+#prm	2
+-30.0	10.0	
+vdg#=2	K
+Ivd	4
+#prm	3
+36.0	4.0	-72.0	
+A	0
+B	0
+m	1
+h	0
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.01	50.0	-50.0	10.0	
+bm	5
+#prm	3
+0.125	-60.0	80.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=2	Neuron_3
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	0.001
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.3	-49.4	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	2
+#prm	3
+120.0	3.0	55.0	
+A	0
+B	0
+m	1
+h	1
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.1	35.0	-35.0	10.0	
+bm	5
+#prm	3
+4.0	-60.0	18.0	
+INACTIVATION=h	
+h	3
+#prm	2
+-1.0	3000.0	
+ah	5
+#prm	3
+0.07	-60.0	20.0	
+bh	8
+#prm	2
+-30.0	10.0	
+vdg#=2	K
+Ivd	4
+#prm	3
+36.0	4.0	-72.0	
+A	0
+B	0
+m	1
+h	0
+R	0
+ACTIVATION=m	
+m	3
+#prm	2
+-1.0	3000.0	
+am	3
+#prm	4
+0.01	50.0	-50.0	10.0	
+bm	5
+#prm	3
+0.125	-60.0	80.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+
+#CELL	0
+
+#ESYN	0
+#CSYN	3
+csyn#=0   1   Neuron_2	 0	Neuron_1	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.7	0.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	1
+is_Xt=	0
+#prm	1
+0.002	
+csyn#=1   2   Neuron_3	 1	Neuron_2	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.7	0.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	1
+is_Xt=	0
+#prm	1
+0.002	
+csyn#=2   0   Neuron_1	 2	Neuron_3	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.7	0.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	1
+is_Xt=	0
+#prm	1
+0.002	
+#MSYN	0
+#WEIGHT	0
+
+#RSYN	0
+#CINJ	3
+	0	Neuron_1	0.0	0.003	5.0
+	1	Neuron_2	0.01	0.1	0.0
+	2	Neuron_3	0.02	0.1	0.0
+#MINJ	0
+#VCLMP	0
+#ICLMP	0
+#LIGHT	0
+
+Ousfile_PATH  /home/madawa/my_Stuff/neuron/snnap8_1/snnap_parser/model/hhNetwork.ous
+#GRAPH_CHNL	1
+gain=	1
+nvar=	3
+name=	time<{ivr}
+vartype=	3
+n_tic=	5
+min=	0.0
+max=	0.1
+color=	blue
+#GRAPH_VAR	3
+chn_id=	0
+name=	V[Neuron_1....]<{svr}
+name2=	NULL
+vartype=	1
+vartype2=	-1
+n_tic=	7
+min=	-80.0
+max=	60.0
+color=	blue
+chn_id=	0
+name=	V[Neuron_3....]<{ivr}
+name2=	NULL
+vartype=	3
+vartype2=	-1
+n_tic=	7
+min=	-80.0
+max=	60.0
+color=	green
+chn_id=	0
+name=	V[Neuron_2....]<{ivr}
+name2=	NULL
+vartype=	3
+vartype2=	-1
+n_tic=	7
+min=	-80.0
+max=	60.0
+color=	red
+#VAR2FILE		6
+name=	time<{ivr}
+vartype=	3
+name=	V[Neuron_1....]<{ivr}
+vartype=	3
+name=	V[Neuron_2....]<{ivr}
+vartype=	3
+name=	V[Neuron_3....]<{ivr}
+vartype=	3
+name=	fAt[Neuron_2.>----.Neuron_1.exc.]<{ivr}
+vartype=	3
+name=	At[Neuron_2.>----.Neuron_1.exc.]<{ivr}
+vartype=	3
+
