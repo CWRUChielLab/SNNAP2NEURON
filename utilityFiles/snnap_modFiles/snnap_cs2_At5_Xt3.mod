@@ -125,8 +125,8 @@ BREAKPOINT {
 
         if (fAt_type == 2) {
             : Assuming A_peak = 0.7 :FOR-NOW
-	        :i = g * At / 0.7 * (v - e)
-	        i = g * 2.0 * (v - e)
+	        i = g * At / 0.7 * (v - e)
+	        :i = g * 2.0 * (v - e)
         }
 
         if (fAt_type == 3) {
@@ -138,6 +138,7 @@ BREAKPOINT {
 	        i = g * ( 1 + fAt_b*At)  * (v - e)
 	        :i = g * 2.0 * (v - e)
         }
+
 
     } else {
         : time and voltage dependent activation :TODO

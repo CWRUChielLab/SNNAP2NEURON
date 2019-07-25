@@ -150,6 +150,14 @@ BREAKPOINT {
 	        i = g / ( 1 + fAt_b*At)  * (v - e)
         }
 
+        if (fAt_type == 5) {
+	        i = g * ( fAt_a + fAt_b*taucs1*At)  * (v - e)
+        }
+
+        if (fAt_type == 6) {
+	        i = g / ( 1 + fAt_a*taucs1*At)  * (v - e)
+        }
+
     } else {
         : time and voltage dependent activation :TODO
         i = g * 1.0 * (v - e)

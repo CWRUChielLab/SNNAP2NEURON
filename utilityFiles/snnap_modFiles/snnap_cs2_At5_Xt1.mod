@@ -118,7 +118,6 @@ BREAKPOINT {
         }
 
         if (fAt_type == 4) {
-            : 
 	        i = g * ( 1 + fAt_b*At())  * (v - e)
         }
 

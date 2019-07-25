@@ -135,8 +135,8 @@ BREAKPOINT {
 
         if (fAt_type == 2) {
             : Assuming A_peak = 0.7 :FOR-NOW
-	        :i = g * At / 0.7 * (v - e)
-	        i = g * 2.0 * (v - e)
+	        i = g * At / 0.7 * (v - e)
+	        :i = g * 2.0 * (v - e)
         }
 
         if (fAt_type == 3) {
@@ -145,6 +145,14 @@ BREAKPOINT {
 
         if (fAt_type == 4) {
 	        i = g / ( 1 + fAt_b*At)  * (v - e)
+        }
+
+        if (fAt_type == 5) {
+	        i = g * ( fAt_a + fAt_b*taucs1*At)  * (v - e)
+        }
+
+        if (fAt_type == 6) {
+	        i = g / ( 1 + fAt_a*taucs1*At)  * (v - e)
         }
 
     } else {
