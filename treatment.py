@@ -12,6 +12,9 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
 import re
@@ -57,9 +60,10 @@ class Treatment():
 
                 i = i+1
 
-    def extractCurntInj(self, i, lineArr):        
+    def extractCurntInj(self, i, lineArr):
         print "Reading current injections in .trt file"
         while lineArr[i][0] != "END":
+
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
                 nrn = lineArr[i][0]
                 start = self.findNextFeature(i, lineArr, feature="Start")

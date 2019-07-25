@@ -95,6 +95,7 @@ class NRNModel():
                 i = i+1
 
             for es in esList:
+
                 # convert uS to S
                 g1 = float(es.g1) * 1.0e-6
                 g2 = float(es.g2) * 1.0e-6
@@ -155,9 +156,8 @@ class NRNModel():
                 tf.write(util.formatedObjectVar(stimID, "amp") + "= "+ str(mag).ljust(lj) + "// (nA)\n\n")
 
         return
-
+        
     def writeChemSyns(self, sSim):
-
         lj = self.lJust1
         csList = sSim.network.chemSyns
         neurons = sSim.network.neurons
@@ -165,6 +165,7 @@ class NRNModel():
         for cs in csList:
             csf_local = "cs_"+cs.preSyn+"_to_" + cs.postSyn + "_" + cs.synType +".hoc"
             csFileName = os.path.join(self.nrnDirPath,self.nrnDirName,csf_local)
+
             with open(csFileName, "w") as csf:
 
                 # append file name to the chemical synapse filelist
@@ -210,7 +211,6 @@ class NRNModel():
                 # convert spike duration to ms
                 spDur = float(neurons[cs.preSyn].spikeDur) *1000
                 csf.write(util.formatedObjectVar(csObjName, "dur")+"= "+ str(spDur).ljust(lj) + "// (ms)\n\n")
-
 
                 if cs.fATType in ['3', '5', '6']:
                     csf.write(util.formatedObjectVar(csObjName, "fAt_a")+"= "+ cs.fAT_a + "\n")
@@ -270,7 +270,6 @@ class NRNModel():
             if self.ElecCouplingFile != "":
                 mf.write("load_file(\"" + self.ElecCouplingFile + "\")\n")
             mf.write("\n")
-            
 
             mf.write("// create stim objects\n")
             mf.write("load_file(\"" + self.treatmentFile + "\")\n\n")
@@ -287,7 +286,6 @@ class NRNModel():
             mf.write("//cvode.active(1)      // enable variable time steps\n")
             mf.write("finitialize()        // initialize state variables (INITIAL blocks)\n")
             mf.write("fcurrent()           // initialize all currents    (BREAKPOINT blocks)\n\n")
-
 
             mf.write("load_file(\"create_plot.hoc\")\n\n")
             # mf.write("// run()\n\n")
@@ -317,18 +315,20 @@ class NRNModel():
         """
         create a directrory called NRNModel_<SNNAP-simulation-name>
         """
+        
         self.nrnDirPath = sSim.simFilePath
         self.nrnDirName = "NRNModel_" + self.simName
 
         if not os.path.isdir(self.nrnDirPath + os.sep + self.nrnDirName):
             os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
-            print "Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName
-
+            print "Neuron model is located in ", self.nrnDirPath+ os.sep + self.nrnDirName
+    
     def writeNeurons(self, sSim):
         """
         write neuron data into files
         """
         lj = self.lJust1
+        
 
         for nName in sSim.network.neurons.keys():
             nf_local = "create_"+nName+".hoc"
@@ -336,6 +336,7 @@ class NRNModel():
             nrn = sSim.network.neurons[nName]
 
             with open(nFileName, "w") as nf:
+
                 # append file name to the neuron filelist
                 self.neutonFiles.append(nf_local)
                 
@@ -396,21 +397,21 @@ class NRNModel():
                         if ivdType == '5':
                             nf.write("// passive current\n")
                         
-                            vdgObjName = nName+"_pas"
+                            vdgObjName = nName+"_"+vdgName
                             nf.write("objref "+vdgObjName+ "\n")
                             nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_pas_ivd5(0.5)\n")
                         
                             nf.write(util.formatedObjectVar(vdgObjName, "e")+ "= "+(vdgs[vdgName].E).ljust(lj) + "// (mV)\n")
                             nf.write(util.formatedObjectVar(vdgObjName, "gmax") + "= " + str(g).ljust(lj) + "// (uS)\n\n\n")
                             continue
-                        
+
                     # create object reference for this vdg
                     vdgObjName = nName+"_"+vdgName
                     nf.write("objref "+vdgObjName+ "\n")
 
                     if ivdType == '1' or ivdType == '3':
                         nf.write("//_A"+aType+"_B"+bType+"\n")
-                        nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_tc_ivd"+ivdType+"(0.5)\n")
+                        nf.write(nName+" "+vdgObjName+ " = new snnap_ionic_tc_ivd"+ivdType+"_A"+aType+"(0.5)\n")
                         
                         nf.write(util.formatedObjectVar(vdgObjName, "e")+ "= "+(vdgs[vdgName].E).ljust(lj) + "// (mV)\n")
                         nf.write(util.formatedObjectVar(vdgObjName, "gmax") + "= " + str(g).ljust(lj) + "// (uS)\n")
@@ -434,7 +435,6 @@ class NRNModel():
 
                         if ivdType == '2':
                             self.write_InActF_rateConstant(nf,  vdgObjName, vdgs[vdgName])
-
                     nf.write("\n")
 
     def write_ActF_rateConstant(self, file, vdgObj, ivd):
@@ -460,6 +460,7 @@ class NRNModel():
                 file.write(util.formatedObjectVar(vdgObj, "am_C")+ "= "+ (ivd.am_C).ljust(lj)+ "// (mV)\n")
 
                 if amType != '5' and amType != '6' and amType != '7':
+
                     file.write(util.formatedObjectVar(vdgObj, "am_D")+ "= "+ (ivd.am_D).ljust(lj)+ "// (mV)\n")
             
         bmType = ivd.bmType
@@ -530,19 +531,21 @@ class NRNModel():
             tA_tx = float(ivd.tA_tx) * 1000.0
             file.write(util.formatedObjectVar(vdgObj, "tA_tx") + "= "+ str(tA_tx).ljust(lj)+ "// (ms)\n")
             
-            if tAType in ['2', '3']:
-                # convert seconds to ms
-                tA_tn = float(ivd.tA_tn) * 1000.0
-                file.write(util.formatedObjectVar(vdgObj, "tA_tn") + "= "+ str(tA_tn).ljust(lj)+ "// (ms)\n")
+            if tAType in ['2', '3', '6']:
                 file.write(util.formatedObjectVar(vdgObj, "tA_h1") + "= "+ (ivd.tA_h1).ljust(lj)+ "// (mV)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tA_s1") + "= "+ (ivd.tA_s1).ljust(lj)+ "// (mV)\n")
-                file.write(util.formatedObjectVar(vdgObj, "tA_p1") + "= "+ (ivd.tA_p1).ljust(lj)+ "\n\n")
-                if tAType in ['3']:
+                if tAType != '6':
+                    # convert seconds to ms
+                    tA_tn = float(ivd.tA_tn) * 1000.0
+                    file.write(util.formatedObjectVar(vdgObj, "tA_tn") + "= "+ str(tA_tn).ljust(lj)+ "// (ms)\n")
+                    file.write(util.formatedObjectVar(vdgObj, "tA_p1") + "= "+ (ivd.tA_p1).ljust(lj)+ "\n\n")
+                if tAType in ['3', '6']:
                     file.write(util.formatedObjectVar(vdgObj, "tA_h2") + "= "+ (ivd.tA_h2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tA_s2") + "= "+ (ivd.tA_s2).ljust(lj)+ "// (mV)\n")
-                    file.write(util.formatedObjectVar(vdgObj, "tA_p2") + "= "+ (ivd.tA_p2).ljust(lj)+ "\n\n")
+                    if tAType != '6':
+                        file.write(util.formatedObjectVar(vdgObj, "tA_p2") + "= "+ (ivd.tA_p2).ljust(lj)+ "\n\n")
             elif tAType != '1':
-                print "WARNING: Time constant forms other than 1, 2, or 3 are not supported yet!!!"
+                print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
 
         # write steady state
         ssAType = ivd.ssAType
@@ -570,22 +573,21 @@ class NRNModel():
             tB_tx = float(ivd.tB_tx) * 1000.0
             file.write(util.formatedObjectVar(vdgObj, "tB_tx")+ "= "+ str(tB_tx).ljust(lj)+ "// (ms)\n")
 
-            if tBType in ['2', '3']:
-                # convert seconds to ms
-                tB_tn = float(ivd.tB_tn) * 1000.0
-                
-                file.write(util.formatedObjectVar(vdgObj, "tB_tn")+ "= "+ str(tB_tn).ljust(lj)+ "// (ms)\n")
+            if tBType in ['2', '3', '6']:
                 file.write(util.formatedObjectVar(vdgObj, "tB_h1")+ "= "+ (ivd.tB_h1).ljust(lj)+ "// (mV)\n")
                 file.write(util.formatedObjectVar(vdgObj, "tB_s1")+ "= "+ (ivd.tB_s1).ljust(lj)+ "// (mV)\n")
-                file.write(util.formatedObjectVar(vdgObj, "tB_p1")+ "= "+ ivd.tB_p1+ "\n\n")
-
-                if tBType in ['3']:
+                if tBType != '6':
+                    # convert seconds to ms
+                    tB_tn = float(ivd.tB_tn) * 1000.0
+                    file.write(util.formatedObjectVar(vdgObj, "tB_tn")+ "= "+ str(tB_tn).ljust(lj)+ "// (ms)\n")
+                    file.write(util.formatedObjectVar(vdgObj, "tB_p1")+ "= "+ ivd.tB_p1+ "\n\n")
+                if tBType in ['3', '6']:
                     file.write(util.formatedObjectVar(vdgObj, "tB_h2")+ "= "+ (ivd.tB_h2).ljust(lj)+ "// (mV)\n")
                     file.write(util.formatedObjectVar(vdgObj, "tB_s2")+ "= "+ (ivd.tB_s2).ljust(lj)+ "// (mV)\n")
-                    file.write(util.formatedObjectVar(vdgObj, "tB_p2")+ "= "+ ivd.tB_p2+ "\n\n")
-
+                    if tBType != '6':
+                        file.write(util.formatedObjectVar(vdgObj, "tB_p2")+ "= "+ ivd.tB_p2+ "\n\n")
             elif tBType != '1':
-                print "WARNING: Time constant forms other than 1, 2, or 3 are not supported yet!!!"
+                print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
 
         # write steady state
         ssBType = ivd.ssBType
@@ -597,6 +599,7 @@ class NRNModel():
 
         if ssBType == '2':
             file.write(util.formatedObjectVar(vdgObj, "ssB_Bn")+ "= "+ ivd.ssB_Bn+ "\n")
+
 
     def printNeurons(self, sSim):
         """
@@ -645,7 +648,6 @@ class NRNModel():
                 print "bm_C: ", ivd.bm_C
                 if bmType != '5' and bmType != '6' and bmType != '7':
                     print "bm_D: ", ivd.bm_D
-
 
     def print_InActF_rateConstant(self, ivd):
         inactfType = ivd.hType
@@ -724,7 +726,7 @@ class NRNModel():
         print "ssB_p: ", ivd.ssB_p            
         if ssBType == 2:
             print "ssB_IV: ", ivd.ssB_Bn
-
+            
     def printIvd(self, ivd):
         """
         """
@@ -751,3 +753,5 @@ class NRNModel():
 
         print "E: ", ivd.E
         print "g: ", ivd.g
+
+

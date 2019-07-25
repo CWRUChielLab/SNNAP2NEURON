@@ -19,6 +19,7 @@
 import sys
 import re
 import os
+
 from simulation import Simulation as sim
 from nrnModelPoint import NRNModelPoint
 from nrnModelDist import NRNModelDist
@@ -35,13 +36,14 @@ def parse2Hoc(filename):
 def printSim(sim):
     pass
 
+    
 if __name__ == "__main__":
     print "main"
     if len(sys.argv) > 1:
         filePath = sys.argv[1]
     else:
         print("usage: parseSNNAP <simulationFile>")
-        #filePath = "model/hhNetwork.smu" # imclude this example when distributing?
+        filePath = "model/hhNetwork.smu"
 
     splitedFilePath = filePath.split(os.sep)
 
@@ -49,3 +51,4 @@ if __name__ == "__main__":
     simFileName = splitedFilePath[len(splitedFilePath)-1]
     
     currSim = parse2Hoc(filePath)
+

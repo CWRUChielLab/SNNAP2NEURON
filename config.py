@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
-
-
 class config():
     """
     

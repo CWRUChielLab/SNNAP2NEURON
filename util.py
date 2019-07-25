@@ -16,6 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+import re
+
+
 def formatedObjectVar(obj, var):
     """
     returns a left justified sting (obj.var) with a length of 20 characters
@@ -27,6 +30,8 @@ def formatedObjectVar(obj, var):
     a left justified sting with a length of 20 characters
     """
     return (obj+"."+var).ljust(20)
+
+
 
 def cleanupFileText(text):
     """
@@ -49,3 +54,18 @@ def cleanupFileText(text):
         else:
             lineArr.append([elem.strip() for elem in l.split('>')])
     return lineArr
+
+
+def findNextFeature(i, lineArr, feature=""):
+    """
+    return value assigned to SNNAP keyword(called feature)
+    """
+    if feature == "":
+        return None
+        
+    j = i+1
+    if j >= len(lineArr):
+        return None
+    while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
+        j = j+1
+    return lineArr[j][0]

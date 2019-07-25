@@ -137,7 +137,7 @@ class Network():
 
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
-            return None
+            return None        
         j = i+1
         if j >= len(lineArr):
             return None
@@ -145,7 +145,7 @@ class Network():
             #while re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
-
+    
     def extractNeurons(self, i, lineArr):
         """
         read neuron name, filename, and color from .ntw file and create a Neuron object 
@@ -169,10 +169,12 @@ class Network():
         while(lineArr[j][1] != "File Name"):
             j = j+1
         return lineArr[j][0]
-  
+
+        
     def findNextColor(self, i, lineArr):
         j = i+1
 
         while(lineArr[j][1] != "Color Name"):
             j = j+1
         return lineArr[j][0]
+            

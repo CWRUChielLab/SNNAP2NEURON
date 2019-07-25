@@ -58,6 +58,7 @@ class ChemSynapse():
                 self.readXtFile()
                 pass
                 
+
     def readXtFile(self):
         """
         read .Xt file
@@ -77,7 +78,8 @@ class ChemSynapse():
                     if self.XtType == "3":
                         self.extractPSM(i+1, lineArr)
                 i = i+1
-               
+
+                
     def extractPSM(self, i, lineArr):
         """
         since PSM has only one option
@@ -85,6 +87,7 @@ class ChemSynapse():
         self.PSM_ud = self.findNextFeature(i+1, lineArr, feature="ud")
         self.PSM_ur = self.findNextFeature(i+1, lineArr, feature="ur")
     
+
     def readfATFile(self):
         """
         read SNNAP time dependent activation function of chemical synapse
@@ -111,7 +114,7 @@ class ChemSynapse():
                     self.extractAt(i, lineArr)
                     
                 i = i+1
-         
+                
     def extractAt(self, i, lineArr):
         self.ATType = lineArr[i+1][0]
         if self.ATType == '1':
@@ -120,7 +123,7 @@ class ChemSynapse():
         if self.ATType == '3':
             self.XtFileName = lineArr[i+2][0]
             self.At_u1 = lineArr[i+3][0]
-       
+            
     def readCSFile(self):
         """
         read SNNAP chemical synapse (.cs) file
@@ -141,24 +144,27 @@ class ChemSynapse():
                     continue
                 if re.search("Ics", line[0]) is not None:
                     self.extractCS(i+1, lineArr)
+
                 i = i+1
 
     def extractCS(self, i, lineArr):
-
         self.iCSType = lineArr[i][0]
         if self.iCSType == '1':
-
             self.fAtFileName = self.findNextFeature(i, lineArr, feature="fAt")
             self.R = self.findNextFeature(i, lineArr, feature="R")
             self.g = self.findNextFeature(i, lineArr, feature="g")
             self.E = self.findNextFeature(i, lineArr, feature="E")
-
+        else :
+            print "WARNING: Only chemical synapses of type 1(Ics: 1) are supported!!!"
+            
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
             return None
+        
         j = i+1
         if j >= len(lineArr):
             return None
         while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
+

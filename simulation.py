@@ -12,6 +12,9 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import re
 import os
@@ -21,6 +24,7 @@ from treatment import Treatment as trt
 
 class Simulation ():
     def __init__(self, filePath):
+        
         """
         self.LOGICAL_NAME
         self.TIMING
@@ -56,7 +60,7 @@ class Simulation ():
 
         if self.parameters['TREATMENTS'] != "":
             self.treatemts = trt(self.simFilePath, self.parameters['TREATMENTS'])
-            
+    
     def readSimFile(self, filePath, fileName):
         """
         read simulation file
@@ -86,6 +90,7 @@ class Simulation ():
         and return line number of the next parameter
         SNNAP states time in seconds in .smu file
         """
+        
         if word1 == "TIMING":
             self.parameters['TIMING']['t0']    = lineArr[i+1][0]
             self.parameters['TIMING']['tStop'] = lineArr[i+2][0]
@@ -94,3 +99,4 @@ class Simulation ():
         else:
             self.parameters[word1] = lineArr[i+1][0]
             return i+1
+
