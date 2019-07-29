@@ -100,7 +100,6 @@ class Neuron():
 
         print "Reading regulation of voltage dependent conductances by ion pools"
         while lineArr[i][0] != "END":
-            print lineArr[i]
             if re.search("Name of Conductance", lineArr[i][1]) is not None:
                 condName = lineArr[i][0].replace('(', '_').replace(')', '_')
                 ionName = lineArr[i+1][0]
