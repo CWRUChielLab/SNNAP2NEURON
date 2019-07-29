@@ -162,7 +162,6 @@ class VDConductance():
                     self.tBType, self.tB_tx, self.tB_tn, self.tB_h1, self.tB_h2, self.tB_s1, self.tB_s2, self.tB_p1, self.tB_p2  = self.extractTimeConstant(i+1, lineArr)
                 i = i+1
         return
-
     
     def extractTimeConstant(self, i, lineArr):
         """
@@ -198,7 +197,6 @@ class VDConductance():
             print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
         return tConstType, tx, tn, h1, h2, s1, s2, p1, p2
 
-    
     def extractSteadyState(self, i, lineArr, isActivation):
         """
         read and return parameters related to steady state of acivation (ssA from .A files)
@@ -234,7 +232,6 @@ class VDConductance():
             
         return funcType, iv
 
-
     def read_mFile(self):
         filename = os.path.join(self.filePath,self.m)
         with open(filename) as f:
@@ -256,7 +253,6 @@ class VDConductance():
                 i = i+1
         return
     
-            
     def read_hFile(self):
         filename = os.path.join(self.filePath,self.h)
         with open(filename) as f:
@@ -277,7 +273,6 @@ class VDConductance():
 
                 i = i+1
         return
-
     
     def extractActivation_rateConst(self, i, lineArr):
         """
@@ -293,7 +288,6 @@ class VDConductance():
             l = self.findNextFeature(i, lineArr, "L")
             
         return funcType, iv, l
-
 
     def extractRateParameter(self, i, lineArr):
         """
@@ -313,7 +307,6 @@ class VDConductance():
                     rp_D = self.findNextFeature(i, lineArr, "D")
         return (parmType, rp_A, rp_B, rp_C,rp_D)
 
-    
     def readVDGFile(self):
         filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
@@ -350,7 +343,6 @@ class VDConductance():
 
         self.g = self.findNextFeature(i, lineArr, "g")
         self.E = self.findNextFeature(i, lineArr, "E")
-
 
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":

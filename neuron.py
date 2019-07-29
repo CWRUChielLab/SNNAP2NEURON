@@ -17,15 +17,12 @@
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import re
-
 import util
 from  vdgConductance import VDConductance
 from ion import IonPool, Current2Ion, ConductanceByIon
 
 class Neuron():
-
     def __init__(self, name, fileName, color, filePath):
-
         self.name = name
         self.filePath = filePath
         self.fileName = fileName
@@ -45,10 +42,7 @@ class Neuron():
         self.curr2Ions = []
         # regulation of vdg by ion pools
         self.condByIon = []
-
-        
         self.readNeuronFile()
-        
         
     def readNeuronFile(self):
         """
@@ -97,7 +91,6 @@ class Neuron():
         """
         read and store regulation of voltage dependent conductances by ion pools
         """
-
         print "Reading regulation of voltage dependent conductances by ion pools"
         while lineArr[i][0] != "END":
             if re.search("Name of Conductance", lineArr[i][1]) is not None:
@@ -109,7 +102,6 @@ class Neuron():
                 self.condByIon.append(ConductanceByIon(condName, ionName, self.filePath, fileName, color))
             i = i+1
         return i
-
 
     def extractCurr2Ions(self, i, lineArr):
         """
@@ -126,14 +118,12 @@ class Neuron():
                 
             i = i+1
         return i
-
     
     def extractIonPools(self, i, lineArr):
         """
         read and store ion pools from
         .neu files
         """
-
         print "Reading ion pools"
         while lineArr[i][0] != "END":
             if re.search("Name of Ion", lineArr[i][1]) is not None:
@@ -159,8 +149,6 @@ class Neuron():
                 vdgName = lineArr[i][0].replace('(', '_').replace(')', '_')
                 vdgFileName = lineArr[i+1][0]
                 vdgColor = lineArr[i+2][0]
-                #vdgFileName = self.findNextFeature(i, lineArr, feature="File Name")
-                #vdgColor = self.findNextFeature(i, lineArr, feature="Color")
                 self.vdgs[vdgName] = VDConductance(self.filePath, vdgFileName, vdgColor)
                 
             i = i+1
@@ -172,21 +160,9 @@ class Neuron():
         .neu files
         """
         vdgName = lineArr[i][0]
-        vdgFileName = self.findNextFeature(i, lineArr, feature="File Name")
-        vdgColor = self.findNextFeature(i, lineArr, feature="Color")
+        vdgFileName = util.findNextFeature(i, lineArr, feature="File Name")
+        vdgColor = util.findNextFeature(i, lineArr, feature="Color")
         self.vdgs[vdgName] = VDConductance(self.filePath, vdgFileName, vdgColor)
-
-
-    def findNextFeature(self, i, lineArr, feature=""):
-        if feature == "":
-            return None        
-        j = i+1
-        if j >= len(lineArr):
-            return None
-        while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
-            j = j+1
-        return lineArr[j][0]
-
 
     def extractNeuronsFeature(self, i, str):
         return str.split(':')[1].strip()

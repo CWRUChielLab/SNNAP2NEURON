@@ -66,22 +66,11 @@ class Treatment():
 
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
                 nrn = lineArr[i][0]
-                start = self.findNextFeature(i, lineArr, feature="Start")
-                stop = self.findNextFeature(i, lineArr, feature="Stop")
-                magnitude = self.findNextFeature(i, lineArr, feature="Magnitude")
+                start = util.findNextFeature(i, lineArr, feature="Start")
+                stop = util.findNextFeature(i, lineArr, feature="Stop")
+                magnitude = util.findNextFeature(i, lineArr, feature="Magnitude")
                 if float(magnitude) != 0.0:
                     self.currentInjList.append(CurrentInj(nrn, start, stop, magnitude))
             i = i+1
         print "Found", len(self.currentInjList), "current injections."
         return i+1
-
-    def findNextFeature(self, i, lineArr, feature=""):
-        if feature == "":
-            return None
-        
-        j = i+1
-        if j >= len(lineArr):
-            return None
-        while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
-            j = j+1
-        return lineArr[j][0]
