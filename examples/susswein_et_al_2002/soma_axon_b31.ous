@@ -1,0 +1,63 @@
+
+>------------------------------->--------------------------------------->
+  VAR_TO_GRAPH: 		>	List of current contributing	>
+				>		to ion pools		>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		15          	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		0.50        	>	Max Value of X			>
+		red          	>	Color of Range			>
+	V[b63_soma....]<{svr} 	>	Var Name for Y-axis		>
+		4           	>	Number of Tic Marks		>
+		-90.00      	>	Min Value of Y			>
+		30.00       	>	Max Value of Y			>
+		red           	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		15          	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		0.50        	>	Max Value of X			>
+		blue         	>	Color of Range			>
+	V[b63_axon....]<{svr} 	>	Var Name for Y-axis		>
+		4           	>	Number of Tic Marks		>
+		-90.00      	>	Min Value of Y			>
+		30.00       	>	Max Value of Y			>
+		white         	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		15          	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		0.50        	>	Max Value of X			>
+		green        	>	Color of Range			>
+	V[b31....]<{svr}      	>	Var Name for Y-axis		>
+		4           	>	Number of Tic Marks		>
+		-90.00      	>	Min Value of Y			>
+		30.00       	>	Max Value of Y			>
+		green         	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	END:			>					>
+>------------------------------->--------------------------------------->
+
+>------------------------------->--------------------------------------->
+   VAR_TO_FILE: 		>	List of current contributing	>
+>				>		to ion pools		>
+>------------------------------->--------------------------------------->
+	V[b63_soma....]<{svr}  	>	VAR name			>
+	V[b63_axon....]<{svr}  	>	VAR name			>
+	V[b31....]<{svr}       	>	VAR name			>
+	time<{ivr}             	>	VAR name			>
+>------------------------------->--------------------------------------->
+	END:			>					>
+>------------------------------->--------------------------------------->
+
+END:

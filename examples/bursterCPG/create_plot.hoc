@@ -1,0 +1,39 @@
+//create plots
+objref plots
+plots = new Graph(0)
+addplot(plots, 0)
+
+// view: xmin, ymin, xrange, yrange, winleft, wintop, winwidth, winheight
+plots.view(0, -70, tstop, 100, 0, 290, 640, 320)
+
+// addvar: "label", "variable", color_index, brush_index
+plots.addvar("ML Vm", "ML.v(0.5)", 3, 1)
+//plots.addvar("Neuron_2 Vm", "Neuron_2.v(0.5)", 2, 1)
+//plots.addvar("Neuron_3 Vm", "Neuron_3.v(0.5)", 4, 1)
+
+
+// New vector for recording Vsoma
+ objref vvec[3], tvec
+ tvec = new Vector()
+ tvec.record(&t) // record time
+ vvec[0] = new Vector()
+ vvec[1] = new Vector()
+ vvec[2] = new Vector()
+
+// record Vm to vectors
+ML vvec[0].record(&v(0.5)) // record v at cell
+//ML vvec[1].record(&ML.Cion_ml_mechs_kca(0.5)) // record v at cell
+//ML vvec[1].record(&ML.ica_ml_mechs_kca(0.5)) // record v at cell
+//ML vvec[1].record(&ML.cai(0.5)) // record [ca2+] at cell
+//ML vvec[2].record(&ML.ica(0.5)) // record ica at cell
+
+
+
+// Neuron_3 vvec[2].record(&v(0.5)) // record v at cell
+
+// to record state variables of a point process defined
+// by NMODL
+//objref mvec
+//mvec = new Vector()
+//HH mvec.record(&HH_K.m) // record state variable m of HH_K
+

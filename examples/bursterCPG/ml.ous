@@ -1,0 +1,52 @@
+
+>------------------------------->--------------------------------------->
+  VAR_TO_GRAPH: 		>	List of current contributing	>
+				>		to ion pools		>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		5           	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		5.00        	>	Max Value of X			>
+		blue         	>	Color of Range			>
+	V[ML....]<{ivr}       	>	Var Name for Y-axis		>
+		8           	>	Number of Tic Marks		>
+		-50.00      	>	Min Value of Y			>
+		30.00       	>	Max Value of Y			>
+		blue          	>	Color of RAnge			>
+	Cion[Ca.ML...]<{svr}  	>	Var Name for Y-axis		>
+		10          	>	Number of Tic Marks		>
+		-2.00       	>	Min Value of Y			>
+		2.00        	>	Max Value of Y			>
+		red           	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	GRPH_CHNL:		>	Graph channel			>
+>------------------------------->--------------------------------------->
+	1			>	GAIN of Channel			>
+	time<{ivr}            	>	Var Name for X-axis		>
+		5           	>	Number of Tic Marks		>
+		0.00        	>	Min Value of X			>
+		5.00        	>	Max Value of X			>
+		blue         	>	Color of Range			>
+	Ivd[Ca.ML...]<{ivr}   	>	Var Name for Y-axis		>
+		10          	>	Number of Tic Marks		>
+		-50.00      	>	Min Value of Y			>
+		0.00        	>	Max Value of Y			>
+		gold          	>	Color of RAnge			>
+	Ivd[K.ML...]<{ivr}    	>	Var Name for Y-axis		>
+		10          	>	Number of Tic Marks		>
+		0.00        	>	Min Value of Y			>
+		50.00       	>	Max Value of Y			>
+		green         	>	Color of RAnge			>
+	Ivd[K(Ca).ML...]<{ivr}	>	Var Name for Y-axis		>
+		10          	>	Number of Tic Marks		>
+		-1.00       	>	Min Value of Y			>
+		2.00        	>	Max Value of Y			>
+		red           	>	Color of RAnge			>
+>------------------------------->--------------------------------------->
+	END:			>					>
+>------------------------------->--------------------------------------->
+
+END:
