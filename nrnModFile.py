@@ -17,19 +17,17 @@
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
+import os
 
 class AssignedBlock():
-
     def __init__(self):
         self.fromNEURON = ['v (mV)', 'celsius (degC)']
         self.rateParameters = []
         self.currents = []
         self.conductances = []
         self.reversePots = []
-    pass
 
 class NEURONBlock():
-
     def __init__(self, nName):
         self.mechName = nName+ "_mechs"
         self.useIons = []
@@ -37,13 +35,8 @@ class NEURONBlock():
         self.specificCurrents = []
         self.rangeVariables = []
         self.globalVariables = []
-        
-        pass
-
-    pass
 
 class ModVariables():
-
     def __init__(self):
         self.varName = ''
         # variable is ranged or not
@@ -51,12 +44,9 @@ class ModVariables():
         # variable is parameter or assigned
         self.isParameter = 1
         self.unit = ''
-    pass
 
 class NRNModFile():
-    
     def __init__(self, nName, modFilePath, nObject):
-
         self.nrnName = nName
         self.modFilePath = modFilePath
         self.nrnObject = nObject
@@ -84,7 +74,6 @@ class NRNModFile():
 
         # write mod file
         self.writeModFile()
-
 
     def readIons(self):
         ions = self.nrnObject.ionPools
@@ -165,8 +154,10 @@ class NRNModFile():
                             br = iConcName + '/('+br_aName+'+'+iConcName+')'
                         elif BRType =='3':
                             br = '1'+ iConcName + '/('+br_aName+'+'+iConcName+')'
+                        elif BRType =='4':
+                            br = '1 / (1+ '+br_aName+'*'+iConcName+')'
                         else:
-                            print "WARNING!: Modulation by regulator models(BR) 1 and 4 are not supported yet!!"
+                            print "WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!"
 
 
                         # default fbr
@@ -190,10 +181,6 @@ class NRNModFile():
                 print "WARNING!: ion concentraion model 1 is not supported yet!!"
                 print "Exiting..."
                 sys.exit(-1)
-                
-
-        pass
-
     
     def readVDGs(self):
         vdgs = self.nrnObject.vdgs
@@ -323,8 +310,6 @@ class NRNModFile():
                     self.fill_ivd_m(vdgName, vgdPrefix, vdgs[vdgName])
                 brkpblck[vdgName].append(currntName+ ' = '+gName +'*(v - '+revPotName+')')                    
                 pass
-        pass
-
 
     def fill_ivd_h(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
@@ -438,7 +423,6 @@ class NRNModFile():
             if ah_Type == '7':
                 self.procRates[prName].append(af_ah+ ' = '+af_ah_A+'/(1-exp(('+af_ah_B+'-v)/'+af_ah_C+'))')
 
-        ##################    
         # write rate paramte: bh
         bh_Type = ivd.bhType
 
@@ -497,8 +481,6 @@ class NRNModFile():
                 self.procRates[prName].append(af_bh+ ' = '+af_bh_A+'/(1+exp(('+af_bh_B+'-v)/'+af_bh_C+'))')
             if bh_Type == '7':
                 self.procRates[prName].append(af_bh+ ' = '+af_bh_A+'/(1-exp(('+af_bh_B+'-v)/'+af_bh_C+'))')
-        pass
-
     
     def fill_ivd_m(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
@@ -611,7 +593,6 @@ class NRNModFile():
             if am_Type == '7':
                 self.procRates[prName] = [af_am+ ' = '+af_am_A+'/(1-exp(('+af_am_B+'-v)/'+af_am_C+'))']
 
-        ##################    
         # write rate paramte: bm
         bm_Type = ivd.bmType
 
@@ -670,8 +651,6 @@ class NRNModFile():
                 self.procRates[prName].append(af_bm+ ' = '+af_bm_A+'/(1+exp(('+af_bm_B+'-v)/'+af_bm_C+'))')
             if bm_Type == '7':
                 self.procRates[prName].append(af_bm+ ' = '+af_bm_A+'/(1-exp(('+af_bm_B+'-v)/'+af_bm_C+'))')
-        pass
-
     
     def fill_ivd_A(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
@@ -693,8 +672,6 @@ class NRNModFile():
         af_tau = afPrefix +'tau'
         af_SSA_prefix = af_SSA+'_'
         af_tau_prefix = af_tau +'_'
-        ##########################################
-
 
         # write steady state
         ssA_Type = ivd.ssAType
@@ -739,8 +716,6 @@ class NRNModFile():
             initblck.append(af +" = " + af_SSA)
             # add activation fucntion to derivative block
             dvblck.append(af+"\' = ("+af_SSA+ " - " +af+") / " +af_tau)
-
-            #########################################
 
             tauType = ivd.tAType
             af_tau_tx = af_tau_prefix +'tx'
@@ -804,7 +779,6 @@ class NRNModFile():
                 print "WARNING: only time constant types 1, 2, 3 and 6 are suppoeterd yet!!"
                 print "Exiting..."
                 sys.exit()
-
 
     def fill_ivd_B(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
@@ -929,20 +903,14 @@ class NRNModFile():
             print "WARNING: Inactivation function type 1 is not suppoeterd yet!!"
             print "Exiting..."
             sys.exit()
-        pass
-
 
     def fillUnitsBlock(self):
-
         self.unitsBlock = ['(mA) = (milliamp)', '(mV) = (millivolt)', '(S) = (siemens)',
                            '(molar) = (1/liter)', '(mM) = (millimolar)']
-        pass
 
     def writeModFile(self):
-
-        modFile = self.modFilePath + "/" + self.neuronBlock.mechName + ".mod"
+        modFile = os.path.join(self.modFilePath,self.neuronBlock.mechName + ".mod")
         with open(modFile, "w") as mf:
-
             # write self.headComments
             self.writeHeadComments(mf)
             
@@ -972,8 +940,6 @@ class NRNModFile():
 
             # write PROCEDURE rates
             self.writeProcRates(mf)
-            pass
-        pass
 
     def writeHeadComments(self, mf):
         mf.write(": Head Comments\n")
@@ -987,7 +953,6 @@ class NRNModFile():
         for cr in self.assignedBlock.fromNEURON:
             mf.write("\t"+cr+"\n")
         mf.write("\n")
-        
 
         mf.write("\t: currents\n")
         for cr in self.assignedBlock.currents:
@@ -1009,7 +974,6 @@ class NRNModFile():
             mf.write("\t"+rp+"\n")
 
         mf.write("}\n")
-        pass
 
     def writeParameterBlock(self, mf):
         mf.write("PARAMETER {\n")
@@ -1019,8 +983,6 @@ class NRNModFile():
                 mf.write("\t"+pbl+"\n")
             mf.write("\n")
         mf.write("}\n\n")
-        pass
-
 
     def writeInitialBlock(self, mf):
         mf.write("INITIAL {\n")
@@ -1044,8 +1006,6 @@ class NRNModFile():
         for dvl in self.derivativeBlock:
             mf.write("\t"+dvl+"\n")
         mf.write("}\n\n")
-        pass
-
 
     def writeBreakpointBlock(self, mf):
         mf.write("BREAKPOINT {\n")
@@ -1058,7 +1018,6 @@ class NRNModFile():
                 mf.write("\t"+bpl+"\n")
             mf.write("\n")
         mf.write("}\n\n")
-        pass
 
     def writeNEURONBlock(self, mf):
         mf.write("NEURON {\n")
@@ -1086,17 +1045,12 @@ class NRNModFile():
             else:
                 mf.write("\t\t"+", ".join(self.neuronBlock.rangeVariables[i:])+"\n")
             i = i+varsPerLine
-
-        # mf.write("\t\t" + ", ".join(self.neuronBlock.rangeVariables) + "\n\n")
         
         # write GLOBAL variables
         mf.write("\tGLOBAL\n")
         mf.write("\t\t" + ", ".join(self.neuronBlock.globalVariables) + "\n\n")
         mf.write("\tTHREADSAFE : assigned GLOBALs will be per thread\n")
-        
-            
         mf.write("}\n\n")
-        pass
 
     def writeProcRates(self, mf):
         mf.write("PROCEDURE rates(v(mV), t(ms)) {\n")
@@ -1109,17 +1063,10 @@ class NRNModFile():
             
         mf.write("\tUNITSON\n")
         mf.write("}\n\n")
-        pass
-
-
     
     def writeUnitsBlock(self, mf):
         mf.write("\nUNITS {\n")
         for u in self.unitsBlock:
             mf.write("\t"+u+"\n")
         mf.write("}\n\n")
-        pass
-
-    
-    pass
-
+        
