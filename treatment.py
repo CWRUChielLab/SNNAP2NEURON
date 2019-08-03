@@ -24,10 +24,24 @@ import util
 class CurrentInj():
     def __init__(self, nName, start, stop, magnitude):
         """
+        Current injection 
         SNNAP .trt files contain time and magnitude in units of seconds
         and nA respectively
         """
         self.neuronName = nName
+        self.start = start
+        self.stop = stop
+        self.magnitude = magnitude
+
+class ModInj():
+    def __init__(self, nName, mod, sm, start, stop, magnitude):
+        """
+        Modulator injection: changes the availability of second messenger 
+        concentration [MOD]
+        """
+        self.neuronName = nName
+        self.mod = mod
+        self.sm = sm
         self.start = start
         self.stop = stop
         self.magnitude = magnitude
@@ -38,6 +52,7 @@ class Treatment():
         self.filePath = filePath
 
         self.currentInjList = []
+        self.modInjList = []
 
         self.readTrtFile()
 
@@ -57,13 +72,15 @@ class Treatment():
                     continue
                 if re.search("CURNT_INJ", line[0]) is not None:
                     self.extractCurntInj(i, lineArr)
+                if re.search("MOD_INJ", line[0]) is not None:
+                    self.extractModInj(i, lineArr)
 
                 i = i+1
 
     def extractCurntInj(self, i, lineArr):
         print "Reading current injections in .trt file"
-        while lineArr[i][0] != "END":
 
+        while lineArr[i][0] != "END":
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
                 nrn = lineArr[i][0]
                 start = util.findNextFeature(i, lineArr, feature="Start")
@@ -73,4 +90,26 @@ class Treatment():
                     self.currentInjList.append(CurrentInj(nrn, start, stop, magnitude))
             i = i+1
         print "Found", len(self.currentInjList), "current injections."
+        return i+1
+
+    def extractModInj(self, i, lineArr):
+        print "Reading modulator injections in .trt file"
+
+        while lineArr[i][0] != "END":
+            if re.search("Name of Neuron", lineArr[i][1]) is not None:
+                nrn = lineArr[i][0]
+                mod = util.findNextFeature(i, lineArr, feature="Name of Modulator")
+                sm = util.findNextFeature(i, lineArr, feature="StartName of sm")
+                start = util.findNextFeature(i, lineArr, feature="Start")
+                stop = util.findNextFeature(i, lineArr, feature="Stop")
+                magnitude = util.findNextFeature(i, lineArr, feature="Magnitude")
+
+                # magnitude can be a .fnc file
+                if re.search("fnc", magnitude) is not None:
+                    print "WARNING: Modulator treatments by .fnc files are not supported yet!"
+                    sys.exit()
+                if float(magnitude) != 0.0:
+                    self.modInjList.append(ModInj(nrn, mod, sm, start, stop, magnitude))
+            i = i+1
+        print "Found", len(self.currentInjList), "modulator injections."
         return i+1
