@@ -70,7 +70,6 @@ class FBR():
             print "WARNING!! Ion pool concentration type 1 is not supported yet"
             print "Exiting..."
             sys.exit(1)
-            
         elif BRType == '2' or BRType == '3':
             BR_a = util.findNextFeature(i, lineArr, "a")
         elif BRType == '4':
