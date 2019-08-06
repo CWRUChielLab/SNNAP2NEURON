@@ -22,7 +22,7 @@ import re
 import util
 
 class FBR():
-    def __inti__(self, filePath, fileName):
+    def __init__(self, filePath, fileName):
         self.filePath = filePath
         self.fileName = fileName
 
