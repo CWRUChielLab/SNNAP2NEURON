@@ -264,6 +264,20 @@ class NRNModelPoint():
     def writeMainSimFile(self, sSim):
 
         lj = self.lJust1
+
+        rf_local = "README.txt"
+        rFileName = os.path.join(self.nrnDirPath,self.nrnDirName,rf_local)
+
+        with open(rFileName, "w") as rf:
+            
+            rf.write("This is an automatically generated directory.\n")
+            rf.write("These scripts will allow you to recreate the results of "+self.simName+".smu in Neuron\n")
+            rf.write("Before running them, conpile the .mod files found in SNNAP2NERON/utilityfiles/snnap_modfiles\n")
+            rf.write("Then simply run file in this directory which is named sim_"+self.simName+".hoc in Neuron\n")
+            rf.write("\n")
+            rf.write("More info here: https://github.com/madawa87/SNNAP2NEURON/tree/master")
+
+        print "readme.txt"
         
         mainFileName = os.path.join(self.nrnDirPath,self.nrnDirName,"sim_"+self.simName+".hoc")
         print "Main fileName: ", mainFileName
