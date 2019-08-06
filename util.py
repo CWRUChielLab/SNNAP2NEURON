@@ -18,7 +18,6 @@
 
 import re
 
-
 def formatedObjectVar(obj, var):
     """
     returns a left justified sting (obj.var) with a length of 20 characters
@@ -30,8 +29,6 @@ def formatedObjectVar(obj, var):
     a left justified sting with a length of 20 characters
     """
     return (obj+"."+var).ljust(20)
-
-
 
 def cleanupFileText(text):
     """
@@ -54,7 +51,6 @@ def cleanupFileText(text):
         else:
             lineArr.append([elem.strip() for elem in l.split('>')])
     return lineArr
-
 
 def findNextFeature(i, lineArr, feature=""):
     """
