@@ -35,6 +35,8 @@ class SMPool():
         self.iv = ''
         self.tau = ''
 
+        self.xCsmType = ''
+        
         self.readSMFile()
 
     def readSMFile(self):
@@ -55,9 +57,10 @@ class SMPool():
                 if len(line) < 2:
                     i = i+1
                     continue
-                if re.search("Csm", line[0]) is not None:
+                if re.search("^Csm", line[0]) is not None:
                     self.smType, self.iv, self.tau = self.extractSM(i+1, lineArr)
-
+                if re.search("^xCsm", line[0]) is not None:
+                    self.xCsmType = lineArr[i+1][0]
                 i=i+1
             pass
 
@@ -66,14 +69,14 @@ class SMPool():
         read and return parameters related to sm concentration dynamics
         """
         smType = ""
-        sm_k1 = ""
-        sm_k2 = ""
+        sm_iv = ""
+        sm_tau = ""
 
         smType = lineArr[i][0]
         if smType == '1':
             sm_iv = util.findNextFeature(i, lineArr, "IV")
             sm_tau = util.findNextFeature(i, lineArr, "u")
-        return smType, sm_k1, sm_k2
+        return smType, sm_iv, sm_tau
 
 class ConductanceBySM():
     def __init__(self, cond, sm, filePath, fileName, color):
@@ -83,7 +86,7 @@ class ConductanceBySM():
         #self.fileName = fileName
         self.color = color
 
-        self.fbr = FBR(filePth, fileName)
+        self.fbr = FBR(filePath, fileName)
         # self.fBRType = ''
         # self.BRType = ''
         # self.BR_a = ''

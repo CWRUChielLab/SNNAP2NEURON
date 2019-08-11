@@ -46,10 +46,11 @@ class ModVariables():
         self.unit = ''
 
 class NRNModFile():
-    def __init__(self, nName, modFilePath, nObject):
+    def __init__(self, nName, modFilePath, nObject, modInjList):
         self.nrnName = nName
         self.modFilePath = modFilePath
         self.nrnObject = nObject
+        self.modInjList = modInjList
 
         self.lJust1 = 16
         self.unitsBlock = []
@@ -72,8 +73,127 @@ class NRNModFile():
         self.readVDGs()
         self.readIons()
 
+        self.readSMs()
+        
         # write mod file
         self.writeModFile()
+
+
+    def readSMs(self):
+        secondMessengers = self.nrnObject.smPools
+        lj = self.lJust1
+
+        nblck = self.neuronBlock
+        prmblck = self.parameterBlock
+        brkpblck = self.breakpointBlock
+        assgndblck = self.assignedBlock
+        stateblck = self.stateBlock
+        initblck = self.initialBlock
+        dvblck  = self.derivativeBlock
+        
+        for smName in secondMessengers.keys():
+            sm = secondMessengers[smName]
+            
+            smName = smName.lower()
+            smPrefix = smName+ '_'
+            smConcName = smPrefix+'C'
+            smConcPrefix = smConcName +'_'
+            smConcType = sm.smType
+            smConc_tau = sm.tau
+            sm_xCsmType = sm.xCsmType
+
+            tauName = smConcPrefix+'tau'
+            smModName = smConcPrefix+'MOD'
+            smModPrefix = smModName+'_'
+            # convert tau in SNNAP to correct units in modfile (sec to milisec)
+
+            print "smConc_tau: ", smConc_tau
+            smConc_tau = 1000.0*float(smConc_tau)
+
+            # for: Csm type = 1
+            # add sm concentration fucntion to state varables block
+            stateblck.append(smConcName+ "\t(mM)")
+            # add intialitation of sm concentration
+            initblck.append(smConcName +" = 0.0")
+
+            xCsm = 1.0
+            if sm_xCsmType == '2':
+                print "WARNING!: xCsm type 2 is not supported yet!!"
+                print "Exiting..."
+                sys.exit(-1)
+            dvblck.append(smConcName+"\' = ("+smModName+" - "+smConcName+")/"+str(smConc_tau))
+
+            modInj_start = '0.0'
+            modInj_stop = '0.0'
+            modInj_mag = '0.0'
+
+            for modInj in self.modInjList:
+                # check modulator treatment is applied to this neuron
+                if modInj.neuronName != self.nrnName and modInj.sm != smName:
+                    continue
+                modInj_start = str(1000* float(modInj.start))
+                modInj_stop = str(1000* float(modInj.stop))
+                # convert units of concentraion
+                modInj_mag = str(1.0e6* float(modInj.magnitude))
+
+                # set up sm modulation
+                # modulation of sm is also calculated by rates(v, t) function
+                prName = "sm modulation, " + smModName
+                self.procRates[prName] = []
+                self.procRates[prName].append("if(t>"+modInj_start+" && t<"+modInj_stop+") {")
+                self.procRates[prName].append("\t"+smModName+" = "+modInj_mag+"\n\t}")
+                self.procRates[prName].append("else {")
+                self.procRates[prName].append("\t"+smModName+" = 0.0\n\t}")
+
+                nblck.globalVariables.append(smModName)
+                assgndblck.rateParameters.append(smModName.ljust(lj) +"(mM)")
+
+                pBlockComment = smPrefix+'SM'
+                prmblck[pBlockComment] = []
+                # add sm parameters to RANGE and PARAMETER blocks
+                prmblck[pBlockComment].append(tauName+ " = "+(str(smConc_tau)).ljust(lj) + "(ms)")
+                nblck.rangeVariables.append(tauName)
+
+            # find VDGs regulated by this second messenger and ammend it's calculation
+            for cBySM in self.nrnObject.condBySM:
+                print "+++++cBySM.cond " + cBySM.cond +" SM : "+ smName
+                print "cBySM.sm,  smName: ", cBySM.sm, smName
+                if cBySM.sm.lower() == smName.lower():
+                    print "SM " +smName + " regulates cond. "  +cBySM.cond
+
+                    BRType = cBySM.fbr.BRType
+                    fBRType = cBySM.fbr.fBRType
+                    BR_a = cBySM.fbr.BR_a
+                    br_aName = smPrefix + '2' + cBySM.cond+'_br_a'
+                    
+                    # add fBR file parameter to RANGE and PARAMETER blocks
+                    prmblck[pBlockComment].append(br_aName+ " = "+BR_a.ljust(lj) + "(mM)")
+                    nblck.rangeVariables.append(br_aName)
+                    
+                    # default br
+                    br='0.0'
+                    if BRType =='2':
+                        br = smConcName + '/('+br_aName+'+'+smConcName+')'
+                    elif BRType =='3':
+                        br = '1'+ iConcName + '/('+br_aName+'+'+smConcName+')'
+                    elif BRType =='4':
+                        br = '1 / (1+ '+br_aName+'*'+smConcName+')'
+                    else:
+                        print "WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!"
+
+                    # default fbr
+                    fbr = '0.0'
+                    if fBRType == '1':
+                        fbr = br
+                    elif fBRType == '2':
+                        fbr = '1.0 + ' + br
+                    else:
+                        print "WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!"
+
+                    print "FBR = ", fbr
+                    brkpblck[cBySM.cond][0] = brkpblck[cBySM.cond][0] + ' * (' +fbr+')'
+                    print brkpblck[cBySM.cond][0]
+                    print "cBySM.cond " , cBySM.cond
 
     def readIons(self):
         ions = self.nrnObject.ionPools
@@ -142,7 +262,8 @@ class NRNModFile():
                         BRType = cByI.BRType
                         fBRType = cByI.fBRType
                         BR_a = cByI.BR_a
-                        br_aName = iPrefix+'br_a'
+                        br_aName = iPrefix + '2' + cByI.cond+'_br_a'
+                        # br_aName = iPrefix+'br_a'
 
                         # add fBR file parameter to RANGE and PARAMETER blocks
                         prmblck[pBlockComment].append(br_aName+ " = "+BR_a.ljust(lj) + "(mM)")
@@ -159,13 +280,12 @@ class NRNModFile():
                         else:
                             print "WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!"
 
-
                         # default fbr
                         fbr = '0.0'
                         if fBRType == '1':
                             fbr = br
                         elif fBRType == '2':
-                            fbr = '1.0' + br
+                            fbr = '1.0 + ' + br
                         else:
                             print "WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!"
 

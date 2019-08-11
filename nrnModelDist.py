@@ -385,7 +385,7 @@ class NRNModelDist():
             modFilePath = os.path.join(self.nrnDirPath,self.nrnDirName)
 
             # create modfile object
-            NRNModFile(nName, modFilePath, nrn)
+            NRNModFile(nName, modFilePath, nrn, sSim.treatemts.modInjList)
 
     def writeNeurons(self, sSim):
         """
