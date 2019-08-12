@@ -296,8 +296,8 @@ class NRNModFile():
                         
                         # find which specific or non-spec. current cByI.cond need to be added
                         # for cByI.cond to be accounted towards the current balance eqn.
-                        if cByI.cond[0].lower() == 'k':
-                            brkpblck['ammend K'] = ['ik = ik + i'+cByI.cond.lower()]
+                        # if cByI.cond[0].lower() == 'k':
+                        #     brkpblck['ammend K'] = ['ik = ik + i'+cByI.cond.lower()]
             else:
                 print "WARNING!: ion concentraion model 1 is not supported yet!!"
                 print "Exiting..."
@@ -328,6 +328,8 @@ class NRNModFile():
                 print "vdgName: ", vdgName
                 ui = "USEION " +vName+ " READ e" +vName+ " WRITE " +currntName
                 nblck.useIons.append(ui)
+            else:
+                nblck.nsCurrents.append(currntName)
                 
             ivdType = vdgs[vdgName].ivdType
             aType = vdgs[vdgName].AType
@@ -346,10 +348,10 @@ class NRNModFile():
 
             if ivdType == '5':
                 if vName == "leak":
-                    currntName = "il"
+                    #currntName = "il"
                     revPotName = "el"
                     gName = "gl"
-                    nblck.nsCurrents.append('NONSPECIFIC_CURRENT ' + currntName)
+                    #nblck.nsCurrents.append('NONSPECIFIC_CURRENT ' + currntName)
                     
                 # add leak current parameters to RANGE varible list
                 nblck.rangeVariables.append(gName)
@@ -1150,8 +1152,10 @@ class NRNModFile():
         mf.write("\n")
 
         # write NONSPECIFIC_CURRENT statements
-        for ns in self.neuronBlock.nsCurrents:
-            mf.write("\t"+ns+"\n")
+        mf.write("\tNONSPECIFIC_CURRENT " + ', '.join(self.neuronBlock.nsCurrents)+"\n\n")
+        # nblck.nsCurrents.append('NONSPECIFIC_CURRENT ' + currntName)
+        # for ns in self.neuronBlock.nsCurrents:
+        #     mf.write("\t"+ns+"\n")
             
         # write RANGE variables
         mf.write("\tRANGE\n")
