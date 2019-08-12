@@ -99,7 +99,7 @@ class Treatment():
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
                 nrn = lineArr[i][0]
                 mod = util.findNextFeature(i, lineArr, feature="Name of Modulator")
-                sm = util.findNextFeature(i, lineArr, feature="StartName of sm")
+                sm = util.findNextFeature(i, lineArr, feature="Name of sm")
                 start = util.findNextFeature(i, lineArr, feature="Start")
                 stop = util.findNextFeature(i, lineArr, feature="Stop")
                 magnitude = util.findNextFeature(i, lineArr, feature="Magnitude")

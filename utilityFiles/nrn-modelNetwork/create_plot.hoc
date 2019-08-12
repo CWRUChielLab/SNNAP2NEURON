@@ -25,9 +25,12 @@ Neuron_1 vvec[0].record(&v(0.5)) // record v at cell
 Neuron_2 vvec[1].record(&v(0.5)) // record v at cell
 Neuron_3 vvec[2].record(&v(0.5)) // record v at cell
 
-// to record state variables of a point process defined
-// by NMODL
+// to record state variables of a point process defined by NMODL
 //objref mvec
 //mvec = new Vector()
-//HH mvec.record(&HH_K.m) // record state variable m of HH_K
+// To record a state variable m of HH_K  (when HH_K is defined as an objref in hoc)
+//HH mvec.record(&HH_K.m) 
+
+// to record state variables of a distrivuted process defined by NMODL
+// syntax: (neuronName mvec.record(&neruonName.stateVarName_distributedMechName(0.5))
 
