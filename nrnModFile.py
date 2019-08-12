@@ -134,7 +134,8 @@ class NRNModFile():
                 modInj_start = str(1000* float(modInj.start))
                 modInj_stop = str(1000* float(modInj.stop))
                 # convert units of concentraion
-                modInj_mag = str(1.0e6* float(modInj.magnitude))
+                # (modulator magnitude is in the same units in both SNNAP and neuron)
+                modInj_mag = str(1.0* float(modInj.magnitude))
 
                 # set up sm modulation
                 # modulation of sm is also calculated by rates(v, t) function
