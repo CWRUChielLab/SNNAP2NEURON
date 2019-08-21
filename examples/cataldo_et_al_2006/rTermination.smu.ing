@@ -1,0 +1,1996 @@
+LOGICAL_NAME	buccal_cpg
+TIMING: 0.0 10.0 4.5E-5
+ON_LINE_GRAPH: 1
+STORE_RESULTS: 0
+INT_METHOD: 1
+INT_&_FIRE: 0.002
+#NEUR	10
+neur#=0	B4
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-70.0
+CM	0.001
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.2	-70.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-51.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-52.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-61.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-48.0	3.5	1.0	
+vdg#=2	K
+Ivd	1
+#prm	3
+25.0	4.0	-80.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-35.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-23.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-26.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-33.0	8.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=1	B8
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-70.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-70.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-49.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-50.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-59.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-46.0	3.5	1.0	
+vdg#=2	K
+Ivd	1
+#prm	3
+25.0	4.0	-80.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-33.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-20.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-24.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-31.0	8.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=2	B31
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	2
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	3
+#prm	3
+0.09	1.0	30.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-45.0	1.0	1.0	
+tA	1
+#prm	1
+0.3	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=3	B34
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	4
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-39.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-40.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-49.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-36.0	3.5	1.0	
+vdg#=2	K
+Ivd	1
+#prm	3
+25.0	4.0	-70.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-23.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-10.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-14.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-21.0	8.0	1.0	
+vdg#=3	K_A
+Ivd	1
+#prm	3
+0.1	2.0	-70.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-55.0	1.0	1.0	
+tA	1
+#prm	1
+0.001	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-50.0	4.0	1.0	
+tB	1
+#prm	1
+0.5	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=4	B35
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	4
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-39.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-40.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-49.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-36.0	3.5	1.0	
+vdg#=2	Na_pp
+Ivd	1
+#prm	3
+0.12	1.0	-28.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-48.0	2.5	1.0	
+tA	1
+#prm	1
+0.2	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-48.0	0.5	1.0	
+tB	1
+#prm	1
+9.5	
+vdg#=3	K
+Ivd	1
+#prm	3
+25.0	4.0	-70.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-23.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-10.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-14.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-21.0	8.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=5	B51
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-70.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	5
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-70.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-49.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-50.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-59.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-46.0	3.5	1.0	
+vdg#=2	Na_pp
+Ivd	3
+#prm	3
+0.09	1.0	30.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-50.0	1.0	1.0	
+tA	1
+#prm	1
+0.15	
+vdg#=3	K
+Ivd	1
+#prm	3
+25.0	4.0	-80.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-33.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-20.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-24.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-31.0	8.0	1.0	
+vdg#=4	K_pp
+Ivd	3
+#prm	3
+0.4	1.0	-80.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-50.0	1.0	1.0	
+tA	1
+#prm	1
+4.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=6	B52rT
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	4
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-39.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-40.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-49.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-36.0	3.5	1.0	
+vdg#=2	K
+Ivd	1
+#prm	3
+25.0	4.0	-70.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-23.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-20.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-14.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-21.0	8.0	1.0	
+vdg#=3	Na_rb
+Ivd	3
+#prm	3
+0.066	1.0	-30.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-63.0	-1.0	3.0	
+tA	1
+#prm	1
+2.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=7	B63
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	3
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-39.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-40.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-49.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-36.0	3.5	1.0	
+vdg#=2	K
+Ivd	3
+#prm	3
+40.0	4.0	-70.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-23.5	9.0	1.0	
+tA	2
+#prm	5
+0.05	0.003	-10.0	10.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=8	B64rT
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-70.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	5
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-70.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-49.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-50.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-59.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-46.0	3.5	1.0	
+vdg#=2	Na_pp
+Ivd	3
+#prm	3
+0.1	1.0	50.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-60.0	1.0	1.0	
+tA	1
+#prm	1
+0.1	
+vdg#=3	K_pp
+Ivd	3
+#prm	3
+0.36	1.0	-80.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-50.0	1.0	1.0	
+tA	1
+#prm	1
+4.0	
+vdg#=4	K
+Ivd	3
+#prm	3
+40.0	4.0	-80.0	
+A	1
+B	0
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-33.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-20.0	10.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+neur#=9	Z
+
+THRESHOLD	0.0
+SPIKDUR	0.003
+VMINIT	-60.0
+CM	5.0E-4
+MEM_AREA	1.0
+is_TR=	0
+#VDG	4
+vdg#=0	leak
+Ivd	5
+#prm	2
+0.1	-60.0	
+A	0
+B	0
+m	0
+h	0
+R	0
+vdg#=1	Na
+Ivd	1
+#prm	3
+7.5	3.0	50.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-39.0	5.0	1.0	
+tA	2
+#prm	5
+0.003	9.0E-4	-40.0	2.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-49.0	9.0	1.0	
+tB	2
+#prm	5
+0.02	0.0048	-36.0	3.5	1.0	
+vdg#=2	Na_pp
+Ivd	1
+#prm	3
+0.16	3.0	-28.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-48.0	0.5	1.0	
+tA	1
+#prm	1
+0.2	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	1
+#prm	3
+-48.0	0.5	1.0	
+tB	1
+#prm	1
+9.5	
+vdg#=3	K
+Ivd	1
+#prm	3
+25.0	4.0	-70.0	
+A	1
+B	1
+m	0
+h	0
+R	0
+ACTIVATION=A	
+A	2
+#prm	1
+-1.0	
+ssA	1
+#prm	3
+-23.5	9.0	1.0	
+tA	2
+#prm	5
+0.034	0.003	-10.0	10.0	1.0	
+INACTIVATION=B	
+B	2
+#prm	1
+-1.0	
+ssB	2
+#prm	4
+0.15	-14.4	1.5	2.0	
+tB	2
+#prm	5
+0.4	0.04	-21.0	8.0	1.0	
+#ION	0
+#SM	0
+#I2C	0
+#gbi	0
+#gbs	0
+#tbi	0
+#tbs	0
+#sbi	0
+#sbs	0
+#LDG	0
+#CC	0
+#MOB	0
+#TRP	0
+
+#CELL	0
+
+#ESYN	4
+esyn#=0	0	B4	5	B51
+Ies	1
+#prm	2
+0.01	0.01	
+R1=	0
+R2=	0
+esyn#=1	8	B64rT	5	B51
+Ies	1
+#prm	2
+0.03	0.03	
+R1=	0
+R2=	0
+esyn#=2	4	B35	2	B31
+Ies	1
+#prm	2
+0.02	0.02	
+R1=	0
+R2=	0
+esyn#=3	7	B63	2	B31
+Ies	1
+#prm	2
+0.03	0.03	
+R1=	0
+R2=	0
+#CSYN	40
+csyn#=0   1   B8	 0	B4	inh
+cell2neur	0
+Ics	1
+#prm	2
+1.0	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=1   2   B31	 0	B4	EXC
+cell2neur	0
+Ics	1
+#prm	2
+0.15	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.03	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=2   5   B51	 0	B4	inh
+cell2neur	0
+Ics	1
+#prm	2
+3.0	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=3   6   B52rT	 0	B4	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.005	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=4   8   B64rT	 0	B4	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.3	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=5   1   B8	 3	B34	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.06	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=6   1   B8	 3	B34	exc
+cell2neur	0
+Ics	1
+#prm	2
+-1.3	-85.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.3	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=7   2   B31	 3	B34	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.1	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.011	0.23	
+csyn#=8   7   B63	 3	B34	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.03	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=9   8   B64rT	 3	B34	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.03	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.02	0.1	
+csyn#=10   0   B4	 4	B35	excf
+cell2neur	0
+Ics	1
+#prm	2
+0.14	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+0.01	0.1	
+csyn#=11   0   B4	 4	B35	excs
+cell2neur	0
+Ics	1
+#prm	2
+0.3	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.8	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=12   2   B31	 4	B35	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.08	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.014	0.2	
+csyn#=13   5   B51	 4	B35	inhf
+cell2neur	0
+Ics	1
+#prm	2
+0.1	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=14   5   B51	 4	B35	inhs
+cell2neur	0
+Ics	1
+#prm	2
+0.56	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.4	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=15   6   B52rT	 4	B35	excf
+cell2neur	0
+Ics	1
+#prm	2
+0.09	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+0.009	0.06	
+csyn#=16   6   B52rT	 4	B35	excs
+cell2neur	0
+Ics	1
+#prm	2
+0.26	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.5	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=17   1   B8	 5	B51	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.1	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.005	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.01	0.08	
+csyn#=18   6   B52rT	 5	B51	inhs
+cell2neur	0
+Ics	1
+#prm	2
+3.2	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.05	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=19   6   B52rT	 5	B51	inhf
+cell2neur	0
+Ics	1
+#prm	2
+0.7	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.002	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+0.02	0.09	
+csyn#=20   8   B64rT	 5	B51	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.05	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.005	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=21   9   Z	 6	B52rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.06	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=22   0   B4	 6	B52rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+1.5	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.04	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=23   1   B8	 6	B52rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.8	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.005	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=24   4   B35	 6	B52rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.035	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.03	0.4	
+csyn#=25   5   B51	 6	B52rT	inhf
+cell2neur	0
+Ics	1
+#prm	2
+0.5	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=26   5   B51	 6	B52rT	inhs
+cell2neur	0
+Ics	1
+#prm	2
+1.5	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.05	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.04	1.0	
+csyn#=27   8   B64rT	 6	B52rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+6.0	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=28   1   B8	 7	B63	inh
+cell2neur	0
+Ics	1
+#prm	2
+0.03	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.001	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=29   2   B31	 7	B63	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.25	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.02	0.25	
+csyn#=30   3   B34	 7	B63	exc
+cell2neur	0
+Ics	1
+#prm	2
+1.0	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=31   8   B64rT	 7	B63	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.02	-80.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	3
+is_PSM=	1
+#prm	0
+
+PSM	1
+#prm	2
+-0.01	0.05	
+csyn#=32   9   Z	 7	B63	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.7	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+1.0	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=33   0   B4	 8	B64rT	exc
+cell2neur	0
+Ics	1
+#prm	2
+0.35	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.01	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=34   2   B31	 8	B64rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=35   3   B34	 8	B64rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=36   4   B35	 8	B64rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=37   6   B52rT	 8	B64rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.005	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=38   7   B63	 8	B64rT	inh
+cell2neur	0
+Ics	1
+#prm	2
+5.0	-70.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.02	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+csyn#=39   8   B64rT	 9	Z	exc
+cell2neur	0
+Ics	1
+#prm	2
+3.5	-10.0	
+fAt=	1
+fAvt=	0
+R=	0
+fAt	1
+#prm	0
+
+At	3
+is_Xt=	1
+#prm	1
+0.5	
+Xt	1
+is_PSM=	1
+#prm	0
+
+PSM	0
+#prm	0
+
+#MSYN	0
+#WEIGHT	0
+
+#RSYN	0
+#CINJ	1
+	0	B63	2.0	3.0	2.0
+#MINJ	0
+#VCLMP	0
+#ICLMP	0
+#LIGHT	0
+
+Ousfile_PATH  ./ous/rTermination.ous
+#GRAPH_CHNL	3
+gain=	1
+nvar=	1
+name=	time<{ivr}
+vartype=	3
+n_tic=	6
+min=	0.0
+max=	10.0
+color=	yellow
+gain=	1
+nvar=	1
+name=	time<{ivr}
+vartype=	3
+n_tic=	6
+min=	0.0
+max=	10.0
+color=	white
+gain=	1
+nvar=	1
+name=	time<{ivr}
+vartype=	3
+n_tic=	6
+min=	0.0
+max=	10.0
+color=	blue
+#GRAPH_VAR	3
+chn_id=	0
+name=	V[B31....]<{svr}
+name2=	NULL
+vartype=	1
+vartype2=	-1
+n_tic=	1
+min=	-75.0
+max=	-10.0
+color=	yellow
+chn_id=	1
+name=	V[B64rT....]<{svr}
+name2=	NULL
+vartype=	1
+vartype2=	-1
+n_tic=	1
+min=	-85.0
+max=	40.0
+color=	white
+chn_id=	2
+name=	V[B52rT....]<{svr}
+name2=	NULL
+vartype=	1
+vartype2=	-1
+n_tic=	1
+min=	-85.0
+max=	40.0
+color=	blue
+#VAR2FILE		0
+

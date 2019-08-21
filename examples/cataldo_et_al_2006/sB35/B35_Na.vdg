@@ -1,0 +1,58 @@
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>    modules name: vdg		>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Ivd:		> 	Current due to a voltage-dependent conductance	>
+		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>------------------------------->--------------------------------------->
+				>	    _	    p			>
+	1			>	G= (g+R) x A x B 	(1)	>
+   /sB35/B35_Na.A	           >A<	>   activation function			>
+   /sB35/B35_Na.B	           >B<	>   inactivation function		>
+   /sB35/R_Na.R	           >R<	>   random fluctuations			>
+   7.5         >g uS or S/cm2<	>   use S/cm2 if using area		>
+   3 		   >P<	>					>
+   50 		>E mV<	>   Ivd = G x (V -E) x fBR		>
+				>   (fBr is modulation function)	>
+>------------------------------->--------------------------------------->
+>				>	      _	      p			>
+>	2			>	Ivd= (g+R) x m x h 	(2)	>
+>   filename.m		  >m<	>   HH activation function		>
+>   filename.h		  >h<	>   HH inactivation function		>
+>   filename.R		  >R<	>   random fluctuations			>
+>   xxx.xx    >g uS or S/cm2<	>   use S/cm2 if using area		>
+>   xxx.xx 		  >P<	>					>
+>   xxx.xx 	       >E mV<	>   Ivd = G x (V -E) x fBr		>
+>				>   (fBr is modulation function)	>
+>------------------------------->--------------------------------------->
+>				>	    _	    p			>
+>	3			>	G= (g+R) x A		(3)	>
+>   /sB31/B31_Na_pp.A		  >A<	>   activation function			>
+>   /sB31/R_Na_pp.R		  >R<	>   random fluctuations			>
+>   0.09    >g uS or S/cm2<	>   use S/cm2 if using area		>
+>   1 		  >P<	>					>
+>   30.0	       >E mV<	>   Ivd = G x (V -E) x fBr		>
+>				>   (fBr is modulation function)	>
+>------------------------------->--------------------------------------->
+>				>	      _	      p			>
+>	4			>	Ivd= (g+R) x m 		(4)	>
+>   filename.m		  >m<	>   HH activation function		>
+>   filename.R		  >R<	>   random fluctuations			>
+>   xxx.xx    >g uS or S/cm2<	>   use S/cm2 if using area		>
+>   xxx.xx 		  >P<	>					>
+>   xxx.xx 	       >E mV<	>   Ivd = G x (V -E) x fBr		>
+>				>   (fBr is modulation function)	>
+>------------------------------->--------------------------------------->
+>				>					>
+>	5			>   Ivd = (G+R) x (V -E) x fBr	(5)	>
+ >  R_leak.R		 >R<	>   random fluctuations			>
+>   0.1   >g uS or S/cm2<	>   use S/cm2 if using area		>
+>   -60 	      >E mV<	>   (fBr is modulation function)	>
+>				>					>
+>------------------------------->--------------------------------------->
+
+END
