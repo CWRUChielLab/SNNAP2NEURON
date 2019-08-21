@@ -27,6 +27,9 @@ class NRNModelPoint():
         self.simName = sSim.simFileName.split('.')[0]
         self.lJust1 = 16
 
+        self.nrnDirPath = ""
+        self.nrnDirName = ""
+
         # use neuron pas
         self.useNrnPas = False
         
@@ -56,6 +59,9 @@ class NRNModelPoint():
         
         # write main file for simulation 
         self.writeMainSimFile(sSim)
+
+        # write plotting file
+        util.writePlottingFile(self.nrnDirPath, self.nrnDirName, sSim)
 
     def writeElecCoupling(self, sSim):
         esList = sSim.network.elecSyns

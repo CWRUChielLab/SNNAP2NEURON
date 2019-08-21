@@ -59,6 +59,9 @@ class NRNModelDist():
         # write main file for simulation 
         self.writeMainSimFile(sSim)
 
+        # write plotting file
+        util.writePlottingFile(self.nrnDirPath, self.nrnDirName, sSim)
+
     def writeElecCoupling(self, sSim):
         esList = sSim.network.elecSyns
         if len(esList) == 0:

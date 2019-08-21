@@ -17,6 +17,7 @@
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
 import re
+import os
 
 def formatedObjectVar(obj, var):
     """
@@ -65,3 +66,36 @@ def findNextFeature(i, lineArr, feature=""):
     while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
         j = j+1
     return lineArr[j][0]
+
+
+def writePlottingFile(nrnDirPath, nrnDirName, sSim):
+    """
+    write .hoc file for making plots
+    """
+    pf_local = "create_plot.hoc"
+    if not os.path.isdir(nrnDirPath + os.sep + nrnDirName):
+        print "Failed to write "+ pf_local+" file"
+        return
+
+    plotFileName = os.path.join(nrnDirPath,nrnDirName,pf_local)
+
+    plot_BP = """//create plots\nobjref plots\nplots = new Graph(0)\naddplot(plots, 0)\n\n
+// view: xmin, ymin, xrange, yrange, winleft, wintop, winwidth, winheight\n
+plots.view(0, -110, tstop, 210, 0, 290, 640, 320)\n
+//addvar: \"label\", \"variable\", color_index, brush_index\n"""
+    
+    with open(plotFileName, "w") as pf:
+        pf.write(plot_BP)
+        
+        nNeurons = len(sSim.network.neurons.keys())
+        if nNeurons > 3:
+            nNeurons = 3
+
+        i = 0
+        for nName in sSim.network.neurons.keys():
+            if i >= nNeurons:
+                break
+            nrn = sSim.network.neurons[nName]
+            pf.write("plots.addvar(\"" +nName+ " Vm\", \""+nName+".v(0.5)\", "+str(i+2)+", 1)\n")
+            i = i+1
+            
