@@ -19,4 +19,4 @@ All the necessary `.mod` files will be found in the directory of this project: `
 
 1. Run `NRNModel_[name]/sim_[name].hoc` with Neuron.
 
-Your SNNAP results should be reproduced.
+Your SNNAP results should be reproduced. For help visualizing them, check `UseExample.ipynb`.
