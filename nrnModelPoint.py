@@ -264,9 +264,9 @@ class NRNModelPoint():
 
         with open(rFileName, "w") as rf:
             rf.write("This is an automatically generated directory.\n")
-            rf.write("These scripts will allow you to recreate the results of "+self.simName+".smu in Neuron\n")
+            rf.write("These scripts will allow you to recreate the results of "+self.simName+".smu in NEURON\n")
             rf.write("Before running them, conpile the .mod files found in SNNAP2NERON/utilityfiles/snnap_modfiles\n")
-            rf.write("Then simply run file in this directory which is named sim_"+self.simName+".hoc in Neuron\n")
+            rf.write("Then simply run file in this directory which is named sim_"+self.simName+".hoc in NEURON\n")
             rf.write("\n")
             rf.write("More info here: https://github.com/madawa87/SNNAP2NEURON/tree/master")
 
@@ -341,7 +341,7 @@ class NRNModelPoint():
 
         if not os.path.isdir(self.nrnDirPath + os.sep + self.nrnDirName):
             os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
-            print("Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName)
+            print("NEURON model is located in ", self.nrnDirPath + os.sep + self.nrnDirName)
 
     def writeNeurons(self, sSim):
         """
@@ -456,7 +456,7 @@ class NRNModelPoint():
                     nf.write("\n")
 
     def write_ActF_rateConstant(self, file, vdgObj, ivd):
-        # in SNNAP time derivatives are also in seconds. to convert them to Neuron time derivatives
+        # in SNNAP time derivatives are also in seconds. to convert them to NEURON time derivatives
         # must be divided by 1000.0
         lj = self.lJust1
         afType = ivd.mType

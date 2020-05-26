@@ -58,7 +58,7 @@ if __name__ == "__main__":
         cond = 'd'
         print("Conductances will be represented as distributed mechanisms")
     else:
-        print("choises for --cond are either 'p' or 'd'")
+        print("choices for --cond are either 'p' or 'd'")
 
     # if len(sys.argv) > 1:
     #     filePath = sys.argv[1]

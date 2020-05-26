@@ -325,7 +325,7 @@ class NRNModelDist():
 
         if not os.path.isdir(self.nrnDirPath + os.sep + self.nrnDirName):
             os.mkdir(self.nrnDirPath + os.sep + self.nrnDirName)
-            print("Neuron model is located in ", self.nrnDirPath + os.sep + self.nrnDirName)
+            print("NEURON model is located in ", self.nrnDirPath + os.sep + self.nrnDirName)
 
     def writeNeuronsDist(self, sSim):
         """
@@ -505,7 +505,7 @@ class NRNModelDist():
                     nf.write("\n")
 
     def write_ActF_rateConstant(self, file, vdgObj, ivd):
-        # in SNNAP time derivatives are also in seconds. to convert them to Neuron time derivatives
+        # in SNNAP time derivatives are also in seconds. to convert them to NEURON time derivatives
         # must be divided by 1000.0
         lj = self.lJust1
         afType = ivd.mType
