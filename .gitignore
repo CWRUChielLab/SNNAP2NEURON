@@ -1,5 +1,8 @@
 # ignore all pyc files
 *.pyc
+*.c
+*.o
+*.dll
 *~
 .vscode/settings.json
 examples/*/NRN*/*
