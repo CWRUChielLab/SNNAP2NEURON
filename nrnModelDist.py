@@ -34,7 +34,7 @@ class NRNModelDist():
         self.useNrnPas = False
 
         self.neuronlist = {}
-        self.neutonFiles = []
+        self.neuronFiles = []
         self.chemSynFiles = []
         self.ElecCouplingFile = ""
         self.treatmentFile = None
@@ -264,7 +264,7 @@ class NRNModelDist():
             mf.write("load_file(\"nrngui.hoc\")\n\n")
 
             mf.write("// create neurons\n")
-            for nfile in self .neutonFiles:
+            for nfile in self .neuronFiles:
                 mf.write("load_file(\"" +nfile+ "\")\n")
             mf.write("\n")
 
@@ -343,7 +343,7 @@ class NRNModelDist():
 
             with open(nFileName, "w") as nf:
                 # append file name to the neuron filelist
-                self.neutonFiles.append(nf_local)
+                self.neuronFiles.append(nf_local)
 
                 nf.write("create "+ nName+"\n")
                 nf.write(nName + " {\n")
@@ -405,7 +405,7 @@ class NRNModelDist():
 
             with open(nFileName, "w") as nf:
                 # append file name to the neuron filelist
-                self.neutonFiles.append(nf_local)
+                self.neuronFiles.append(nf_local)
 
                 nf.write("create "+ nName+"\n")
                 nf.write(nName + " {\n")

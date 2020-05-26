@@ -53,10 +53,10 @@ if __name__ == "__main__":
     cond = ''
     if args.cond == 'p':
         cond = 'p'
-        print("Conductances will be as point mechanisms")
+        print("Conductances will be represented as point mechanisms")
     elif args.cond == 'd':
         cond = 'd'
-        print("Conductances will be as distributed mechanisms")
+        print("Conductances will be represented as distributed mechanisms")
     else:
         print("choises for --cond are either 'p' or 'd'")
 
