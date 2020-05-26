@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import re
 import os
 
@@ -40,7 +42,7 @@ def cleanupFileText(text):
 
     Returns:
     lineArr - an array of lines without comments and empty lines
-    
+
     """
     fileLines = text.split('\n')
     lineArr = []
@@ -59,7 +61,7 @@ def findNextFeature(i, lineArr, feature=""):
     """
     if feature == "":
         return None
-        
+
     j = i+1
     if j >= len(lineArr):
         return None
@@ -74,7 +76,7 @@ def writePlottingFile(nrnDirPath, nrnDirName, sSim):
     """
     pf_local = "create_plot.hoc"
     if not os.path.isdir(nrnDirPath + os.sep + nrnDirName):
-        print "Failed to write "+ pf_local+" file"
+        print("Failed to write "+ pf_local+" file")
         return
 
     plotFileName = os.path.join(nrnDirPath,nrnDirName,pf_local)
@@ -83,10 +85,10 @@ def writePlottingFile(nrnDirPath, nrnDirName, sSim):
 // view: xmin, ymin, xrange, yrange, winleft, wintop, winwidth, winheight\n
 plots.view(0, -110, tstop, 210, 0, 290, 640, 320)\n
 //addvar: \"label\", \"variable\", color_index, brush_index\n"""
-    
+
     with open(plotFileName, "w") as pf:
         pf.write(plot_BP)
-        
+
         nNeurons = len(sSim.network.neurons.keys())
         if nNeurons > 3:
             nNeurons = 3
@@ -98,4 +100,3 @@ plots.view(0, -110, tstop, 210, 0, 290, 640, 320)\n
             nrn = sSim.network.neurons[nName]
             pf.write("plots.addvar(\"" +nName+ " Vm\", \""+nName+".v(0.5)\", "+str(i+2)+", 1)\n")
             i = i+1
-            

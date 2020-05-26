@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import re
 import os
 import util
@@ -49,7 +51,7 @@ class Neuron():
         # regulation of vdg by sm pools
         self.condBySM = []
         self.readNeuronFile()
-        
+
     def readNeuronFile(self):
         """
         read .neu file
@@ -58,7 +60,7 @@ class Neuron():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading neuron file : ", filename
+            print("Reading neuron file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -78,10 +80,10 @@ class Neuron():
 
                 elif re.search("CM", line[0]) is not None:
                     self.cm = self.extractNeuronsFeature(i+1, line[0])
-                    
+
                 elif re.search("^MEM_AREA", line[0]) is not None:
                     self.memAreaType = lineArr[i+1][0]
-                    
+
                 elif line[0] == "CONDUCTANCES:":
                     i = self.extractConductance(i+1, lineArr)
                 elif line[0] == "LIST_ION:":
@@ -100,7 +102,7 @@ class Neuron():
         """
         read and store regulation of voltage dependent conductances by sm pools
         """
-        print "Reading regulation of voltage dependent conductances by sm pools"
+        print("Reading regulation of voltage dependent conductances by sm pools")
         while lineArr[i][0] != "END":
             if re.search("Name of Conductance", lineArr[i][1]) is not None:
                 condName = lineArr[i][0].replace('(', '_').replace(')', '_')
@@ -115,7 +117,7 @@ class Neuron():
         """
         read and store regulation of voltage dependent conductances by ion pools
         """
-        print "Reading regulation of voltage dependent conductances by ion pools"
+        print("Reading regulation of voltage dependent conductances by ion pools")
         while lineArr[i][0] != "END":
             if re.search("Name of Conductance", lineArr[i][1]) is not None:
                 condName = lineArr[i][0].replace('(', '_').replace(')', '_')
@@ -130,7 +132,7 @@ class Neuron():
         """
         read list of currents that contribute to ion pools
         """
-        print "Reading list of currents that contribute to ion pools"
+        print("Reading list of currents that contribute to ion pools")
         while lineArr[i][0] != "END":
             if re.search("Name of Conductance", lineArr[i][1]) is not None:
                 condName = lineArr[i][0].replace('(', '_').replace(')', '_')
@@ -139,13 +141,13 @@ class Neuron():
                 self.curr2Ions.append(Current2Ion(condName, ionName, color))
             i = i+1
         return i
-    
+
     def extractSMPools(self, i, lineArr):
         """
         read and store second messenger pools from
         .neu files
         """
-        print "Reading sm pools"
+        print("Reading sm pools")
         while lineArr[i][0] != "END":
             if re.search("Name of SM", lineArr[i][1]) is not None:
                 smName = lineArr[i][0]
@@ -154,13 +156,13 @@ class Neuron():
                 self.smPools[smName] = SMPool(self.filePath, smFileName, smColor)
             i = i+1
         return i
-    
+
     def extractIonPools(self, i, lineArr):
         """
         read and store ion pools from
         .neu files
         """
-        print "Reading ion pools"
+        print("Reading ion pools")
         while lineArr[i][0] != "END":
             if re.search("Name of Ion", lineArr[i][1]) is not None:
                 ionName = lineArr[i][0]
@@ -175,7 +177,7 @@ class Neuron():
         read and store leak, Na, K, conductance filenames(*.vdg) and color from
         .neu files
         """
-        print "Reading conductances"
+        print("Reading conductances")
         while lineArr[i][0] != "END":
             if re.search("Name of conductance", lineArr[i][1]) is not None:
                 # vdg names sometimes had paranthesis!
@@ -183,7 +185,7 @@ class Neuron():
                 vdgFileName = lineArr[i+1][0]
                 vdgColor = lineArr[i+2][0]
                 self.vdgs[vdgName] = VDConductance(self.filePath, vdgFileName, vdgColor)
-                
+
             i = i+1
         return i
 

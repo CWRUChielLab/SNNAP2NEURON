@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import re
 import os
 import util
@@ -66,7 +68,7 @@ class VDConductance():
         self.ssB_s = ""
         self.ssB_p = ""
         self.ssB_Bn = ""
-        
+
         self.tBType = ""
         self.tB_tx = ""
         self.tB_tn = ""
@@ -81,7 +83,7 @@ class VDConductance():
         self.mType = ""
         self.m_IV = ""
         self.m_L = ""
-        
+
         self.amType = ""
         self.am_A = ""
         self.am_B = ""
@@ -98,7 +100,7 @@ class VDConductance():
         self.hType = ""
         self.h_IV = ""
         self.h_L = ""
-        
+
         self.ahType = ""
         self.ah_A = ""
         self.ah_B = ""
@@ -110,7 +112,7 @@ class VDConductance():
         self.bh_B = ""
         self.bh_C = ""
         self.bh_D = ""
-        
+
         self.readVDGFile()
         if self.ivdType == "2" or self.ivdType == "4":
             self.read_mFile()
@@ -127,7 +129,7 @@ class VDConductance():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading .A file : ", filename
+            print("Reading .A file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -148,7 +150,7 @@ class VDConductance():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading .B file : ", filename
+            print("Reading .B file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -162,7 +164,7 @@ class VDConductance():
                     self.tBType, self.tB_tx, self.tB_tn, self.tB_h1, self.tB_h2, self.tB_s1, self.tB_s2, self.tB_p1, self.tB_p2  = self.extractTimeConstant(i+1, lineArr)
                 i = i+1
         return
-    
+
     def extractTimeConstant(self, i, lineArr):
         """
         read and return parameters related to time constant for activation (tA from .A files)
@@ -194,7 +196,7 @@ class VDConductance():
                 p1 = self.findNextFeature(i, lineArr, "p1")
                 p2 = self.findNextFeature(i, lineArr, "p2")
         elif tConstType != '1':
-            print "WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!"
+            print("WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!")
         return tConstType, tx, tn, h1, h2, s1, s2, p1, p2
 
     def extractSteadyState(self, i, lineArr, isActivation):
@@ -213,7 +215,7 @@ class VDConductance():
             ss_Xn= self.findNextFeature(i, lineArr, "An")
         if ssType == '2' and isActivation == 0:
             ss_Xn= self.findNextFeature(i, lineArr, "Bn")
-            
+
         ss_h = self.findNextFeature(i, lineArr, "h")
         ss_s = self.findNextFeature(i, lineArr, "s")
         ss_p = self.findNextFeature(i, lineArr, "p")
@@ -229,7 +231,7 @@ class VDConductance():
         funcType = lineArr[i][0]
         if funcType == "2":
             iv = self.findNextFeature(i, lineArr, "IV")
-            
+
         return funcType, iv
 
     def read_mFile(self):
@@ -237,7 +239,7 @@ class VDConductance():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading .m file : ", filename
+            print("Reading .m file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -252,13 +254,13 @@ class VDConductance():
 
                 i = i+1
         return
-    
+
     def read_hFile(self):
         filename = os.path.join(self.filePath,self.h)
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading .h file : ", filename
+            print("Reading .h file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -273,7 +275,7 @@ class VDConductance():
 
                 i = i+1
         return
-    
+
     def extractActivation_rateConst(self, i, lineArr):
         """
         extract rate constant activation (m) or inactivation (h) parameters
@@ -286,7 +288,7 @@ class VDConductance():
             iv = self.findNextFeature(i, lineArr, "IV")
         if funcType == "3":
             l = self.findNextFeature(i, lineArr, "L")
-            
+
         return funcType, iv, l
 
     def extractRateParameter(self, i, lineArr):
@@ -312,7 +314,7 @@ class VDConductance():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading .vdg file : ", filename
+            print("Reading .vdg file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -347,11 +349,10 @@ class VDConductance():
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
             return None
-        
+
         j = i+1
         if j >= len(lineArr):
             return None
         while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
-    

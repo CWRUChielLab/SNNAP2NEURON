@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import re
 import os
 import util
@@ -40,7 +42,7 @@ class ElecSynapse():
         filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
-            print "Reading electrical coupling file : ", filename
+            print("Reading electrical coupling file : ", filename)
             # extract useful lines from the the text
             lineArr = util.cleanupFileText(self.text)
 
@@ -73,7 +75,7 @@ class Network():
         filename = os.path.join(self.filePath,self.fileName)
         with open(filename) as f:
             self.text = f.read()
-            print "Reading network file : ", filename
+            print("Reading network file : ", filename)
 
             # extract useful lines from the the text
             lineArr = util.cleanupFileText(self.text)
@@ -85,7 +87,7 @@ class Network():
                 if len(line) < 2:
                     i = i+1
                     continue
-                
+
                 if line[0] == "LIST_NEURONS:":
                     i = self.extractNeurons(i+1, lineArr)
 
@@ -102,14 +104,14 @@ class Network():
         """
         TODO
         """
-        print "Reading Modulatory synapses"
+        print("Reading Modulatory synapses")
         while lineArr[i][0] != "END":
             i = i+1
-        print "Done reading Modulatory synapses"
+        print("Done reading Modulatory synapses")
         return i+1
-    
+
     def extractElecSynapses(self, i, lineArr):
-        print "Reading electrical coupling"
+        print("Reading electrical coupling")
         while lineArr[i][0] != "END":
             if re.search("postsynaptic", lineArr[i][1]) is not None:
                 postSyn = lineArr[i][0]
@@ -118,11 +120,11 @@ class Network():
                 elecSynapseColor = self.findNextFeature(i, lineArr, feature="Color")
                 self.elecSyns.append(ElecSynapse(postSyn, preSyn, elecSynapseFilename, elecSynapseColor, self.filePath))
             i = i+1
-        print "Found", len(self.elecSyns), "electrical synapses."
+        print("Found", len(self.elecSyns), "electrical synapses.")
         return i+1
 
     def extractChemSynapses(self, i, lineArr):
-        print "Reading chemical synapses in .ntw file"
+        print("Reading chemical synapses in .ntw file")
         while lineArr[i][0] != "END":
             if re.search("postsynaptic", lineArr[i][1]) is not None:
                 postSyn = lineArr[i][0]
@@ -132,12 +134,12 @@ class Network():
                 chemSynapseColor = self.findNextFeature(i, lineArr, feature="Color")
                 self.chemSyns.append(ChemSynapse(postSyn, preSyn, chemSynapseType, chemSynapseFilename, chemSynapseColor, self.filePath))
             i = i+1
-        print "Found", len(self.chemSyns), "chemical synapses."
+        print("Found", len(self.chemSyns), "chemical synapses.")
         return i+1
 
     def findNextFeature(self, i, lineArr, feature=""):
         if feature == "":
-            return None        
+            return None
         j = i+1
         if j >= len(lineArr):
             return None
@@ -145,13 +147,13 @@ class Network():
             #while re.search(feature, lineArr[j][1]) is None:
             j = j+1
         return lineArr[j][0]
-    
+
     def extractNeurons(self, i, lineArr):
         """
-        read neuron name, filename, and color from .ntw file and create a Neuron object 
+        read neuron name, filename, and color from .ntw file and create a Neuron object
         for each of the read neurons and store them in dictionary 'self.neurons'
         """
-        print "Reading neurons in .ntw file"
+        print("Reading neurons in .ntw file")
         while (lineArr[i][0] != "END"):
             if lineArr[i][1] == "Neuron's name":
                 nName = lineArr[i][0]
@@ -160,9 +162,9 @@ class Network():
                 self.neurons[nName] = Neuron(nName, nFilename, nColor, self.filePath)
 
             i = i+1
-        print "Found", len(self.neurons.keys()), "nerons."
+        print("Found", len(self.neurons.keys()), "nerons.")
         return i+1
-        
+
     def findNextFilename(self, i, lineArr):
         j = i+1
 
@@ -170,11 +172,10 @@ class Network():
             j = j+1
         return lineArr[j][0]
 
-        
+
     def findNextColor(self, i, lineArr):
         j = i+1
 
         while(lineArr[j][1] != "Color Name"):
             j = j+1
         return lineArr[j][0]
-            

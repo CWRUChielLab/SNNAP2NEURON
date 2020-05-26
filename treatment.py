@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import re
 import os
@@ -24,7 +26,7 @@ import util
 class CurrentInj():
     def __init__(self, nName, start, stop, magnitude):
         """
-        Current injection 
+        Current injection
         SNNAP .trt files contain time and magnitude in units of seconds
         and nA respectively
         """
@@ -36,7 +38,7 @@ class CurrentInj():
 class ModInj():
     def __init__(self, nName, mod, sm, start, stop, magnitude):
         """
-        Modulator injection: changes the availability of second messenger 
+        Modulator injection: changes the availability of second messenger
         concentration [MOD]
         """
         self.neuronName = nName
@@ -61,7 +63,7 @@ class Treatment():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading treatment file : ", filename
+            print("Reading treatment file : ", filename)
             lineArr = util.cleanupFileText(self.text)
 
             i = 0
@@ -78,7 +80,7 @@ class Treatment():
                 i = i+1
 
     def extractCurntInj(self, i, lineArr):
-        print "Reading current injections in .trt file"
+        print("Reading current injections in .trt file")
 
         while lineArr[i][0] != "END":
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
@@ -89,11 +91,11 @@ class Treatment():
                 if float(magnitude) != 0.0:
                     self.currentInjList.append(CurrentInj(nrn, start, stop, magnitude))
             i = i+1
-        print "Found", len(self.currentInjList), "current injections."
+        print("Found", len(self.currentInjList), "current injections.")
         return i+1
 
     def extractModInj(self, i, lineArr):
-        print "Reading modulator injections in .trt file"
+        print("Reading modulator injections in .trt file")
 
         while lineArr[i][0] != "END":
             if re.search("Name of Neuron", lineArr[i][1]) is not None:
@@ -106,10 +108,10 @@ class Treatment():
 
                 # magnitude can be a .fnc file
                 if re.search("fnc", magnitude) is not None:
-                    print "WARNING: Modulator treatments by .fnc files are not supported yet!"
+                    print("WARNING: Modulator treatments by .fnc files are not supported yet!")
                     sys.exit()
                 if float(magnitude) != 0.0:
                     self.modInjList.append(ModInj(nrn, mod, sm, start, stop, magnitude))
             i = i+1
-        print "Found", len(self.currentInjList), "modulator injections."
+        print("Found", len(self.currentInjList), "modulator injections.")
         return i+1

@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import os
 
@@ -55,7 +57,7 @@ class NRNModFile():
         self.lJust1 = 16
         self.unitsBlock = []
         self.parameterBlock = {}
-    
+
         self.stateBlock = []
         self.breakpointBlock = {}
         self.initialBlock = []
@@ -68,13 +70,13 @@ class NRNModFile():
         self.assignedBlock =  AssignedBlock()
         # NEURON block object
         self.neuronBlock =  NEURONBlock(self.nrnName)
-        
+
         self.fillUnitsBlock()
         self.readVDGs()
         self.readIons()
 
         self.readSMs()
-        
+
         # write mod file
         self.writeModFile()
 
@@ -90,10 +92,10 @@ class NRNModFile():
         stateblck = self.stateBlock
         initblck = self.initialBlock
         dvblck  = self.derivativeBlock
-        
+
         for smName in secondMessengers.keys():
             sm = secondMessengers[smName]
-            
+
             smName = smName.lower()
             smPrefix = smName+ '_'
             smConcName = smPrefix+'C'
@@ -107,7 +109,7 @@ class NRNModFile():
             smModPrefix = smModName+'_'
             # convert tau in SNNAP to correct units in modfile (sec to milisec)
 
-            print "smConc_tau: ", smConc_tau
+            print("smConc_tau: ", smConc_tau)
             smConc_tau = 1000.0*float(smConc_tau)
 
             # for: Csm type = 1
@@ -118,8 +120,8 @@ class NRNModFile():
 
             xCsm = 1.0
             if sm_xCsmType == '2':
-                print "WARNING!: xCsm type 2 is not supported yet!!"
-                print "Exiting..."
+                print("WARNING!: xCsm type 2 is not supported yet!!")
+                print("Exiting...")
                 sys.exit(-1)
             dvblck.append(smConcName+"\' = ("+smModName+" - "+smConcName+")/"+str(smConc_tau))
 
@@ -157,20 +159,20 @@ class NRNModFile():
 
             # find VDGs regulated by this second messenger and ammend it's calculation
             for cBySM in self.nrnObject.condBySM:
-                print "+++++cBySM.cond " + cBySM.cond +" SM : "+ smName
-                print "cBySM.sm,  smName: ", cBySM.sm, smName
+                print("+++++cBySM.cond " + cBySM.cond +" SM : "+ smName)
+                print("cBySM.sm,  smName: ", cBySM.sm, smName)
                 if cBySM.sm.lower() == smName.lower():
-                    print "SM " +smName + " regulates cond. "  +cBySM.cond
+                    print("SM " +smName + " regulates cond. "  +cBySM.cond)
 
                     BRType = cBySM.fbr.BRType
                     fBRType = cBySM.fbr.fBRType
                     BR_a = cBySM.fbr.BR_a
                     br_aName = smPrefix + '2' + cBySM.cond+'_br_a'
-                    
+
                     # add fBR file parameter to RANGE and PARAMETER blocks
                     prmblck[pBlockComment].append(br_aName+ " = "+BR_a.ljust(lj) + "(mM)")
                     nblck.rangeVariables.append(br_aName)
-                    
+
                     # default br
                     br='0.0'
                     if BRType =='2':
@@ -180,7 +182,7 @@ class NRNModFile():
                     elif BRType =='4':
                         br = '1 / (1+ '+br_aName+'*'+smConcName+')'
                     else:
-                        print "WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!"
+                        print("WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!")
 
                     # default fbr
                     fbr = '0.0'
@@ -189,12 +191,12 @@ class NRNModFile():
                     elif fBRType == '2':
                         fbr = '1.0 + ' + br
                     else:
-                        print "WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!"
+                        print("WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!")
 
-                    print "FBR = ", fbr
+                    print("FBR = ", fbr)
                     brkpblck[cBySM.cond][0] = brkpblck[cBySM.cond][0] + ' * (' +fbr+')'
-                    print brkpblck[cBySM.cond][0]
-                    print "cBySM.cond " , cBySM.cond
+                    print(brkpblck[cBySM.cond][0])
+                    print("cBySM.cond " , cBySM.cond)
 
     def readIons(self):
         ions = self.nrnObject.ionPools
@@ -207,10 +209,10 @@ class NRNModFile():
         stateblck = self.stateBlock
         initblck = self.initialBlock
         dvblck  = self.derivativeBlock
-        
+
         for ionName in ions.keys():
             ion = ions[ionName]
-            
+
             iName = ionName.lower()
             iPrefix = iName+ '_'
             iConcName = iPrefix+'C'
@@ -226,14 +228,14 @@ class NRNModFile():
             # rearrange K1 in SNNAP as a time constant
             tauName = iConcPrefix+'tau'
             iConc_tau = 1000.0/float(iConc_k1)
-            
-            
+
+
             if iConcType == '2':
                 # add ion concentration fucntion to state varables block
                 stateblck.append(iConcName+ "\t(mM)")
                 # add intialitation of ion concentration
                 initblck.append(iConcName +" = 0.0")
-                
+
                 # find contributing currntes for this ion
                 contributingvdgName = []
                 for cr2Ion in self.nrnObject.curr2Ions:
@@ -246,7 +248,7 @@ class NRNModFile():
 
                 # add ion concentration to derivative block
                 dvblck.append(iConcName+"\' = (-"+k2Name+" * ("+ "+".join(contributingvdgName) + ") - "+iConcName +")/"+str(iConc_tau))
-                
+
                 pBlockComment = iPrefix+'ion'
                 # add ion parameters to RANGE and PARAMETER blocks
                 prmblck[pBlockComment] = [k2Name+ " = "+str(k2).ljust(lj) + "(mM-cm2/mA)"]
@@ -256,9 +258,9 @@ class NRNModFile():
 
                 # find VDGs regulated by this ion and ammend it's calculation
                 for cByI in self.nrnObject.condByIon:
-                    print "-----cByI.cond " + cByI.cond +" ION: "+ ionName
+                    print("-----cByI.cond " + cByI.cond +" ION: "+ ionName)
                     if cByI.ion == ionName:
-                        print "Ion " +ionName + " regulates cond. "  +cByI.cond
+                        print("Ion " +ionName + " regulates cond. "  +cByI.cond)
 
                         BRType = cByI.BRType
                         fBRType = cByI.fBRType
@@ -279,7 +281,7 @@ class NRNModFile():
                         elif BRType =='4':
                             br = '1 / (1+ '+br_aName+'*'+iConcName+')'
                         else:
-                            print "WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!"
+                            print("WARNING!: Modulation by regulator models(BR) 1 is not supported yet!!")
 
                         # default fbr
                         fbr = '0.0'
@@ -288,21 +290,21 @@ class NRNModFile():
                         elif fBRType == '2':
                             fbr = '1.0 + ' + br
                         else:
-                            print "WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!"
+                            print("WARNING!: Modulation by regulator model(fBR) 3 is not supported yet!!")
 
                         brkpblck[cByI.cond][0] = brkpblck[cByI.cond][0] + ' * (' +fbr+')'
-                        print brkpblck[cByI.cond][0]
-                        print "cByI.cond " , cByI.cond
-                        
+                        print(brkpblck[cByI.cond][0])
+                        print("cByI.cond " , cByI.cond)
+
                         # find which specific or non-spec. current cByI.cond need to be added
                         # for cByI.cond to be accounted towards the current balance eqn.
                         # if cByI.cond[0].lower() == 'k':
                         #     brkpblck['ammend K'] = ['ik = ik + i'+cByI.cond.lower()]
             else:
-                print "WARNING!: ion concentraion model 1 is not supported yet!!"
-                print "Exiting..."
+                print("WARNING!: ion concentraion model 1 is not supported yet!!")
+                print("Exiting...")
                 sys.exit(-1)
-    
+
     def readVDGs(self):
         vdgs = self.nrnObject.vdgs
 
@@ -314,7 +316,7 @@ class NRNModFile():
             prmblck = self.parameterBlock
             brkpblck = self.breakpointBlock
             assgndblck = self.assignedBlock
-            
+
             vName = vdgName.lower()
 
             vgdPrefix = vdgName+"_"
@@ -322,28 +324,28 @@ class NRNModFile():
             revPotName = vgdPrefix+"e"
             gbarName = vgdPrefix+"gbar"
             gName = vgdPrefix+"g"
-            
+
             # create USEION statements
             if vName in ['na', 'k','ca']:
-                print "vdgName: ", vdgName
+                print("vdgName: ", vdgName)
                 ui = "USEION " +vName+ " READ e" +vName+ " WRITE " +currntName
                 nblck.useIons.append(ui)
             else:
                 nblck.nsCurrents.append(currntName)
-                
+
             ivdType = vdgs[vdgName].ivdType
             aType = vdgs[vdgName].AType
             bType = vdgs[vdgName].BType
             mType = vdgs[vdgName].mType
             hType = vdgs[vdgName].hType
-            
+
             if self.nrnObject.memAreaType == '0'or self.nrnObject.memAreaType == "":
                 # in SNNAP, if not using memArea conductance is given in uS
                 try:
                     g = float(vdgs[vdgName].g) * 1.0e-6
                 except:
-                    print "WARNING!: could not convert "+vdgName+ " conductance of neuron " + nName
-                    print "Exited unexpectedly!"
+                    print("WARNING!: could not convert "+vdgName+ " conductance of neuron " + nName)
+                    print("Exited unexpectedly!")
                     sys.exit(-1)
 
             if ivdType == '5':
@@ -352,7 +354,7 @@ class NRNModFile():
                     revPotName = "el"
                     gName = "gl"
                     #nblck.nsCurrents.append('NONSPECIFIC_CURRENT ' + currntName)
-                    
+
                 # add leak current parameters to RANGE varible list
                 nblck.rangeVariables.append(gName)
                 nblck.rangeVariables.append(revPotName)
@@ -360,21 +362,21 @@ class NRNModFile():
                 # add leak current parameters to PARAMETER block
                 prmblck[vdgName] = [gName+ " = "+(str(g)).ljust(lj) + "(S/cm2)"]
                 prmblck[vdgName].append(revPotName+ " = "+(vdgs[vdgName].E).ljust(lj) + "(mV)")
-        
+
                 # add leak current parameters to ASSIGNED varible list
                 #assgndblck.conductances.append(gName.ljust(lj) + "(S/cm2)")
                 assgndblck.currents.append(currntName.ljust(lj) +"(mA/cm2)")
-                
+
                 # add leak current parameters to BREAKPOINT block
                 brkpblck[vdgName] = [currntName+ ' = '+gName +'*(v - '+revPotName+')']
-                
+
             if ivdType == '1' or ivdType == '3':
                 self.headComments.append(":_A"+aType+"_B"+bType+"\t"+vdgName)
 
                 # add leak current parameters to PARAMETER block
                 prmblck[vdgName] = [gbarName+ " = "+(str(g)).ljust(lj) + "(S/cm2)"]
                 prmblck[vdgName].append(revPotName+ " = "+(vdgs[vdgName].E).ljust(lj) + "(mV)")
-                
+
                 # add parameters to RANGE varible list
                 nblck.rangeVariables.append(gName)
                 nblck.rangeVariables.append(revPotName)
@@ -394,20 +396,20 @@ class NRNModFile():
                     brkpblck[vdgName] = [gName+ ' = '+gbarName +' * ('+ivd_A+'^'+ivd_p+') * '+ivd_B]
                     self.fill_ivd_A(vdgName, vgdPrefix, vdgs[vdgName])
                     self.fill_ivd_B(vdgName, vgdPrefix, vdgs[vdgName])
-                    
+
                 if ivdType == '3':
                     brkpblck[vdgName] = [gName+ ' = '+gbarName +' * '+ivd_A+'^'+ivd_p]
                     self.fill_ivd_A(vdgName, vgdPrefix, vdgs[vdgName])
 
                 brkpblck[vdgName].append(currntName+ ' = '+gName +'*(v - '+revPotName+')')
-                
+
             if ivdType == '2' or ivdType == '4':
                 self.headComments.append(":_m"+mType+"_h"+hType+"\t"+vdgName)
 
                 # add leak current parameters to PARAMETER block
                 prmblck[vdgName] = [gbarName+ " = "+(str(g)).ljust(lj) + "(S/cm2)"]
                 prmblck[vdgName].append(revPotName+ " = "+(vdgs[vdgName].E).ljust(lj) + "(mV)")
-                
+
                 # add parameters to RANGE varible list
                 nblck.rangeVariables.append(gName)
                 nblck.rangeVariables.append(revPotName)
@@ -416,7 +418,7 @@ class NRNModFile():
                 assgndblck.currents.append(currntName.ljust(lj) +"(mA/cm2)")
                 assgndblck.conductances.append(gName.ljust(lj) +"(S/cm2)")
                 assgndblck.reversePots.append(("e" +vName).ljust(lj) +"(mV)")
-                
+
                 # add current parameters to BREAKPOINT block
                 ivd_m = vgdPrefix +"m"
                 ivd_p = vgdPrefix +"p"
@@ -427,11 +429,11 @@ class NRNModFile():
                     brkpblck[vdgName] = [gName+ ' = '+gbarName +' * ('+ivd_m+'^'+ivd_p+') * '+ivd_h]
                     self.fill_ivd_m(vdgName, vgdPrefix, vdgs[vdgName])
                     self.fill_ivd_h(vdgName, vgdPrefix, vdgs[vdgName])
-                    
+
                 if ivdType == '4':
                     brkpblck[vdgName] = [gName+ ' = '+gbarName +' * '+ivd_m+'^'+ivd_p]
                     self.fill_ivd_m(vdgName, vgdPrefix, vdgs[vdgName])
-                brkpblck[vdgName].append(currntName+ ' = '+gName +'*(v - '+revPotName+')')                    
+                brkpblck[vdgName].append(currntName+ ' = '+gName +'*(v - '+revPotName+')')
                 pass
 
     def fill_ivd_h(self, vdgName, vgdPrefix, ivd):
@@ -444,9 +446,9 @@ class NRNModFile():
         dvblck  = self.derivativeBlock
 
         lj = self.lJust1
-        
+
         af_Type = ivd.hType
-        
+
         af = vgdPrefix+'h'
         afPrefix = af+'_'
 
@@ -458,8 +460,8 @@ class NRNModFile():
         af_bh_prefix = af_bh + '_'
 
         if af_Type == '1':
-            print "WARNING: Activation function type 1 is not suppoeterd yet!!"
-            print "Exiting..."
+            print("WARNING: Activation function type 1 is not suppoeterd yet!!")
+            print("Exiting...")
             sys.exit()
 
         # scale L, and add it to parameter block as well as Range block
@@ -499,7 +501,7 @@ class NRNModFile():
             self.procRates[prName].append(af_ah+ ' = ' + af_ah_A)
             prmblck[vdgName].append(af_ah_A+ " = "+ivd.ah_A)
             nblck.rangeVariables.append(af_ah_A)
-            
+
         if ah_Type in ['2', '3']:
             prmblck[vdgName].append(af_ah_A+ " = "+ivd.ah_A)
             prmblck[vdgName].append(af_ah_B+ " = "+(ivd.ah_B).ljust(lj) + "(mV)")
@@ -558,7 +560,7 @@ class NRNModFile():
             self.procRates[prName].append(af_bh+ ' = ' + af_bh_A)
             prmblck[vdgName].append(af_bh_A+ " = "+ivd.bh_A)
             nblck.rangeVariables.append(af_bh_A)
-            
+
         if bh_Type in ['2', '3']:
             prmblck[vdgName].append(af_bh_A+ " = "+ivd.bh_A)
             prmblck[vdgName].append(af_bh_B+ " = "+(ivd.bh_B).ljust(lj) + "(mV)")
@@ -604,7 +606,7 @@ class NRNModFile():
                 self.procRates[prName].append(af_bh+ ' = '+af_bh_A+'/(1+exp(('+af_bh_B+'-v)/'+af_bh_C+'))')
             if bh_Type == '7':
                 self.procRates[prName].append(af_bh+ ' = '+af_bh_A+'/(1-exp(('+af_bh_B+'-v)/'+af_bh_C+'))')
-    
+
     def fill_ivd_m(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
         prmblck = self.parameterBlock
@@ -615,9 +617,9 @@ class NRNModFile():
         dvblck  = self.derivativeBlock
 
         lj = self.lJust1
-        
+
         af_Type = ivd.mType
-        
+
         af = vgdPrefix+'m'
         afPrefix = af+'_'
 
@@ -629,8 +631,8 @@ class NRNModFile():
         af_bm_prefix = af_bm + '_'
 
         if af_Type == '1':
-            print "WARNING: Activation function type 1 is not suppoeterd yet!!"
-            print "Exiting..."
+            print("WARNING: Activation function type 1 is not suppoeterd yet!!")
+            print("Exiting...")
             sys.exit()
 
         # scale L, and add it to parameter block as well as Range block
@@ -669,7 +671,7 @@ class NRNModFile():
             self.procRates[prName] = [af_am+ ' = ' + af_am_A]
             prmblck[vdgName].append(af_am_A+ " = "+ivd.am_A)
             nblck.rangeVariables.append(af_am_A)
-            
+
         if am_Type in ['2', '3']:
             prmblck[vdgName].append(af_am_A+ " = "+ivd.am_A)
             prmblck[vdgName].append(af_am_B+ " = "+(ivd.am_B).ljust(lj) + "(mV)")
@@ -728,7 +730,7 @@ class NRNModFile():
             self.procRates[prName].append(af_bm+ ' = ' + af_bm_A)
             prmblck[vdgName].append(af_bm_A+ " = "+ivd.bm_A)
             nblck.rangeVariables.append(af_bm_A)
-            
+
         if bm_Type in ['2', '3']:
             prmblck[vdgName].append(af_bm_A+ " = "+ivd.bm_A)
             prmblck[vdgName].append(af_bm_B+ " = "+(ivd.bm_B).ljust(lj) + "(mV)")
@@ -774,7 +776,7 @@ class NRNModFile():
                 self.procRates[prName].append(af_bm+ ' = '+af_bm_A+'/(1+exp(('+af_bm_B+'-v)/'+af_bm_C+'))')
             if bm_Type == '7':
                 self.procRates[prName].append(af_bm+ ' = '+af_bm_A+'/(1-exp(('+af_bm_B+'-v)/'+af_bm_C+'))')
-    
+
     def fill_ivd_A(self, vdgName, vgdPrefix, ivd):
         nblck = self.neuronBlock
         prmblck = self.parameterBlock
@@ -785,12 +787,12 @@ class NRNModFile():
         dvblck  = self.derivativeBlock
 
         lj = self.lJust1
-        
+
         af_Type = ivd.AType
-        
+
         af = vgdPrefix+'A'
         afPrefix = af+'_'
-        
+
         af_SSA = afPrefix +'SSA'
         af_tau = afPrefix +'tau'
         af_SSA_prefix = af_SSA+'_'
@@ -801,7 +803,7 @@ class NRNModFile():
         af_SSA_h = af_SSA_prefix+ 'h'
         af_SSA_s = af_SSA_prefix+ 's'
         af_SSA_p = af_SSA_prefix+ 'p'
-            
+
         # add to parameter block
         prmblck[vdgName].append(af_SSA_h+ " = "+ivd.ssA_h.ljust(lj) + "(mV)")
         prmblck[vdgName].append(af_SSA_s+ " = "+ivd.ssA_s.ljust(lj) + "(mV)")
@@ -819,7 +821,7 @@ class NRNModFile():
             self.procRates[prName] = [af_SSA+ ' = (1 - '+af_SSA_An+')/(1 + exp(('+af_SSA_h+'-v)/'+af_SSA_s+'))^'+af_SSA_p+' + '+ af_SSA_An]
             prmblck[vdgName].append(af_SSA_An+ " = "+ivd.ssA_An)
             nblck.rangeVariables.append(af_SSA_An)
-        
+
         # add rate paramters to GLOBAL variable list
         nblck.globalVariables.append(af_SSA)
 
@@ -828,11 +830,11 @@ class NRNModFile():
         if af_Type == "1":
             assgndblck.rateParameters.append(af)
             self.procRates[prName].append(af +" = " + af_SSA)
-        
+
         elif af_Type == "2":
             nblck.globalVariables.append(af_tau)
             assgndblck.rateParameters.append(af_tau.ljust(lj) +"(ms)")
-            
+
             # add activation fucntion to state varables block
             stateblck.append(af)
             # add intialitation of activation fucntion
@@ -842,10 +844,10 @@ class NRNModFile():
 
             tauType = ivd.tAType
             af_tau_tx = af_tau_prefix +'tx'
-            
+
             # convert seconds to ms
             tau_tx = float(ivd.tA_tx) * 1000.0
-            
+
             prmblck[vdgName].append(af_tau_tx+ " = "+str(tau_tx).ljust(lj) + "(ms)")
             nblck.rangeVariables.append(af_tau_tx)
 
@@ -858,19 +860,19 @@ class NRNModFile():
                 af_tau_h1 = af_tau_prefix +'h1'
                 prmblck[vdgName].append(af_tau_h1+ " = "+ivd.tA_h1.ljust(lj) + "(mV)")
                 nblck.rangeVariables.append(af_tau_h1)
-                
+
                 af_tau_s1 = af_tau_prefix +'s1'
                 prmblck[vdgName].append(af_tau_s1+ " = "+ivd.tA_s1.ljust(lj) + "(mV)")
                 nblck.rangeVariables.append(af_tau_h1)
 
                 af_tau_p1 = af_tau_prefix +'p1'
                 af_tau_tn = af_tau_prefix +'tn'
-                
+
                 if tauType in ['2', '3']:
                     # af_tau_p1 = af_tau_prefix +'p1'
                     prmblck[vdgName].append(af_tau_p1+ " = "+ivd.tA_p1)
                     nblck.rangeVariables.append(af_tau_p1)
-                    
+
                     tau_tn = float(ivd.tA_tn) * 1000.0
                     #af_tau_tn = af_tau_prefix +'tn'
                     prmblck[vdgName].append(af_tau_tn+ " = "+str(tau_tn).ljust(lj) + "(ms)")
@@ -887,20 +889,20 @@ class NRNModFile():
                     af_tau_s2 = af_tau_prefix +'s2'
                     prmblck[vdgName].append(af_tau_s2+ " = "+ivd.tA_s2.ljust(lj) + "(mV)")
                     nblck.rangeVariables.append(af_tau_s2)
-                    
+
                     if tauType == '3':
                         af_tau_p2 = af_tau_prefix +'p2'
                         prmblck[vdgName].append(af_tau_p2+ " = "+ivd.tA_p2)
                         nblck.rangeVariables.append(af_tau_p2)
-                    
+
                         self.procRates[prName].append(af_tau+ ' = (' +af_tau_tx+ ' - '+af_tau_tn+')/ (1 + exp((v-'+af_tau_h1+')/'+af_tau_s1+'))^'+af_tau_p1 + ' /(1+exp((v-' +af_tau_h2+ ')/' +af_tau_s2+ '))^'+af_tau_p2 +' + ' + af_tau_tn)
-                        
+
                     if tauType == '6':
                         self.procRates[prName].append(af_tau+ ' = ' +af_tau_tx+ '/ (exp((v-'+af_tau_h1+')/'+af_tau_s1+') + exp((' +af_tau_h2+ '-v)/' +af_tau_s2+ '))')
-                        
+
             elif tauType in ['4', '5']:
-                print "WARNING: only time constant types 1, 2, 3 and 6 are suppoeterd yet!!"
-                print "Exiting..."
+                print("WARNING: only time constant types 1, 2, 3 and 6 are suppoeterd yet!!")
+                print("Exiting...")
                 sys.exit()
 
     def fill_ivd_B(self, vdgName, vgdPrefix, ivd):
@@ -913,19 +915,19 @@ class NRNModFile():
         dvblck  = self.derivativeBlock
 
         #self.globalVariables
-        
+
         lj = self.lJust1
-        
+
         bf_Type = ivd.BType
-        
+
         bf = vgdPrefix+'B'
         bfPrefix = bf+'_'
-        
+
         bf_SSB = bfPrefix +'SSB'
         bf_tau = bfPrefix +'tau'
         bf_SSB_prefix = bf_SSB+'_'
         bf_tau_prefix = bf_tau +'_'
-        
+
         if bf_Type == "2":
             # add rate paramters to GLOBAL variable list
             nblck.globalVariables.append(bf_SSB)
@@ -933,7 +935,7 @@ class NRNModFile():
             #add rate paramters to ASSIGNED block
             assgndblck.rateParameters.append(bf_SSB)
             assgndblck.rateParameters.append(bf_tau.ljust(lj) +"(ms)")
-            
+
             # add activation fucntion to state varables block
             stateblck.append(bf)
             # add intialitation of activation fucntion
@@ -947,7 +949,7 @@ class NRNModFile():
             bf_SSB_h = bf_SSB_prefix+ 'h'
             bf_SSB_s = bf_SSB_prefix+ 's'
             bf_SSB_p = bf_SSB_prefix+ 'p'
-            
+
             # add to parameter block
             prmblck[vdgName].append(bf_SSB_h+ " = "+ivd.ssB_h.ljust(lj) + "(mV)")
             prmblck[vdgName].append(bf_SSB_s+ " = "+ivd.ssB_s.ljust(lj) + "(mV)")
@@ -970,7 +972,7 @@ class NRNModFile():
             # write time constant
             tauType = ivd.tBType
             bf_tau_tx = bf_tau_prefix +'tx'
-            
+
             # convert seconds to ms
             tau_tx = float(ivd.tB_tx) * 1000.0
 
@@ -978,13 +980,13 @@ class NRNModFile():
             nblck.rangeVariables.append(bf_tau_tx)
             if tauType == '1':
                 self.procRates[prName].append(bf_tau+ ' = ' + bf_tau_tx)
-                
+
             elif tauType in ['2', '3']:
 
                 bf_tau_h1 = bf_tau_prefix +'h1'
                 prmblck[vdgName].append(bf_tau_h1+ " = "+ivd.tB_h1.ljust(lj) + "(mV)")
                 nblck.rangeVariables.append(bf_tau_h1)
-                
+
                 bf_tau_s1 = bf_tau_prefix +'s1'
                 prmblck[vdgName].append(bf_tau_s1+ " = "+ivd.tB_s1.ljust(lj) + "(mV)")
                 nblck.rangeVariables.append(bf_tau_h1)
@@ -994,14 +996,14 @@ class NRNModFile():
                 bf_tau_tn = bf_tau_prefix +'tn'
                 prmblck[vdgName].append(bf_tau_tn+ " = "+str(tau_tn).ljust(lj) + "(ms)")
                 nblck.rangeVariables.append(bf_tau_tn)
-                    
+
                 bf_tau_p1 = bf_tau_prefix +'p1'
                 prmblck[vdgName].append(bf_tau_p1+ " = "+ivd.tB_p1)
                 nblck.rangeVariables.append(bf_tau_p1)
-                
+
                 if tauType == '2':
                     self.procRates[prName].append(bf_tau+ ' = (' +bf_tau_tx+ ' - '+bf_tau_tn+')/ (1 + exp((v-'+bf_tau_h1+')/'+bf_tau_s1+'))^'+bf_tau_p1 + ' + ' + bf_tau_tn)
-                    
+
                 if tauType == '3':
                     bf_tau_p2 = bf_tau_prefix +'p2'
                     prmblck[vdgName].append(bf_tau_p2+ " = "+ivd.tB_p2)
@@ -1014,17 +1016,17 @@ class NRNModFile():
                     bf_tau_s2 = bf_tau_prefix +'s2'
                     prmblck[vdgName].append(bf_tau_s2+ " = "+ivd.tB_s2.ljust(lj) + "(mV)")
                     nblck.rangeVariables.append(bf_tau_s2)
-                    
-                    
+
+
                     self.procRates[prName].append(bf_tau+ ' = (' +bf_tau_tx+ ' - '+bf_tau_tn+')/ (1 + exp((v-'+bf_tau_h1+')/'+bf_tau_s1+'))^'+bf_tau_p1 + ' /(1+exp((v-' +bf_tau_h2+ ')/' +bf_tau_s2+ '))^'+bf_tau_p2 +' + ' + bf_tau_tn)
             else:
-                print "WARNING: only time constant types 1, 2 and 3 are suppoeterd yet!!"
-                print "Exiting..."
+                print("WARNING: only time constant types 1, 2 and 3 are suppoeterd yet!!")
+                print("Exiting...")
                 sys.exit()
-                
+
         else:
-            print "WARNING: Inactivation function type 1 is not suppoeterd yet!!"
-            print "Exiting..."
+            print("WARNING: Inactivation function type 1 is not suppoeterd yet!!")
+            print("Exiting...")
             sys.exit()
 
     def fillUnitsBlock(self):
@@ -1036,10 +1038,10 @@ class NRNModFile():
         with open(modFile, "w") as mf:
             # write self.headComments
             self.writeHeadComments(mf)
-            
+
             # write UNITS Block
             self.writeUnitsBlock(mf)
-            
+
             # write NEURON Block
             self.writeNEURONBlock(mf)
 
@@ -1054,7 +1056,7 @@ class NRNModFile():
 
             # write STATE Block
             self.writeStateBlock(mf)
-            
+
             # write BREAKPOINT Block
             self.writeBreakpointBlock(mf)
 
@@ -1081,17 +1083,17 @@ class NRNModFile():
         for cr in self.assignedBlock.currents:
             mf.write("\t"+cr+"\n")
         mf.write("\n")
-        
+
         mf.write("\t: conductances\n")
         for cd in self.assignedBlock.conductances:
             mf.write("\t"+cd+"\n")
         mf.write("\n")
-        
+
         mf.write("\t: reverse potentials\n")
         for rp in self.assignedBlock.reversePots:
             mf.write("\t"+rp+"\n")
         mf.write("\n")
-        
+
         mf.write("\t: rateParameters\n")
         for rp in self.assignedBlock.rateParameters:
             mf.write("\t"+rp+"\n")
@@ -1114,7 +1116,7 @@ class NRNModFile():
             mf.write("\t"+inl+"\n")
         mf.write("}\n\n")
         pass
-    
+
     def writeStateBlock(self, mf):
         mf.write("STATE {\n")
 
@@ -1122,7 +1124,7 @@ class NRNModFile():
             mf.write("\t"+stl+"\n")
         mf.write("}\n\n")
         pass
-    
+
     def writeDerivativeBlock(self, mf):
         mf.write("DERIVATIVE states  {\n")
         mf.write("\trates(v,t)\n")
@@ -1156,7 +1158,7 @@ class NRNModFile():
         # nblck.nsCurrents.append('NONSPECIFIC_CURRENT ' + currntName)
         # for ns in self.neuronBlock.nsCurrents:
         #     mf.write("\t"+ns+"\n")
-            
+
         # write RANGE variables
         mf.write("\tRANGE\n")
         rLine = ", ".join(self.neuronBlock.rangeVariables)
@@ -1170,7 +1172,7 @@ class NRNModFile():
             else:
                 mf.write("\t\t"+", ".join(self.neuronBlock.rangeVariables[i:])+"\n")
             i = i+varsPerLine
-        
+
         # write GLOBAL variables
         mf.write("\tGLOBAL\n")
         mf.write("\t\t" + ", ".join(self.neuronBlock.globalVariables) + "\n\n")
@@ -1185,13 +1187,12 @@ class NRNModFile():
             for prl in self.procRates[prName]:
                 mf.write("\t"+prl+"\n")
             mf.write("\n")
-            
+
         mf.write("\tUNITSON\n")
         mf.write("}\n\n")
-    
+
     def writeUnitsBlock(self, mf):
         mf.write("\nUNITS {\n")
         for u in self.unitsBlock:
             mf.write("\t"+u+"\n")
         mf.write("}\n\n")
-        

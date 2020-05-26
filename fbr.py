@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import os
 import re
@@ -37,13 +39,13 @@ class FBR():
         read fBR  file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        print "FBR FIle", filename
+        print("FBR FIle", filename)
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading fBR file : ", filename
+            print("Reading fBR file : ", filename)
             lineArr = util.cleanupFileText(self.text)
-            
+
             i = 0
             while i< len(lineArr):
                 line = lineArr[i]
@@ -67,8 +69,8 @@ class FBR():
 
         BRType = lineArr[i][0]
         if BRType == '1':
-            print "WARNING!! Ion pool concentration type 1 is not supported yet"
-            print "Exiting..."
+            print("WARNING!! Ion pool concentration type 1 is not supported yet")
+            print("Exiting...")
             sys.exit(1)
         elif BRType == '2' or BRType == '3':
             BR_a = util.findNextFeature(i, lineArr, "a")
@@ -85,9 +87,8 @@ class FBR():
         """
         fBRType = lineArr[i][0]
         if fBRType == '3':
-            print "WARNING!! Modulation by regulator type 3 is not supported yet"
-            print "Exiting..."
+            print("WARNING!! Modulation by regulator type 3 is not supported yet")
+            print("Exiting...")
             sys.exit(1)
 
         return fBRType
-
