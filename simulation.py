@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import re
 import os
 import util
@@ -24,7 +26,7 @@ from treatment import Treatment as trt
 
 class Simulation ():
     def __init__(self, filePath):
-        
+
         """
         self.LOGICAL_NAME
         self.TIMING
@@ -49,18 +51,18 @@ class Simulation ():
 
         self.simFilePath = os.sep.join(splitedFilePath[:-1])
         self.simFileName = splitedFilePath[len(splitedFilePath)-1]
-    
+
         # read simulation(.smu) file
         self.readSimFile(self.simFilePath, self.simFileName)
 
         # read network(.ntw) file
         self.network = ntw(self.simFilePath, self.parameters['NETWORK'])
 
-        print "Done reading .ntw file"
+        print("Done reading .ntw file")
 
         if self.parameters['TREATMENTS'] != "":
             self.treatemts = trt(self.simFilePath, self.parameters['TREATMENTS'])
-    
+
     def readSimFile(self, filePath, fileName):
         """
         read simulation file
@@ -69,7 +71,7 @@ class Simulation ():
         with open(fileName) as f:
             self.text = f.read()
 
-            print "Reading simulaiton file : ", fileName
+            print("Reading simulaiton file : ", fileName)
             # extract useful lines from the the text
             lineArr = util.cleanupFileText(self.text)
 
@@ -90,7 +92,7 @@ class Simulation ():
         and return line number of the next parameter
         SNNAP states time in seconds in .smu file
         """
-        
+
         if word1 == "TIMING":
             self.parameters['TIMING']['t0']    = lineArr[i+1][0]
             self.parameters['TIMING']['tStop'] = lineArr[i+2][0]
@@ -99,4 +101,3 @@ class Simulation ():
         else:
             self.parameters[word1] = lineArr[i+1][0]
             return i+1
-

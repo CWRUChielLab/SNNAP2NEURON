@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import re
 import os
@@ -26,7 +28,7 @@ from nrnModelPoint import NRNModelPoint
 from nrnModelDist import NRNModelDist
 
 def parse2Hoc(filename, cond):
-    # create simulation object. 
+    # create simulation object.
     snnapSim = sim(filename)
 
     # write model in NEURON
@@ -39,7 +41,7 @@ def parse2Hoc(filename, cond):
 def printSim(sim):
     pass
 
-    
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", help="path to SNNAP .smu file")
@@ -51,13 +53,13 @@ if __name__ == "__main__":
     cond = ''
     if args.cond == 'p':
         cond = 'p'
-        print "Conductances will be as point mechanisms"
+        print("Conductances will be represented as point mechanisms")
     elif args.cond == 'd':
         cond = 'd'
-        print "Conductances will be as distributed mechanisms"
+        print("Conductances will be represented as distributed mechanisms")
     else:
-        print "choises for --cond are either 'p' or 'd'"
-    
+        print("choices for --cond are either 'p' or 'd'")
+
     # if len(sys.argv) > 1:
     #     filePath = sys.argv[1]
     # else:
@@ -68,6 +70,5 @@ if __name__ == "__main__":
 
     simFilePath = splitedFilePath[:-1]
     simFileName = splitedFilePath[len(splitedFilePath)-1]
-    
-    currSim = parse2Hoc(filePath, cond)
 
+    currSim = parse2Hoc(filePath, cond)

@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import os
 import re
@@ -44,9 +46,9 @@ class IonPool():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading ion file : ", filename
+            print("Reading ion file : ", filename)
             lineArr = util.cleanupFileText(self.text)
-            
+
             i = 0
             while i< len(lineArr):
                 line = lineArr[i]
@@ -70,10 +72,10 @@ class IonPool():
 
         iType = lineArr[i][0]
         if iType == '1':
-            print "WARNING!! Ion pool concentration type 1 is not supported yet"
-            print "Exiting..."
+            print("WARNING!! Ion pool concentration type 1 is not supported yet")
+            print("Exiting...")
             sys.exit(1)
-            
+
         elif iType == '2':
             i_k1 = util.findNextFeature(i, lineArr, "K1")
             i_k2 = util.findNextFeature(i, lineArr, "K2")
@@ -108,13 +110,13 @@ class ConductanceByIon():
         read fBR  file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        print "FBR FIle", filename
+        print("FBR FIle", filename)
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading fBR file : ", filename
+            print("Reading fBR file : ", filename)
             lineArr = util.cleanupFileText(self.text)
-            
+
             i = 0
             while i< len(lineArr):
                 line = lineArr[i]
@@ -138,10 +140,10 @@ class ConductanceByIon():
 
         BRType = lineArr[i][0]
         if BRType == '1':
-            print "WARNING!! Ion pool concentration type 1 is not supported yet"
-            print "Exiting..."
+            print("WARNING!! Ion pool concentration type 1 is not supported yet")
+            print("Exiting...")
             sys.exit(1)
-            
+
         elif BRType == '2' or BRType == '3':
             BR_a = util.findNextFeature(i, lineArr, "a")
         elif BRType == '4':
@@ -149,7 +151,7 @@ class ConductanceByIon():
             BR_a = lineArr[i+1][0]
 
         return BRType, BR_a
-    
+
     # def extractBR(self, i, lineArr):
     #     """
     #     read and return parameters related to regulaion of conductances by ion
@@ -159,10 +161,10 @@ class ConductanceByIon():
 
     #     BRType = lineArr[i][0]
     #     if BRType in ['1', '4']:
-    #         print "WARNING!! Ion pool concentration type 1 or 4 not supported yet"
-    #         print "Exiting..."
+    #         print("WARNING!! Ion pool concentration type 1 or 4 not supported yet")
+    #         print("Exiting...")
     #         sys.exit(1)
-            
+
     #     else:
     #         BR_a = util.findNextFeature(i, lineArr, "a")
     #     return BRType, BR_a
@@ -174,9 +176,8 @@ class ConductanceByIon():
         """
         fBRType = lineArr[i][0]
         if fBRType == '3':
-            print "WARNING!! Modulation by regulator type 3 is not supported yet"
-            print "Exiting..."
+            print("WARNING!! Modulation by regulator type 3 is not supported yet")
+            print("Exiting...")
             sys.exit(1)
 
         return fBRType
-

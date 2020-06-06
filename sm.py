@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with SNNAP2NEURON.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import sys
 import os
 import re
@@ -36,7 +38,7 @@ class SMPool():
         self.tau = ''
 
         self.xCsmType = ''
-        
+
         self.readSMFile()
 
     def readSMFile(self):
@@ -47,9 +49,9 @@ class SMPool():
         with open(filename) as f:
             self.text = f.read()
 
-            print "Reading second messenger file : ", filename
+            print("Reading second messenger file : ", filename)
             lineArr = util.cleanupFileText(self.text)
-            
+
             i = 0
             while i< len(lineArr):
                 line = lineArr[i]
@@ -90,4 +92,3 @@ class ConductanceBySM():
         # self.fBRType = ''
         # self.BRType = ''
         # self.BR_a = ''
-        
