@@ -1,0 +1,56 @@
+NEURONS
+B4 ./B4/B4_ASW.neu green
+B8 ./B8/B8_ASW.neu Yellow
+B31 ./B31/B31.neu white
+B34 ./B34/B34_ASW.neu white
+B35 ./B35/B35.neu white
+B51 ./B51/B51_ASW.neu green
+B52rT ./B52/B52rT.neu red
+B63 ./B63/B63.neu white
+B64rT ./B64/B64_ASWrT.neu green
+Z ./Z/Z.neu white
+CONNECTIONS
+B4 B8 c1 inh 0 ./cs/B4_2_B8.cs N green
+B4 B31 c1 EXC 0 ./cs/B4_2_B31.cs N green
+B4 B51 c1 inh 0 ./cs/B4_2_B51.cs N green
+B4 B52rT c1 inh 0 ./cs/B4_2_B52.cs N green
+B4 B64rT c1 exc 0 ./cs/B4_2_B64.cs N green
+B34 B8 c1 inh 0 ./cs/B34_2_B8_i.cs N white
+B34 B8 c1 exc -1 ./cs/B34_2_B8_e.cs N white
+B34 B31 c1 exc 0 ./cs/B34_2_B31_ASW.cs N white
+B34 B63 c1 exc 0 ./cs/B34_2_B63.cs N white
+B34 B64rT c1 inh 0 ./cs/B34_2_B64.cs N pink
+B35 B4 c1 excf 0 ./cs/B35_2_B4_f.cs N pink
+B35 B4 c1 excs -1 ./cs/B35_2_B4_s.cs N pink
+B35 B31 c1 exc 0 ./cs/B35_2_B31.cs N white
+B35 B51 c1 inhf 0 ./cs/B35_2_B51_f.cs N pink
+B35 B51 c1 inhs -1 ./cs/B35_2_B51_s.cs N pink
+B35 B52rT c1 excf 0 ./cs/B35_2_B52_f.cs N pink
+B35 B52rT c1 excs -1 ./cs/B35_2_B52_s.cs N pink
+B51 B8 c1 exc 0 ./cs/B51_2_B8.cs N green
+B51 B52rT c1 inhs 0 ./cs/B51_2_B52_s.cs N green
+B51 B52rT c1 inhf -1 ./cs/B51_2_B52_f.cs N green
+B51 B64rT c1 exc 0 ./cs/B51_2_B64.cs N green
+B52rT Z c1 inh 0 ./cs/B52_2_Z.cs N red
+B52rT B4 c1 inh -1 ./cs/B52_2_B4.cs N red
+B52rT B8 c1 inh 0 ./cs/B52_2_B8.cs N red
+B52rT B35 c1 inh 1 ./cs/B52_2_B35.cs N pink
+B52rT B51 c1 inhf 1 ./cs/B52_2_B51_f.cs N red
+B52rT B51 c1 inhs -2 ./cs/B52_2_B51_s.cs N red
+B52rT B64rT c1 inh 0 ./cs/B52_2_B64.cs N red
+B63 B8 c1 inh 0 ./cs/B63_2_B8.cs N green
+B63 B31 c1 exc 0 ./cs/B63_2_B31.cs N white
+B63 B34 c1 exc -1 ./cs/B63_2_B34.cs N white
+B63 B64rT c1 exc 0 ./cs/B63_2_B64.cs N pink
+B63 Z c1 exc 0 ./cs/B63_2_Z.cs N pink
+B64rT B4 c1 exc -1 ./cs/B64_2_B4.cs N green
+B64rT B31 c1 inh 0 ./cs/B64_2_B31_ASW.cs N pink
+B64rT B34 c1 inh -1 ./cs/B64_2_B34.cs N pink
+B64rT B35 c1 inh 0 ./cs/B64_2_B35.cs N pink
+B64rT B52rT c1 inh -1 ./cs/B64_2_B52.cs N green
+B64rT B63 c1 inh -1 ./cs/B64_2_B63.cs N pink
+Z B64rT c1 exc 0 ./cs/Z_2_B64.cs N green
+B51 B4 e 0 -1 ./es/B51_B4.es N green
+B51 B64rT e 0 -1 ./es/B51_B64.es N green
+B31 B35 e 0 -1 ./es/B31_B35.es N white
+B31 B63 e 0 -1 ./es/B31_B63.es N white
