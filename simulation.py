@@ -68,7 +68,7 @@ class Simulation ():
         read simulation file
         """
         fileName = os.path.join(filePath,fileName)
-        with open(fileName) as f:
+        with open(fileName.lstrip('/')) as f:
             self.text = f.read()
 
             print("Reading simulaiton file : ", fileName)

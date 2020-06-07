@@ -46,7 +46,7 @@ class SMPool():
         read .sm file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        with open(filename) as f:
+        with open(filename.lstrip('/')) as f:
             self.text = f.read()
 
             print("Reading second messenger file : ", filename)

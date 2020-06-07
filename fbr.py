@@ -40,7 +40,7 @@ class FBR():
         """
         filename = os.path.join(self.filePath,self.fileName)
         print("FBR FIle", filename)
-        with open(filename) as f:
+        with open(filename.lstrip('/')) as f:
             self.text = f.read()
 
             print("Reading fBR file : ", filename)

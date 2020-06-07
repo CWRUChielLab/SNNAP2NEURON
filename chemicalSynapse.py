@@ -66,7 +66,7 @@ class ChemSynapse():
         read .Xt file
         """
         fileName = os.path.join(self.filePath,self.XtFileName)
-        with open(fileName) as f:
+        with open(fileName.lstrip('/')) as f:
             self.text = f.read()
 
             # extract useful lines from the the text
@@ -95,7 +95,7 @@ class ChemSynapse():
         read SNNAP time dependent activation function of chemical synapse
         """
         fileName = os.path.join(self.filePath,self.fAtFileName)
-        with open(fileName) as f:
+        with open(fileName.lstrip('/')) as f:
             self.text = f.read()
 
             # extract useful lines from the the text
@@ -131,7 +131,7 @@ class ChemSynapse():
         read SNNAP chemical synapse (.cs) file
         """
         fileName = os.path.join(self.filePath,self.fileName)
-        with open(fileName) as f:
+        with open(fileName.lstrip('/')) as f:
             self.text = f.read()
             print("Reading chemical synapse file : ", fileName)
 
