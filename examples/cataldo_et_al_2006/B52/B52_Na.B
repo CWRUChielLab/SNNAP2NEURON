@@ -15,22 +15,22 @@ B:		> 	Inactivation function (time constant method)	>
 >	1			>	B = ssB			(1)	>
 >				>					>
 >------------------------------->--------------------------------------->
-2			>	        ssB - B			>
--1	>IV<		>	dB/dt= ------------	(2)	>
+	2			>	        ssB - B			>
+	-1	>IV<		>	dB/dt= ------------	(2)	>
 				>	           tB			>
 >------------------------------->--------------------------------------->
 
 
 
 		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-ssB:		> 	Steady state value for activation		>
+ssB:		> 	Steady state value for activation		>	
 		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 >----------------------->------------------------------------------------------>
-1		>			1			       >
--49.0    >-49 h<	>	ssB = --------------------		(1)    >
-9.0	>9 s<	>		+-	     -+ p	  	       >
-1	>1 p<	>		|     (V-h)/s |			       >
+	1		>			1			       >
+     -49.0    >-49 h<	>	ssB = --------------------		(1)    >
+	9.0	>9 s<	>		+-	     -+ p	  	       >
+	1	>1 p<	>		|     (V-h)/s |			       >
 			>		|1 + e        |			       >
 			>		+-	     -+			       >
 			>						       >
@@ -45,7 +45,7 @@ ssB:		> 	Steady state value for activation		>
 
 
 		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-tB:		> 	Time constant for activation			>
+tB:		> 	Time constant for activation			>	
 		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 >----------------------->------------------------------------------------------>
@@ -53,12 +53,12 @@ tB:		> 	Time constant for activation			>
 >	1		> tB = tx					    (1)>
 >	xxxx.xx	>tx<	>						       >
 >----------------------->------------------------------------------------------>
-2		>	  tx -tn				       >
-0.02	     >.02 tx<	> tB = -------------------- + tn	            (2)>
-0.0048  >.0048 tn<	>	+-	     -+ p			       >
--36.0      >-36 h<	>	|     (V-h)/s |				       >
-3.5	      >3.5 s<	>	|1 + e        |				       >
-1	        >1 p<	>	+-	     -+				       >
+	2		>	  tx -tn				       >
+   0.02	     >.02 tx<	> tB = -------------------- + tn	            (2)>
+   0.0048  >.0048 tn<	>	+-	     -+ p			       >
+   -36.0      >-36 h<	>	|     (V-h)/s |				       >
+   3.5	      >3.5 s<	>	|1 + e        |				       >
+   1	        >1 p<	>	+-	     -+				       >
 			>						       >
 >----------------------->------------------------------------------------------>
 >	3		>	 		tx -tn			       >
@@ -99,8 +99,7 @@ tB:		> 	Time constant for activation			>
 > -------
 > ssB is the steady-stae value of activation and tB is its time constant.
 > h's are half parameters, s's are shape parameters and p's are values of the 
-exponents.
+  exponents.
 > Bn is the minimal value of activation.
 > tx is the maximal value of the time constant and tn is its minimal value.
 > rtn = tn/tx
-

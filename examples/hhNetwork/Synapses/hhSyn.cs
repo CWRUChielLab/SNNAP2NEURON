@@ -11,7 +11,7 @@ Ics:		> 	Current due to a chemical synapse		>
 >------------------------------->--------------------------------------->
 				>	   -				>
 	1			>	G= g x fAt 		(1)	>
-	Synapses/hhSyn.fAt	>fAt<	>					>
+	/Synapses/hhSyn.fAt	>fAt<	>					>
 	0.7		>.15 g<	>					>
 	0.0		>0 E<	>	Ics= G x (V -E)			>
 				>					>

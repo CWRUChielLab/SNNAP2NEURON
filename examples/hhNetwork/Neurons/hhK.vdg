@@ -37,7 +37,7 @@ Ivd:		> 	Current due to a voltage-dependent conductance	>
 >------------------------------->--------------------------------------->
 				>		p			>
 	4			>	Ivd= g x m 		(4)	>
-	Neurons/hhK.m		>m<	>					>
+	/Neurons/hhK.m		>m<	>					>
 	36.0		>36 g<	>					>
 	4.0		>4 P<	>	Ivd = G x (V -E)		>
 	-72.0		>-72 E<	>					>

@@ -5,57 +5,56 @@
 	>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 >----------------------->------------------------------->
-LOGICAL_NAME:		> 	Name of Network		>
+  LOGICAL_NAME:		> 	Name of Network		>
 >.......................>...............................>
-buccal_cpg	> The name of the network	>
+	buccal_cpg	> The name of the network	>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-TIMING:		> Timing information in seconds	>
+  TIMING:		> Timing information in seconds	>
 >.......................>...............................>
-0.0		> What value to assign to the	>
+	0.0		> What value to assign to the	>
 			> variable "time" at time=0	>
 >.......................>...............................>
-60		> When to stop the simulation	>
+	60		> When to stop the simulation	>
 >.......................>...............................>
-0.000045	> 45 usec Step-size (h)		>
+	0.000045	> 45 usec Step-size (h)		>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-ON_LINE_GRAPH:	> 	On-line graph		>
+  ON_LINE_GRAPH:	> 	On-line graph		>
 >.......................>...............................>
-1		> 1 for yes, 0 for no		>
+	1		> 1 for yes, 0 for no		>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-STORE_RESULTS:	> 	Store results		>
+  STORE_RESULTS:	> 	Store results		>
 >.......................>...............................>
-0		> 1 for yes, 0 for no		>
+	0		> 1 for yes, 0 for no		>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-INT_METHOD:		> 	Integration method	>
+  INT_METHOD:		> 	Integration method	>
 >.......................>...............................>
-1		> 1 for Euler method		>
+	1		> 1 for Euler method		>
 			> 2 for RK			>
 			> 3 for RKQC			>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-NETWORK:		> structure of network		>
+  NETWORK:		> structure of network		>
 >.......................>...............................>
-./ntw/network_ASW.ntw	> the name of the file 		>
+  /ntw/network_ASW.ntw	> the name of the file 		>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-OUTPUT_SETUP:		> list of variables for output	>
+  OUTPUT_SETUP:		> list of variables for output	>
 >.......................>...............................>
-./ous/rBMP.ous	> the name of the file 		>
+  /ous/rBMP.ous	> the name of the file 		>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-TREATMENTS:		> External treatments		>
+  TREATMENTS:		> External treatments		>
 >.......................>...............................>
-./trt/rBMP.trt	> the name of the file 		>
+  /trt/rBMP.trt	> the name of the file 		>
 >----------------------->------------------------------->
-

@@ -6,328 +6,327 @@
 
 
 >----------------------->------------------------------->
-LIST_NEURONS:		>	List of Neurons		>
+  LIST_NEURONS:		>	List of Neurons		>
 >.......................>...............................>
-B4		>	Neuron's name		>
-./B4/B4_ASW.neu	>	File Name		>
-green		>	Color Name		>
+	B4		>	Neuron's name		>
+   /B4/B4_ASW.neu	>	File Name		>
+	green		>	Color Name		>
 >.......................>...............................>
-B8		>	Neuron's name		>
-./B8/B8_ASW.neu	>	File Name		>
-Yellow		>	Color Name		>
+	B8		>	Neuron's name		>
+   /B8/B8_ASW.neu	>	File Name		>
+	Yellow		>	Color Name		>
 >.......................>...............................>
-B31		>	Neuron's name		>
-./B31/B31.neu	>	File Name		>
-white		>	Color Name		>
+	B31		>	Neuron's name		>
+    /B31/B31.neu	>	File Name		>
+	white		>	Color Name		>
 >.......................>...............................>
-B34		>	Neuron's name		>
-./B34/B34_ASW.neu	>	File Name		>
-white		>	Color Name		>
+	B34		>	Neuron's name		>
+   /B34/B34_ASW.neu	>	File Name		>
+	white		>	Color Name		>
 >.......................>...............................>
-B35		>	Neuron's name		>
-./B35/B35.neu		>	File Name		>
-white		>	Color Name		>
+	B35		>	Neuron's name		>
+   /B35/B35.neu		>	File Name		>
+	white		>	Color Name		>
 >.......................>...............................>
-B51		>	Neuron's name		>
-./B51/B51_ASW.neu	>	File Name		>
+	B51		>	Neuron's name		>
+    /B51/B51_ASW.neu	>	File Name		>
 >    /B51/B51_CR.neu	>	File Name		>
-green		>	Color Name		>
+	green		>	Color Name		>
 >.......................>...............................>
-B52rT		>	Neuron's name		>
-./B52/B52rT.neu		>	File Name		>
-red		>	Color Name		>
+	B52rT		>	Neuron's name		>
+   /B52/B52rT.neu		>	File Name		>
+	red		>	Color Name		>
 >.......................>...............................>
-B63		>	Neuron's name		>
-./B63/B63.neu	>	File Name		>
-white		>	Color Name		>
+	B63		>	Neuron's name		>
+    /B63/B63.neu	>	File Name		>
+	white		>	Color Name		>
 >.......................>...............................>
-B64rT		>	Neuron's name		>
-./B64/B64_ASWrT.neu	>	File Name		>
-green		>	Color Name		>
+	B64rT		>	Neuron's name		>
+   /B64/B64_ASWrT.neu	>	File Name		>
+	green		>	Color Name		>
 >.......................>...............................>
-Z		>	Neuron's name		>
-./Z/Z.neu		>	File Name		>
-white		>	Color Name		>
+	Z		>	Neuron's name		>
+   /Z/Z.neu		>	File Name		>
+	white		>	Color Name		>
 >.......................>...............................>
-END		>				>
+	END		>				>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-CHEMSYN:		>	Chemical synapse	>
+  CHEMSYN:		>	Chemical synapse	>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B4		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B4_2_B8.cs	> File Name			>
-green		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B4		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B4_2_B8.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B31		> Name of postsynaptic neuron	>
-B4		> Name of presynaptic neuron	>
-EXC		> type of synapse		>
-./cs/B4_2_B31.cs	> File Name			>
-green		> Color Name			>
+	B31		> Name of postsynaptic neuron	>
+	B4		> Name of presynaptic neuron	>
+	EXC		> type of synapse		>
+   /cs/B4_2_B31.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B51		> Name of postsynaptic neuron	>
-B4		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B4_2_B51.cs	> File Name			>
-green		> Color Name			>
+	B51		> Name of postsynaptic neuron	>
+	B4		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B4_2_B51.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B4		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B4_2_B52.cs	> File Name			>
-green		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B4		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B4_2_B52.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B4		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B4_2_B64.cs	> File Name			>
-green		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B4		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B4_2_B64.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B34		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B34_2_B8_i.cs	> File Name			>
-white		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B34		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B34_2_B8_i.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B34		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B34_2_B8_e.cs	> File Name			>
-white		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B34		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B34_2_B8_e.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B31		> Name of postsynaptic neuron	>
-B34		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B34_2_B31_ASW.cs	> File Name			>
-white		> Color Name			>
+	B31		> Name of postsynaptic neuron	>
+	B34		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B34_2_B31_ASW.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B63		> Name of postsynaptic neuron	>
-B34		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B34_2_B63.cs	> File Name			>
-white		> Color Name			>
+	B63		> Name of postsynaptic neuron	>
+	B34		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B34_2_B63.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B34		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B34_2_B64.cs	> File Name			>
-pink		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B34		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B34_2_B64.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B4		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-excf		> type of synapse		>
-./cs/B35_2_B4_f.cs	> File Name			>
-pink		> Color Name			>
+	B4		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	excf		> type of synapse		>
+   /cs/B35_2_B4_f.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B4		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-excs		> type of synapse		>
-./cs/B35_2_B4_s.cs	> File Name			>
-pink		> Color Name			>
+	B4		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	excs		> type of synapse		>
+   /cs/B35_2_B4_s.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B31		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B35_2_B31.cs	> File Name			>
-white		> Color Name			>
+	B31		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B35_2_B31.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B51		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-inhf		> type of synapse		>
-./cs/B35_2_B51_f.cs	> File Name			>
-pink		> Color Name			>
+	B51		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	inhf		> type of synapse		>
+   /cs/B35_2_B51_f.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B51		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-inhs		> type of synapse		>
-./cs/B35_2_B51_s.cs	> File Name			>
-pink		> Color Name			>
+	B51		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	inhs		> type of synapse		>
+   /cs/B35_2_B51_s.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-excf		> type of synapse		>
-./cs/B35_2_B52_f.cs	> File Name			>
-pink		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	excf		> type of synapse		>
+   /cs/B35_2_B52_f.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B35		> Name of presynaptic neuron	>
-excs		> type of synapse		>
-./cs/B35_2_B52_s.cs	> File Name			>
-pink		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B35		> Name of presynaptic neuron	>
+	excs		> type of synapse		>
+   /cs/B35_2_B52_s.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B51_2_B8.cs	> File Name			>
-green		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B51_2_B8.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-inhs		> type of synapse		>
-./cs/B51_2_B52_s.cs	> File Name			>
-green		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+	inhs		> type of synapse		>
+   /cs/B51_2_B52_s.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-inhf		> type of synapse		>
-./cs/B51_2_B52_f.cs	> File Name			>
-green		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+	inhf		> type of synapse		>
+   /cs/B51_2_B52_f.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B51_2_B64.cs	> File Name			>
-green		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B51_2_B64.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-Z		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B52_2_Z.cs	> File Name			>
-red		> Color Name			>
+	Z		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B52_2_Z.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B4		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B52_2_B4.cs	> File Name			>
-red		> Color Name			>
+	B4		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B52_2_B4.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B52_2_B8.cs	> File Name			>
-red		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B52_2_B8.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B35		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B52_2_B35.cs	> File Name			>
-pink		> Color Name			>
+	B35		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B52_2_B35.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B51		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inhf		> type of synapse		>
-./cs/B52_2_B51_f.cs	> File Name			>
-red		> Color Name			>
+	B51		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inhf		> type of synapse		>
+   /cs/B52_2_B51_f.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B51		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inhs		> type of synapse		>
-./cs/B52_2_B51_s.cs	> File Name			>
-red		> Color Name			>
+	B51		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inhs		> type of synapse		>
+   /cs/B52_2_B51_s.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B52rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B52_2_B64.cs	> File Name			>
-red		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B52rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B52_2_B64.cs	> File Name			>
+	red		> Color Name			>
 >.......................>...............................>
-B8		> Name of postsynaptic neuron	>
-B63		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B63_2_B8.cs	> File Name			>
-green		> Color Name			>
+	B8		> Name of postsynaptic neuron	>
+	B63		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B63_2_B8.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B31		> Name of postsynaptic neuron	>
-B63		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B63_2_B31.cs	> File Name			>
-white		> Color Name			>
+	B31		> Name of postsynaptic neuron	>
+	B63		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B63_2_B31.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B34		> Name of postsynaptic neuron	>
-B63		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B63_2_B34.cs	> File Name			>
-white		> Color Name			>
+	B34		> Name of postsynaptic neuron	>
+	B63		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B63_2_B34.cs	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B63		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B63_2_B64.cs	> File Name			>
-pink		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B63		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B63_2_B64.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-Z		> Name of postsynaptic neuron	>
-B63		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B63_2_Z.cs	> File Name			>
-pink		> Color Name			>
+	Z		> Name of postsynaptic neuron	>
+	B63		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B63_2_Z.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B4		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/B64_2_B4.cs	> File Name			>
-green		> Color Name			>
+	B4		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/B64_2_B4.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B31		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B64_2_B31_ASW.cs	> File Name			>
-pink		> Color Name			>
+	B31		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B64_2_B31_ASW.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B34		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B64_2_B34.cs	> File Name			>
-pink		> Color Name			>
+	B34		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B64_2_B34.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B35		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B64_2_B35.cs	> File Name			>
-pink		> Color Name			>
+	B35		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B64_2_B35.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B52rT		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B64_2_B52.cs	> File Name			>
-green		> Color Name			>
+	B52rT		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B64_2_B52.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B63		> Name of postsynaptic neuron	>
-B64rT		> Name of presynaptic neuron	>
-inh		> type of synapse		>
-./cs/B64_2_B63.cs	> File Name			>
-pink		> Color Name			>
+	B63		> Name of postsynaptic neuron	>
+	B64rT		> Name of presynaptic neuron	>
+	inh		> type of synapse		>
+   /cs/B64_2_B63.cs	> File Name			>
+	pink		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-Z		> Name of presynaptic neuron	>
-exc		> type of synapse		>
-./cs/Z_2_B64.cs	> File Name			>
-green		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	Z		> Name of presynaptic neuron	>
+	exc		> type of synapse		>
+   /cs/Z_2_B64.cs	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-END		>				>
+	END		>				>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-ELCTRCPL:		>	Electrical coupling	>
+  ELCTRCPL:		>	Electrical coupling	>
 >.......................>...............................>
-B4		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-./es/B51_B4.es	> File Name			>
-green		> Color Name			>
+	B4		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+   /es/B51_B4.es	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B64rT		> Name of postsynaptic neuron	>
-B51		> Name of presynaptic neuron	>
-./es/B51_B64.es	> File Name			>
-green		> Color Name			>
+	B64rT		> Name of postsynaptic neuron	>
+	B51		> Name of presynaptic neuron	>
+   /es/B51_B64.es	> File Name			>
+	green		> Color Name			>
 >.......................>...............................>
-B35		> Name of postsynaptic neuron	>
-B31		> Name of presynaptic neuron	>
-./es/B31_B35.es	> File Name			>
-white		> Color Name			>
+	B35		> Name of postsynaptic neuron	>
+	B31		> Name of presynaptic neuron	>
+   /es/B31_B35.es	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-B63		> Name of postsynaptic neuron	>
-B31		> Name of presynaptic neuron	>
-./es/B31_B63.es	> File Name			>
-white		> Color Name			>
+	B63		> Name of postsynaptic neuron	>
+	B31		> Name of presynaptic neuron	>
+   /es/B31_B63.es	> File Name			>
+	white		> Color Name			>
 >.......................>...............................>
-END		>				>
+	END		>				>
 >----------------------->------------------------------->
 
 >----------------------->------------------------------->
-MODULSYN:		>	Modulatory synapse	>
+  MODULSYN:		>	Modulatory synapse	>
 >.......................>...............................>
-END		>				>
+	END		>				>
 >----------------------->------------------------------->
-
 

@@ -48,12 +48,11 @@ Ivd:		> 	Current due to a voltage-dependent conductance	>
 >				>   (fBr is modulation function)	>
 >------------------------------->--------------------------------------->
 				>					>
-5			>   Ivd = (G+R) x (V -E) x fBr	(5)	>
+	5			>   Ivd = (G+R) x (V -E) x fBr	(5)	>
 >   R_leak.R		 >R<	>   random fluctuations			>
-0.1   >g uS or S/cm2<	>   use S/cm2 if using area		>
--60 	      >E mV<	>   (fBr is modulation function)	>
+   0.1   >g uS or S/cm2<	>   use S/cm2 if using area		>
+   -60 	      >E mV<	>   (fBr is modulation function)	>
 				>					>
 >------------------------------->--------------------------------------->
 
 END
-
