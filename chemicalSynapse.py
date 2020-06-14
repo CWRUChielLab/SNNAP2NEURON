@@ -86,8 +86,8 @@ class ChemSynapse():
         """
         since PSM has only one option
         """
-        self.PSM_ud = self.findNextFeature(i+1, lineArr, feature="ud")
-        self.PSM_ur = self.findNextFeature(i+1, lineArr, feature="ur")
+        self.PSM_ud = util.findNextFeature(i+1, lineArr, feature="ud")
+        self.PSM_ur = util.findNextFeature(i+1, lineArr, feature="ur")
 
 
     def readfATFile(self):
@@ -108,10 +108,10 @@ class ChemSynapse():
                 if re.search("^fAt", line[0]) is not None:
                     self.fATType = lineArr[i+1][0]
                     if self.fATType in ['3', '5', '6']:
-                        self.fAT_a = self.findNextFeature(i+1, lineArr, feature="a")
-                        #self.fAT_b = self.findNextFeature(i+1, lineArr, feature="b")
+                        self.fAT_a = util.findNextFeature(i+1, lineArr, feature="a")
+                        #self.fAT_b = util.findNextFeature(i+1, lineArr, feature="b")
                     if self.fATType in ['3', '4', '5']:
-                        self.fAT_b = self.findNextFeature(i+1, lineArr, feature="b")
+                        self.fAT_b = util.findNextFeature(i+1, lineArr, feature="b")
                 if re.search("^At", line[0]) is not None:
                     self.extractAt(i, lineArr)
 
@@ -152,20 +152,9 @@ class ChemSynapse():
     def extractCS(self, i, lineArr):
         self.iCSType = lineArr[i][0]
         if self.iCSType == '1':
-            self.fAtFileName = self.findNextFeature(i, lineArr, feature="fAt")
-            self.R = self.findNextFeature(i, lineArr, feature="R")
-            self.g = self.findNextFeature(i, lineArr, feature="g")
-            self.E = self.findNextFeature(i, lineArr, feature="E")
+            self.fAtFileName = util.findNextFeature(i, lineArr, feature="fAt")
+            self.R = util.findNextFeature(i, lineArr, feature="R")
+            self.g = util.findNextFeature(i, lineArr, feature="g")
+            self.E = util.findNextFeature(i, lineArr, feature="E")
         else :
             print("WARNING: Only chemical synapses of type 1(Ics: 1) are supported!!!")
-
-    def findNextFeature(self, i, lineArr, feature=""):
-        if feature == "":
-            return None
-
-        j = i+1
-        if j >= len(lineArr):
-            return None
-        while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
-            j = j+1
-        return lineArr[j][0]

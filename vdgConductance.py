@@ -171,7 +171,7 @@ class VDConductance():
         or inactivation (tB from .B files)
         """
         tConstType = lineArr[i][0]
-        tx = self.findNextFeature(i, lineArr, "tx")
+        tx = util.findNextFeature(i, lineArr, "tx")
         tn = ""
         h1 = ""
         h2 = ""
@@ -180,21 +180,21 @@ class VDConductance():
         p1 = ""
         p2 = ""
         if tConstType in ['2']:
-            tn = self.findNextFeature(i, lineArr, "tn")
-            h1 = self.findNextFeature(i, lineArr, "h")
-            s1 = self.findNextFeature(i, lineArr, "s")
-            p1 = self.findNextFeature(i, lineArr, "p")
+            tn = util.findNextFeature(i, lineArr, "tn")
+            h1 = util.findNextFeature(i, lineArr, "h")
+            s1 = util.findNextFeature(i, lineArr, "s")
+            p1 = util.findNextFeature(i, lineArr, "p")
         elif tConstType in ['3', '6']:
 
-            h1 = self.findNextFeature(i, lineArr, "h1")
-            s1 = self.findNextFeature(i, lineArr, "s1")
+            h1 = util.findNextFeature(i, lineArr, "h1")
+            s1 = util.findNextFeature(i, lineArr, "s1")
 
-            h2 = self.findNextFeature(i, lineArr, "h2")
-            s2 = self.findNextFeature(i, lineArr, "s2")
+            h2 = util.findNextFeature(i, lineArr, "h2")
+            s2 = util.findNextFeature(i, lineArr, "s2")
             if tConstType in ['3']:
-                tn = self.findNextFeature(i, lineArr, "tn")
-                p1 = self.findNextFeature(i, lineArr, "p1")
-                p2 = self.findNextFeature(i, lineArr, "p2")
+                tn = util.findNextFeature(i, lineArr, "tn")
+                p1 = util.findNextFeature(i, lineArr, "p1")
+                p2 = util.findNextFeature(i, lineArr, "p2")
         elif tConstType != '1':
             print("WARNING: Time constant forms other than 1, 2, 3 or 6 are not supported yet!!!")
         return tConstType, tx, tn, h1, h2, s1, s2, p1, p2
@@ -212,13 +212,13 @@ class VDConductance():
 
         ssType = lineArr[i][0]
         if ssType == '2' and isActivation == 1:
-            ss_Xn= self.findNextFeature(i, lineArr, "An")
+            ss_Xn= util.findNextFeature(i, lineArr, "An")
         if ssType == '2' and isActivation == 0:
-            ss_Xn= self.findNextFeature(i, lineArr, "Bn")
+            ss_Xn= util.findNextFeature(i, lineArr, "Bn")
 
-        ss_h = self.findNextFeature(i, lineArr, "h")
-        ss_s = self.findNextFeature(i, lineArr, "s")
-        ss_p = self.findNextFeature(i, lineArr, "p")
+        ss_h = util.findNextFeature(i, lineArr, "h")
+        ss_s = util.findNextFeature(i, lineArr, "s")
+        ss_p = util.findNextFeature(i, lineArr, "p")
         return ssType, ss_h, ss_s, ss_p, ss_Xn
 
     def extractActivation_timeConst(self, i, lineArr):
@@ -230,7 +230,7 @@ class VDConductance():
         iv = ""
         funcType = lineArr[i][0]
         if funcType == "2":
-            iv = self.findNextFeature(i, lineArr, "IV")
+            iv = util.findNextFeature(i, lineArr, "IV")
 
         return funcType, iv
 
@@ -285,9 +285,9 @@ class VDConductance():
         l = ""
         funcType = lineArr[i][0]
         if funcType == "2" or funcType == "3":
-            iv = self.findNextFeature(i, lineArr, "IV")
+            iv = util.findNextFeature(i, lineArr, "IV")
         if funcType == "3":
-            l = self.findNextFeature(i, lineArr, "L")
+            l = util.findNextFeature(i, lineArr, "L")
 
         return funcType, iv, l
 
@@ -297,16 +297,16 @@ class VDConductance():
         am, and bm from .m files and ah, and bh from .h files
         """
         parmType = lineArr[i][0]
-        rp_A = self.findNextFeature(i, lineArr, "A")
+        rp_A = util.findNextFeature(i, lineArr, "A")
         rp_B = ""
         rp_C = ""
         rp_D = ""
         if parmType != '1':
-            rp_B = self.findNextFeature(i, lineArr, "B")
+            rp_B = util.findNextFeature(i, lineArr, "B")
             if parmType != '4' and parmType != '8' and parmType != '9':
-                rp_C = self.findNextFeature(i, lineArr, "C")
+                rp_C = util.findNextFeature(i, lineArr, "C")
                 if parmType != '5' and parmType != '6' and parmType != '7':
-                    rp_D = self.findNextFeature(i, lineArr, "D")
+                    rp_D = util.findNextFeature(i, lineArr, "D")
         return (parmType, rp_A, rp_B, rp_C,rp_D)
 
     def readVDGFile(self):
@@ -331,28 +331,17 @@ class VDConductance():
         """
         self.ivdType = lineArr[i][0]
         if self.ivdType == "1" or self.ivdType == "3":
-            self.A = self.findNextFeature(i, lineArr, "A")
-            self.P = self.findNextFeature(i, lineArr, "P")
+            self.A = util.findNextFeature(i, lineArr, "A")
+            self.P = util.findNextFeature(i, lineArr, "P")
 
         if self.ivdType == "2" or self.ivdType == "4":
-            self.m = self.findNextFeature(i, lineArr, "m")
-            self.P = self.findNextFeature(i, lineArr, "P")
+            self.m = util.findNextFeature(i, lineArr, "m")
+            self.P = util.findNextFeature(i, lineArr, "P")
 
         if self.ivdType == "1":
-            self.B = self.findNextFeature(i, lineArr, "B")
+            self.B = util.findNextFeature(i, lineArr, "B")
         if self.ivdType == "2":
-            self.h = self.findNextFeature(i, lineArr, "h")
+            self.h = util.findNextFeature(i, lineArr, "h")
 
-        self.g = self.findNextFeature(i, lineArr, "g")
-        self.E = self.findNextFeature(i, lineArr, "E")
-
-    def findNextFeature(self, i, lineArr, feature=""):
-        if feature == "":
-            return None
-
-        j = i+1
-        if j >= len(lineArr):
-            return None
-        while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
-            j = j+1
-        return lineArr[j][0]
+        self.g = util.findNextFeature(i, lineArr, "g")
+        self.E = util.findNextFeature(i, lineArr, "E")
