@@ -20,9 +20,10 @@ from __future__ import print_function
 
 import re
 import os
-import util
-from network import Network as ntw
-from treatment import Treatment as trt
+
+from . import util
+from .network import Network as ntw
+from .treatment import Treatment as trt
 
 class Simulation ():
     def __init__(self, filePath):

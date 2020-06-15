@@ -21,7 +21,8 @@ from __future__ import print_function
 import sys
 import re
 import os
-import util
+
+from . import util
 
 class CurrentInj():
     def __init__(self, nName, start, stop, magnitude):

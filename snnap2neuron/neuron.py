@@ -20,10 +20,11 @@ from __future__ import print_function
 
 import re
 import os
-import util
-from  vdgConductance import VDConductance
-from ion import IonPool, Current2Ion, ConductanceByIon
-from sm import SMPool, ConductanceBySM
+
+from . import util
+from .vdgConductance import VDConductance
+from .ion import IonPool, Current2Ion, ConductanceByIon
+from .sm import SMPool, ConductanceBySM
 
 class Neuron():
     def __init__(self, name, fileName, color, filePath):

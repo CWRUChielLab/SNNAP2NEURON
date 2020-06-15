@@ -21,8 +21,9 @@ from __future__ import print_function
 import sys
 import os
 import re
-import util
-from fbr import FBR
+
+from . import util
+from .fbr import FBR
 
 class SMPool():
     """

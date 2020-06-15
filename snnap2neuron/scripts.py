@@ -23,9 +23,9 @@ import re
 import os
 import argparse
 
-from simulation import Simulation as sim
-from nrnModelPoint import NRNModelPoint
-from nrnModelDist import NRNModelDist
+from .simulation import Simulation as sim
+from .nrnModelPoint import NRNModelPoint
+from .nrnModelDist import NRNModelDist
 
 def parse2Hoc(filename, cond):
     # create simulation object.
@@ -41,9 +41,13 @@ def parse2Hoc(filename, cond):
 def printSim(sim):
     pass
 
+def main():
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    description = """
+    An automated translation tool for converting SNNAP models into NEURON models
+    """
+
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("-i", "--input", help="path to SNNAP .smu file")
     parser.add_argument("-c", "--cond", choices=['p', 'd'], default='p',
                         help="representation of conductances (point 'p', or distributed 'd')")
@@ -82,3 +86,6 @@ if __name__ == "__main__":
     os.chdir(simFilePath)
 
     currSim = parse2Hoc(simFileName, cond)
+
+if __name__ == "__main__":
+    main()

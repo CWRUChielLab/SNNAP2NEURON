@@ -21,7 +21,8 @@ from __future__ import print_function
 import sys
 import os
 import re
-import util
+
+from . import util
 
 class IonPool():
     """

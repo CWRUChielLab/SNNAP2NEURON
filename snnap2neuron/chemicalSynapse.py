@@ -20,7 +20,8 @@ from __future__ import print_function
 
 import re
 import os
-import util
+
+from . import util
 
 class ChemSynapse():
     def __init__(self, postSyn, preSyn, synType, fileName, color, filePath):

@@ -20,9 +20,10 @@ from __future__ import print_function
 
 import re
 import os
-import util
-from neuron import Neuron
-from chemicalSynapse import ChemSynapse
+
+from . import util
+from .neuron import Neuron
+from .chemicalSynapse import ChemSynapse
 
 class ElecSynapse():
     def __init__(self, postSyn, preSyn, fileName, color, filePath):
