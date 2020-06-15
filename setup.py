@@ -16,7 +16,7 @@ setup(
     keywords = ['neuroscience', 'modeling', 'model', 'SNNAP', 'NEURON'],
     # author = 'Jeffrey Gill',
     # author_email = 'jeffrey.p.gill@gmail.com',
-    # license = 'MIT',
+    license = 'GPLv3',
     url = 'https://github.com/CWRUChielLab/SNNAP2NEURON',
     project_urls = {
         'Source code': 'https://github.com/CWRUChielLab/SNNAP2NEURON',
@@ -28,7 +28,7 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering',
-        # 'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent',
     ],
 )
