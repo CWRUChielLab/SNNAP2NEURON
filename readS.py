@@ -68,7 +68,13 @@ if __name__ == "__main__":
 
     splitedFilePath = filePath.split(os.sep)
 
-    simFilePath = splitedFilePath[:-1]
-    simFileName = splitedFilePath[len(splitedFilePath)-1]
+    simFilePath = os.sep.join(splitedFilePath[:-1])
+    if not simFilePath:
+        simFilePath = '.'
+    simFileName = splitedFilePath[-1]
 
-    currSim = parse2Hoc(filePath, cond)
+    # file paths given within SNNAP files are always specified relative to the
+    # SMU file, so change directory now so all files can be located later
+    os.chdir(simFilePath)
+
+    currSim = parse2Hoc(simFileName, cond)

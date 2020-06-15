@@ -52,7 +52,7 @@ class Simulation ():
         self.simFilePath = os.sep.join(splitedFilePath[:-1])
         if not self.simFilePath:
             self.simFilePath = '.'
-        self.simFileName = splitedFilePath[len(splitedFilePath)-1]
+        self.simFileName = splitedFilePath[-1]
 
         # read simulation(.smu) file
         self.readSimFile(self.simFilePath, self.simFileName)
