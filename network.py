@@ -115,9 +115,9 @@ class Network():
         while lineArr[i][0] != "END":
             if re.search("postsynaptic", lineArr[i][1]) is not None:
                 postSyn = lineArr[i][0]
-                preSyn = self.findNextFeature(i, lineArr, feature="presynaptic")
-                elecSynapseFilename = self.findNextFeature(i, lineArr, feature="File Name")
-                elecSynapseColor = self.findNextFeature(i, lineArr, feature="Color")
+                preSyn = util.findNextFeature(i, lineArr, feature="presynaptic")
+                elecSynapseFilename = util.findNextFeature(i, lineArr, feature="File Name")
+                elecSynapseColor = util.findNextFeature(i, lineArr, feature="Color")
                 self.elecSyns.append(ElecSynapse(postSyn, preSyn, elecSynapseFilename, elecSynapseColor, self.filePath))
             i = i+1
         print("Found", len(self.elecSyns), "electrical synapses.")
@@ -128,25 +128,14 @@ class Network():
         while lineArr[i][0] != "END":
             if re.search("postsynaptic", lineArr[i][1]) is not None:
                 postSyn = lineArr[i][0]
-                preSyn = self.findNextFeature(i, lineArr, feature="presynaptic")
-                chemSynapseType = self.findNextFeature(i, lineArr, feature="type")
-                chemSynapseFilename = self.findNextFeature(i, lineArr, feature="File Name")
-                chemSynapseColor = self.findNextFeature(i, lineArr, feature="Color")
+                preSyn = util.findNextFeature(i, lineArr, feature="presynaptic")
+                chemSynapseType = util.findNextFeature(i, lineArr, feature="type")
+                chemSynapseFilename = util.findNextFeature(i, lineArr, feature="File Name")
+                chemSynapseColor = util.findNextFeature(i, lineArr, feature="Color")
                 self.chemSyns.append(ChemSynapse(postSyn, preSyn, chemSynapseType, chemSynapseFilename, chemSynapseColor, self.filePath))
             i = i+1
         print("Found", len(self.chemSyns), "chemical synapses.")
         return i+1
-
-    def findNextFeature(self, i, lineArr, feature=""):
-        if feature == "":
-            return None
-        j = i+1
-        if j >= len(lineArr):
-            return None
-        while len(lineArr[j]) > 1 and re.search(feature, lineArr[j][1]) is None:
-            #while re.search(feature, lineArr[j][1]) is None:
-            j = j+1
-        return lineArr[j][0]
 
     def extractNeurons(self, i, lineArr):
         """
@@ -157,8 +146,8 @@ class Network():
         while (lineArr[i][0] != "END"):
             if lineArr[i][1] == "Neuron's name":
                 nName = lineArr[i][0]
-                nFilename = self.findNextFeature(i, lineArr, feature="File Name")
-                nColor = self.findNextFeature(i, lineArr, feature="Color")
+                nFilename = util.findNextFeature(i, lineArr, feature="File Name")
+                nColor = util.findNextFeature(i, lineArr, feature="Color")
                 self.neurons[nName] = Neuron(nName, nFilename, nColor, self.filePath)
 
             i = i+1
