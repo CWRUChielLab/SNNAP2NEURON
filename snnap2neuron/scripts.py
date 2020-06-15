@@ -22,29 +22,74 @@ import sys
 import re
 import os
 import argparse
+from contextlib import contextmanager
 
 from .simulation import Simulation as sim
 from .nrnModelPoint import NRNModelPoint
 from .nrnModelDist import NRNModelDist
 
-def parse2Hoc(filename, cond):
-    # create simulation object.
-    snnapSim = sim(filename)
 
-    # write model in NEURON
-    if cond == 'p':
-        print("Conductances will be represented as point mechanisms")
-        nrnModel = NRNModelPoint(snnapSim)
-    elif cond == 'd':
-        print("Conductances will be represented as distributed mechanisms")
-        nrnModel = NRNModelDist(snnapSim)
-    else:
+@contextmanager
+def cd(newdir):
+    """
+    A context manager for temporarily changing directory
+    """
+    prevdir = os.getcwd()
+    if newdir:
+        os.chdir(os.path.expanduser(newdir))
+    try:
+        yield
+    finally:
+        os.chdir(prevdir)
+
+
+def snnap2neuron(filePath, cond='p'):
+    """
+    Run the SNNAP-to-NEURON model translation tool
+
+    Parameters
+    ----------
+
+    filePath : string
+        Path to SNNAP .smu file.
+
+    cond : {'p', 'd'}
+        Method for representing conductances (point or distributed).
+        Default: 'p'
+
+    Returns
+    -------
+    (snnapSim, nrnModel)
+
+    """
+
+    if not os.path.isfile(filePath):
+        print('error: file does not exist: ' + str(filePath))
+        return None, None
+
+    if cond not in ['p', 'd']:
         print("error: bad conductance mode: " + str(cond))
-        return None
-    return snnapSim
+        return None, None
 
-def printSim(sim):
-    pass
+    simFilePath, simFileName = os.path.split(filePath)
+
+    # file paths given within SNNAP files are always specified relative to the
+    # SMU file, so change directory now so all files can be located later
+    with cd(simFilePath):
+
+        # create simulation object.
+        snnapSim = sim(simFileName)
+
+        # write model in NEURON
+        if cond == 'p':
+            print("Conductances will be represented as point mechanisms")
+            nrnModel = NRNModelPoint(snnapSim)
+        elif cond == 'd':
+            print("Conductances will be represented as distributed mechanisms")
+            nrnModel = NRNModelDist(snnapSim)
+
+        return snnapSim, nrnModel
+
 
 def main():
 
@@ -58,23 +103,8 @@ def main():
                         help="representation of conductances (point 'p', or distributed 'd')")
     args = parser.parse_args()
 
-    filePath = args.input
-    if not os.path.isfile(filePath):
-        print('error: file "' + filePath + '" does not exist')
-        exit(1)
+    snnap2neuron(args.input, args.cond)
 
-    splitedFilePath = filePath.split(os.sep)
-
-    simFilePath = os.sep.join(splitedFilePath[:-1])
-    if not simFilePath:
-        simFilePath = '.'
-    simFileName = splitedFilePath[-1]
-
-    # file paths given within SNNAP files are always specified relative to the
-    # SMU file, so change directory now so all files can be located later
-    os.chdir(simFilePath)
-
-    currSim = parse2Hoc(simFileName, args.cond)
 
 if __name__ == "__main__":
     main()

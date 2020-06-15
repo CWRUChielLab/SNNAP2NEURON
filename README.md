@@ -3,13 +3,23 @@
 
 ## Usage
 
-1. Download this project, extract it, and navigate to the extracted directory
+1. Download this project, extract it, and navigate to the extracted directory.
 
-2. Install the tool by running `python setup.py develop`
+2. Install the tool by running `python setup.py develop`.
 
-3. From any directory, you can now run `snnap2neuron [.smu file you wish to translate]`
+3. From any directory, you can now run the `snnap2neuron` command on a SNNAP
+   `.smu` simulation file, e.g.,
 
-In the directory of the SNNAP project you translated, a new folder named
+    `snnap2neuron my_sim.smu`
+
+   Alternatively, use the Python API:
+
+    ```python
+    >>> from snnap2neuron import snnap2neuron
+    >>> snnap2neuron('my_sim.smu')
+    ```
+
+In the directory containing the SNNAP `.smu` file, a new folder named
 `NRNModel_[name]` will be created, containing the necessary `.hoc` files to
 replicate the results of the SNNAP simulation in NEURON.
 
