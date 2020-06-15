@@ -48,7 +48,7 @@ def main():
     """
 
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument("-i", "--input", help="path to SNNAP .smu file")
+    parser.add_argument("input", help="path to SNNAP .smu file")
     parser.add_argument("-c", "--cond", choices=['p', 'd'], default='p',
                         help="representation of conductances (point 'p', or distributed 'd')")
     args = parser.parse_args()

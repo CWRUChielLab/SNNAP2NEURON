@@ -7,7 +7,7 @@
 
 2. Install the tool by running `python setup.py develop`
 
-3. From any directory, you can now run `snnap2neuron -i [.smu file you wish to translate]`
+3. From any directory, you can now run `snnap2neuron [.smu file you wish to translate]`
 
 In the directory of the SNNAP project you translated, a new folder named
 `NRNModel_[name]` will be created, containing the necessary `.hoc` files to
