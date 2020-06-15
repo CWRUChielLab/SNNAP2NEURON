@@ -57,7 +57,7 @@ class Neuron():
         read .neu file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        with open(filename) as f:
+        with open(filename.lstrip('/')) as f:
             self.text = f.read()
 
             print("Reading neuron file : ", filename)

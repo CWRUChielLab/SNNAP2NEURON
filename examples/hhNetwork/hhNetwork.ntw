@@ -9,15 +9,15 @@
   LIST_NEURONS:		>	List of Neurons		>
 >.......................>...............................>
 	Neuron_1        >	Neuron's name		>
-	Neurons/hhNeuron.neu>	File Name		>
+	/Neurons/hhNeuron.neu>	File Name		>
 	blue            >	Color Name		>
 >.......................>...............................>
 	Neuron_2        >	Neuron's name		>
-	Neurons/hhNeuron.neu>	File Name		>
+	/Neurons/hhNeuron.neu>	File Name		>
 	red             >	Color Name		>
 >.......................>...............................>
 	Neuron_3        >	Neuron's name		>
-	Neurons/hhNeuron.neu>	File Name		>
+	/Neurons/hhNeuron.neu>	File Name		>
 	green           >	Color Name		>
 >.......................>...............................>
 	END		>				>
@@ -35,19 +35,19 @@
 	Neuron_2        > Name of postsynaptic neuron	>
 	Neuron_1        > Name of presynaptic neuron	>
 	exc             > type of synapse		>
-	Synapses/hhSyn.cs> File Name			>
+	/Synapses/hhSyn.cs> File Name			>
 	brown           > Color Name			>
 >.......................>...............................>
 	Neuron_3        > Name of postsynaptic neuron	>
 	Neuron_2        > Name of presynaptic neuron	>
 	exc             > type of synapse		>
-	Synapses/hhSyn.cs> File Name			>
+	/Synapses/hhSyn.cs> File Name			>
 	brown           > Color Name			>
 >.......................>...............................>
 	Neuron_1        > Name of postsynaptic neuron	>
 	Neuron_3        > Name of presynaptic neuron	>
 	exc             > type of synapse		>
-	Synapses/hhSyn.cs> File Name			>
+	/Synapses/hhSyn.cs> File Name			>
 	brown           > Color Name			>
 >.......................>...............................>
 	END		>				>

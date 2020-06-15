@@ -45,15 +45,15 @@
    CONDUCTANCES:		>	List of Conductances	>
 >------------------------------->------------------------------->
 	leak			>	Name of conductance	>
-	Neurons/hhLeak.vdg		>	File Name		>
+	/Neurons/hhLeak.vdg		>	File Name		>
 	green			>	Color			>
 >------------------------------->------------------------------->
 	Na			>	Name of conductance	>
-	Neurons/hhNa.vdg		>	File Name		>
+	/Neurons/hhNa.vdg		>	File Name		>
 	green			>	Color			>
 >------------------------------->------------------------------->
 	K			>	Name of conductance	>
-	Neurons/hhK.vdg		>	File Name		>
+	/Neurons/hhK.vdg		>	File Name		>
 	green			>	Color			>
 >------------------------------->------------------------------->
 	END			>				>

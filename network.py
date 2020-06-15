@@ -40,7 +40,7 @@ class ElecSynapse():
         read electrical coupling file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        with open(filename) as f:
+        with open(filename.lstrip('/')) as f:
             self.text = f.read()
             print("Reading electrical coupling file : ", filename)
             # extract useful lines from the the text
@@ -73,7 +73,7 @@ class Network():
         read network file
         """
         filename = os.path.join(self.filePath,self.fileName)
-        with open(filename) as f:
+        with open(filename.lstrip('/')) as f:
             self.text = f.read()
             print("Reading network file : ", filename)
 
