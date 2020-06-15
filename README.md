@@ -1,5 +1,5 @@
 # SNNAP2NEURON
-Automatically translate SNNAP simulations to NEURON.
+*An automated translation tool for converting SNNAP models into NEURON models*
 
 ## Usage
 
