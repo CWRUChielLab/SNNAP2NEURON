@@ -33,9 +33,14 @@ def parse2Hoc(filename, cond):
 
     # write model in NEURON
     if cond == 'p':
+        print("Conductances will be represented as point mechanisms")
         nrnModel = NRNModelPoint(snnapSim)
     elif cond == 'd':
+        print("Conductances will be represented as distributed mechanisms")
         nrnModel = NRNModelDist(snnapSim)
+    else:
+        print("error: bad conductance mode: " + str(cond))
+        return None
     return snnapSim
 
 def printSim(sim):
@@ -58,22 +63,6 @@ def main():
         print('error: file "' + filePath + '" does not exist')
         exit(1)
 
-    cond = ''
-    if args.cond == 'p':
-        cond = 'p'
-        print("Conductances will be represented as point mechanisms")
-    elif args.cond == 'd':
-        cond = 'd'
-        print("Conductances will be represented as distributed mechanisms")
-    else:
-        print("choices for --cond are either 'p' or 'd'")
-
-    # if len(sys.argv) > 1:
-    #     filePath = sys.argv[1]
-    # else:
-    #     print("usage: parseSNNAP <simulationFile>")
-    #     filePath = "model/hhNetwork.smu"
-
     splitedFilePath = filePath.split(os.sep)
 
     simFilePath = os.sep.join(splitedFilePath[:-1])
@@ -85,7 +74,7 @@ def main():
     # SMU file, so change directory now so all files can be located later
     os.chdir(simFilePath)
 
-    currSim = parse2Hoc(simFileName, cond)
+    currSim = parse2Hoc(simFileName, args.cond)
 
 if __name__ == "__main__":
     main()
