@@ -11,6 +11,9 @@ bursterCPG
 cataldo_et_al_2006
     - https://modeldb.yale.edu/65412
 
+Costa2020
+    - https://modeldb.yale.edu/261489
+
 hhNetwork
     - Included with SNNAP in the directory "tutorial/tutorialExamples"
 
