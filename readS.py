@@ -48,7 +48,11 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--cond", choices=['p', 'd'], default='p',
                         help="representation of conductances (point 'p', or distributed 'd')")
     args = parser.parse_args()
+
     filePath = args.input
+    if not os.path.isfile(filePath):
+        print('error: file "' + filePath + '" does not exist')
+        exit(1)
 
     cond = ''
     if args.cond == 'p':
