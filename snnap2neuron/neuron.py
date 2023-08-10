@@ -180,7 +180,7 @@ class Neuron():
         """
         print("Reading conductances")
         while lineArr[i][0] != "END":
-            if re.search("Name of conductance", lineArr[i][1]) is not None:
+            if re.search("Name of conductance", lineArr[i][1], re.IGNORECASE) is not None:
                 # vdg names sometimes had paranthesis!
                 vdgName = lineArr[i][0].replace('(', '_').replace(')', '_')
                 vdgFileName = lineArr[i+1][0]
