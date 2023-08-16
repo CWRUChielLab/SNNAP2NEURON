@@ -193,17 +193,21 @@ class NRNModel():
                 if AtType == '3' or AtType == '4':
                     if XtType == '1':
                         csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At34_Xt1(0.5)\n\n")
+                    elif XtType == '2':
+                        csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At34_Xt2(0.5)\n\n")
                     elif XtType == '3':
                         csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At34_Xt3(0.5)\n\n")
                     else:
-                        print("WARNING: Xt types other than \"1\" or \"3\" are not supported yet!!!")
+                        print("WARNING: Xt types other than \"1\", \"2\", or \"3\" are not supported yet, but " + XtType + " was provided in " + csFileName + " !!!")
                 if AtType == '5':
                     if XtType == '1':
                         csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At5_Xt_1(0.5)\n\n")
+                    elif XtType == '2':
+                        csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At5_Xt_2(0.5)\n\n")
                     elif XtType == '3':
                         csf.write(cs.postSyn+" "+ csObjName +" = new snnap_cs2_At5_Xt_3(0.5)\n\n")
                     else:
-                        print("WARNING: Xt types other than \"1\" or \"3\" are not supported yet!!!")
+                        print("WARNING: Xt types other than \"1\", \"2\", or \"3\" are not supported yet, but " + XtType + " was provided in " + csFileName + " !!!")
 
                 csf.write(util.formatedObjectVar(csObjName, "e")+"= "+ cs.E.ljust(lj) + "// (mV)\n")
 

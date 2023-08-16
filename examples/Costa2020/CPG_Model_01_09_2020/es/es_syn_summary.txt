@@ -1,0 +1,30 @@
+ Volume in drive C is Windows
+ Volume Serial Number is 84CE-F0A9
+
+ Directory of C:\Users\dbaxter\2012\2012_CPG_Model\BAXTER_16_cell_network_12_12_12\BAXTER_16_cell_network\es
+
+12/15/2012  03:39 PM    <DIR>          .
+12/15/2012  03:39 PM    <DIR>          ..
+12/11/2012  10:24 AM               775 B20_2_B31s.es
+12/11/2012  10:05 AM               779 B20_2_B63.es
+12/11/2012  10:05 AM               779 B20_2_B65.es
+12/11/2012  11:05 AM               777 B30_2_B31s.es
+12/11/2012  10:58 AM               777 B30_2_B63.es
+12/11/2012  12:34 PM               749 B31s_2_B31a.es
+12/11/2012  12:34 PM               779 B31s_2_B34.es
+12/11/2012  12:34 PM               741 B31s_2_B63.es
+12/11/2012  12:34 PM               779 B31s_2_B65.es
+12/11/2012  01:38 PM               779 B34_2_B40.es
+12/11/2012  04:22 PM               783 B34_2_B65.es
+12/11/2012  04:22 PM               783 B40_2_B63.es
+12/11/2012  04:22 PM               783 B40_2_B65.es
+12/11/2012  10:24 AM               779 B4_2_B31s.es
+12/11/2012  10:05 AM               779 B4_2_B51a.es
+12/11/2012  10:24 AM               779 B4_2_B64s.es
+12/11/2012  01:55 PM               775 B51a_2_B64a.es
+12/11/2012  01:56 PM               775 B51s_2_B51a.es
+12/11/2012  04:22 PM               779 B63_2_B65.es
+12/11/2012  04:49 PM               775 B64s_2_B64a.es
+12/15/2012  03:39 PM                 0 es_syn_summary.txt
+              21 File(s)         15,504 bytes
+               2 Dir(s)  587,129,208,832 bytes free

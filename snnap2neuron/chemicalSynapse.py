@@ -55,9 +55,9 @@ class ChemSynapse():
         self.PSM_ur = ""
 
         self.readCSFile()
-        if self.iCSType == '1':
+        if self.fAtFileName:
             self.readfATFile()
-            if self.ATType == '3':
+            if self.XtFileName:
                 self.readXtFile()
                 pass
 
@@ -119,13 +119,20 @@ class ChemSynapse():
                 i = i+1
 
     def extractAt(self, i, lineArr):
+        supported_types = ['1', '3', '4']
+
         self.ATType = lineArr[i+1][0]
+        assert self.ATType in supported_types, 'ERROR: At type ' + self.ATType + ' is not yet supported: ' + self.fAtFileName
+
         if self.ATType == '1':
             self.At_u1 = lineArr[i+2][0]
-
-        if self.ATType == '3':
+        elif self.ATType == '3':
             self.XtFileName = lineArr[i+2][0]
             self.At_u1 = lineArr[i+3][0]
+        elif self.ATType == '4':
+            self.XtFileName = lineArr[i+2][0]
+            self.At_u1 = lineArr[i+3][0]
+            self.At_u2 = lineArr[i+4][0]
 
     def readCSFile(self):
         """
