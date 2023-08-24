@@ -174,6 +174,7 @@ class NRNModelPoint():
         i = 0
         for cs in csList:
             csf_local = "cs_"+cs.preSyn+"_to_" + cs.postSyn + "_" + cs.synType +".hoc"
+            print(csf_local)
             csFileName = os.path.join(self.nrnDirPath,self.nrnDirName,csf_local)
 
             with open(csFileName, "w") as csf:

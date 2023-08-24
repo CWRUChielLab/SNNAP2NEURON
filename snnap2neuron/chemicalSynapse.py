@@ -57,7 +57,7 @@ class ChemSynapse():
         self.readCSFile()
         if self.iCSType == '1':
             self.readfATFile()
-            if self.ATType == '3':
+            if self.ATType in ['3','4']:
                 self.readXtFile()
                 pass
 
@@ -98,14 +98,13 @@ class ChemSynapse():
         fileName = os.path.join(self.filePath,self.fAtFileName)
         with open(fileName.lstrip('/')) as f:
             self.text = f.read()
-
+            
             # extract useful lines from the the text
             lineArr = util.cleanupFileText(self.text)
 
             i=0
             while i < len(lineArr):
                 line =  lineArr[i]
-
                 if re.search("^fAt", line[0]) is not None:
                     self.fATType = lineArr[i+1][0]
                     if self.fATType in ['3', '5', '6']:
@@ -117,15 +116,20 @@ class ChemSynapse():
                     self.extractAt(i, lineArr)
 
                 i = i+1
+            
 
     def extractAt(self, i, lineArr):
         self.ATType = lineArr[i+1][0]
         if self.ATType == '1':
             self.At_u1 = lineArr[i+2][0]
-
         if self.ATType == '3':
             self.XtFileName = lineArr[i+2][0]
             self.At_u1 = lineArr[i+3][0]
+        if self.ATType == '4':
+            self.XtFileName = lineArr[i+2][0]
+            self.At_u1 = lineArr[i+3][0]  
+            self.At_u2 = lineArr[i+4][0]              
+                
 
     def readCSFile(self):
         """
